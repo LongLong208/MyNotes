@@ -26,7 +26,7 @@ int main(){
     return 0;
 }
 ```
-
+---
 
 ```javascript {cmd="node"}
 const date = Date.now();
