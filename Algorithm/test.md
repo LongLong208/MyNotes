@@ -10,3 +10,7 @@ int main()
 1234
 1111111
 33333
+```javascript {cmd="node"}
+const date = Date.now()
+console.log(date.toString())
+```
