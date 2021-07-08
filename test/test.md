@@ -37,7 +37,33 @@ cout<<"C++ single line"<<endl;
 cout<<1+2+3+4+5;
 ```
 
+---
+#### c++类定义与使用
+<!-- 本质是把这些代码嵌入到main函数中执行 -->
+```cpp {cmd="cppclass"}
+//define
+class abcd{
+public:
+    int num;
+};
+//use
+abcd a;
+a.num = 10;
+cout << a.num;
+```
 
+
+---
+#### c++算法与测试
+<!-- 本质是把这些代码嵌入到main函数中执行 -->
+```cpp {cmd="cppal"}
+//algorithm
+int solution(int num){
+    return num;
+}
+//test
+1 2 3 4 5 6
+```
 
 
 ---

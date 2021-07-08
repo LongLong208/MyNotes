@@ -14,8 +14,20 @@ int main(int argc, char *argv[])
         return 0;
     string a = "#include <bits/stdc++.h> \n";
     a += "using namespace std; \n";
-    a += "int main(){ \n";
 
+    while (ifile)
+    {
+        ifile.getline(temp, 100);
+        if (string(temp) == "//define")
+            continue;
+        if (string(temp) == "//use")
+            break;
+        a += '\t';
+        a += temp;
+        a += '\n';
+    }
+
+    a += "int main(){ \n";
     while (ifile)
     {
         ifile.getline(temp, 100);
@@ -23,7 +35,6 @@ int main(int argc, char *argv[])
         a += temp;
         a += '\n';
     }
-
     a += "\treturn 0;\n}";
     ifile.close();
     system((string("del ") + argv[1]).c_str());
