@@ -8,11 +8,6 @@
 
 ``` cpp {cmd="cppsl"}
 srand(time(NULL));
-cout << rand()%10000;
+cout << "今天做 " <<(rand()%100*100 | rand()%100 );
 ```
 
-``` cpp {cmd="cppsl" id="1"}
-int a;
-cin >> a;
-cout << a;
-```
