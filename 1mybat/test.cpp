@@ -5,16 +5,31 @@
 #include <vector>
 using namespace std;
 
-//algorithm
-int print(int num)
+template <typename T>
+ostream &operator<<(ostream &out, vector<T> v)
 {
-    for (int i = 0; i < 10000; ++i)
+    out << "[";
+    for (int i = 0; i < v.size(); ++i)
     {
-        for (int j = 0; j < 10000; ++j)
-        {
-        }
+        out << v[i];
+        if (i < v.size() - 1)
+            out << ',';
     }
-    return num;
+    out << "]";
+    return out;
+}
+
+//algorithm
+vector<vector<int> > print(int num)
+{
+    vector<vector<int> > vec;
+    vector<int> v;
+    v.push_back(num);
+    vector<int> v2;
+    v2.push_back(num * 10);
+    vec.push_back(v);
+    vec.push_back(v2);
+    return vec;
 }
 
 //entry

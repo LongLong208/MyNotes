@@ -59,8 +59,15 @@ cout << a.num;
 
 ```cpp {cmd="cppal"}
 //algorithm
-int print(int num){
-    return num * 10;
+vector<vector<int> > print(int num){
+    vector<vector<int> > vec;
+    vector<int> v;
+    v.push_back(num);
+    vector<int> v2;
+    v2.push_back(num * 10);
+    vec.push_back(v);
+    vec.push_back(v2);
+    return vec;
 }
 ```
 ```cpp {cmd="cppal" id="print" continue hide}

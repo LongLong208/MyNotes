@@ -17,6 +17,8 @@ int main(int argc, char *argv[])
     string a = "#include <bits/stdc++.h> \n";
     a += "using namespace std; \n";
 
+    a += "template <typename T>\nostream &operator<<(ostream &out, vector<T> v)\n{\n\tout << '[';\n\tfor (int i = 0; i < v.size(); ++i)\n\t{\n\t\tout << v[i];\n\t\tif (i < v.size() - 1)\n\t\t\tout << ',';\n\t}\n\tout << ']';\n\treturn out;\n}\n";
+
     while (ifile)
     {
         ifile.getline(temp, 100);
