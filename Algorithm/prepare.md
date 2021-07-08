@@ -7,6 +7,6 @@
 随机数生成器
 
 ``` cpp {cmd="cppsl"}
-Random rd;
-cout << rd.nextInt();
+srand(time(NULL));
+cout << rand()%10000;
 ```
