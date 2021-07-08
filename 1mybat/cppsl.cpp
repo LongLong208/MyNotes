@@ -14,6 +14,15 @@ int main(int argc, char *argv[])
         return 0;
     string a = "#include <bits/stdc++.h> \n";
     a += "using namespace std; \n";
+
+    while (ifile)
+    {
+        ifile.getline(temp, 100);
+        a += '\t';
+        a += temp;
+        a += '\n';
+    }
+
     a += "int main(){ \n";
 
     while (ifile)

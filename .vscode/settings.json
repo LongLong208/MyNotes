@@ -17,7 +17,8 @@
         "array": "cpp",
         "string_view": "cpp",
         "initializer_list": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "new": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled",
     "python.formatting.provider": "yapf"

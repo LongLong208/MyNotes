@@ -39,7 +39,6 @@ cout<<1+2+3+4+5;
 
 ---
 #### c++类定义与使用
-<!-- 本质是把这些代码嵌入到main函数中执行 -->
 ```cpp {cmd="cppclass"}
 //define
 class abcd{
@@ -55,14 +54,27 @@ cout << a.num;
 
 ---
 #### c++算法与测试
-<!-- 本质是把这些代码嵌入到main函数中执行 -->
+
+
+
 ```cpp {cmd="cppal"}
 //algorithm
-int solution(int num){
-    return num;
+int print(int num){
+    return num * 10;
 }
+```
+```cpp {cmd="cppal" continue hide}
+//entry
+int a = 0;
+input >> a;
+    if(input)
+        cout << print(a);
+```
+```cpp {cmd="cppal" continue}
 //test
-1 2 3 4 5 6
+1
+2
+3
 ```
 
 
