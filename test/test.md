@@ -39,12 +39,14 @@ cout<<1+2+3+4+5;
 
 ---
 #### c++类定义与使用
-```cpp {cmd="cppclass"}
+```cpp {cmd="cppclass" id="abcd"}
 //define
 class abcd{
 public:
     int num;
 };
+```
+```cpp {cmd="cppclass" continue="abcd}
 //use
 abcd a;
 a.num = 10;
@@ -55,22 +57,20 @@ cout << a.num;
 ---
 #### c++算法与测试
 
-
-
 ```cpp {cmd="cppal"}
 //algorithm
 int print(int num){
     return num * 10;
 }
 ```
-```cpp {cmd="cppal" continue hide}
+```cpp {cmd="cppal" id="print" continue hide}
 //entry
 int a = 0;
 input >> a;
     if(input)
         cout << print(a);
 ```
-```cpp {cmd="cppal" continue}
+```cpp {cmd="cppal" continue="print"}
 //test
 1
 2
