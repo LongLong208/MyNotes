@@ -1,0 +1,24 @@
+{
+    "files.associations": {
+        "*.wxss": "css",
+        "iostream": "cpp",
+        "cstdlib": "cpp",
+        "beepmusic": "cpp",
+        "vector": "cpp",
+        "*.tcc": "cpp",
+        "fstream": "cpp",
+        "iosfwd": "cpp",
+        "ostream": "cpp",
+        "string": "cpp",
+        "sstream": "cpp",
+        "deque": "cpp",
+        "climits": "cpp",
+        "typeinfo": "cpp",
+        "array": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "utility": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled",
+    "python.formatting.provider": "yapf"
+}
