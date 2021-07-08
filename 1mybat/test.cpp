@@ -45,6 +45,8 @@ int main(int argc, char *argv[])
 {
 
     string instr = "1\n2\n3\n4\n5";
+    if (instr == "")
+        return 0;
 
     stringstream input(instr);
     vector<time_t> times;

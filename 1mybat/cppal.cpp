@@ -57,6 +57,7 @@ int main(int argc, char *argv[])
         a += "\\n";
     }
     a += "\";";
+    a += "\tif (instr == \"\")\n\treturn 0;";
     a += "\n\tstringstream input(instr);\n\tvector<time_t> times;\n\twhile (input){\n\t\ttime_t begin_t = clock();\n\t\tsolution(input);\n\t\ttime_t finish_t = clock();\n\t\ttimes.push_back(finish_t - begin_t);\n\t\tcout << endl;\n\t}\n\ttime_t aver = 0;\n\tfor (int i = 0; i < times.size(); ++i){\n\t\taver += times[i];}\n\taver /= times.size();\n\tcout <<\"-------------------\"<< endl<< \"average time: \" << aver << \" ms\" << endl;\n";
     a += "\treturn 0;\n}";
     ifile.close();
