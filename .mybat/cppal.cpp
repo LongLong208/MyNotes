@@ -66,6 +66,6 @@ int main(int argc, char *argv[])
         return 0;
     ofile << a << endl;
     ofile.close();
-    system((string("cppal.bat ") + argv[1]).c_str());
+    system((string("cppmd.bat ") + argv[1]).c_str());
     return 0;
 }
