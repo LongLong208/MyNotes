@@ -2,6 +2,12 @@
 
 [TOC]
 
+```cpp {cmd="cppal" id="start" hide}
+//algorithm
+class Solution{
+public:
+```
+
 ---
 
 ## 位运算相关
@@ -73,4 +79,61 @@ $$
 **其他性质：**
 - $a ~\&~ (a−1)$ 可将 $a$ 的二进制表示中最后一个1 变成 0
 - $a~\&~(-a)$ 结果为 只保留 $a$ 二进制中最后一个 1 ，其他全 0 （ $a ~\&~ (\sim(a-1))$ 等价） 
+
+<br><hr width="60%">
+
+### 格雷编码
+
+> 格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。
+> 
+> 给定一个代表编码总位数的非负整数 n，打印其格雷编码序列。即使有多个不同答案，你也只需要返回其中一种。
+> 
+> 格雷编码序列必须以 0 开头。
+
+2位的格雷编码如：
+
+<p align="center">00 - 0<br>01 - 1<br>11 - 3<br>10 - 2</p>
+
+思路：
+1. 初始数组为 [0]
+1. 反向遍历 n（位数）次数组，在每个数组元素的最前面添加一个 1，并插入数组尾部
+
+示例：
+
+1. [ 0 ]
+2. [ 0, <font color="red" >1</font> ]
+3. [ 00, 01, <font color="red">11</font>, <font color="red">10</font> ]
+4. [ 000, 001, 011, 010, <font color="red">110</font>, <font color="red">111</font>, <font color="red">101</font>, <font color="red">100</font> ] 
+
+代码
+
+```cpp {cmd="cppal" continue="start"}
+vector<int> grayCode(int n) {
+    vector<int> ans;
+    ans.push_back(0);
+    for(int i = 0; i < n; ++i){
+        for(int j = ans.size() - 1; j >= 0; --j){
+            ans.push_back(ans[j] | 1 << i);
+        }
+    }
+    return ans;
+}
+```
+```cpp {cmd="cppal" continue hide}
+
+};
+Solution so;
+//entry
+int n;
+input >> n;
+if(n)
+    cout<<so.grayCode(n);
+//test
+```
+```cpp {cmd="cppal" continue}
+3
+```
+
+<br><hr width="60%">
+
 

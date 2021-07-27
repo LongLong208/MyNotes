@@ -48,7 +48,7 @@ Solution so;
 
 //test
 ```
-```cpp {cmd="cppal"}
+```cpp {cmd="cppal" continue}
 1
 2
 3

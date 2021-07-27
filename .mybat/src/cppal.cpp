@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     if (!ifile)
         return 0;
     string a = "#include <bits/stdc++.h> \n";
-    a += "#include \"D:/1Notes/.mybat/cppalMethod.h\"\n";
+    a += "#include \"D:/1Notes/.mybat/src/cppalMethod.h\"\n";
     a += "using namespace std; \n";
 
     while (ifile)
