@@ -66,27 +66,27 @@ Solution so;
 ### 测试
 
 ```cpp {cmd="cppal" continue="start"}
-int algorithm(vector<int>& nums) {
-    int pre = 0, maxAns = nums[0];
-    for (const auto &x: nums) {
-        pre = max(pre + x, x);
-        maxAns = max(maxAns, pre);
-        cout << "pre:" << pre << " maxAns:" << maxAns << endl;
-    }
-    return maxAns;
+template <class T, class... Args>
+void algorithm(T value, Args... args) {
+    cout << value << endl;
+    algorithm(args...);
+}
+void algorithm() {
+    return;
 }
 ```
 ```cpp {cmd="cppal" continue hide}
 };
 Solution so;
 //entry
-vector<int> n;
-if(input >> n)
-    cout << so.algorithm(n);
+
+so.algorithm();
+
 //test
 ```
 ```cpp {cmd="cppal" continue}
-[-2,1,-3,4,-1,2,1,-5,4]
+
+
 ```
 
 ---
