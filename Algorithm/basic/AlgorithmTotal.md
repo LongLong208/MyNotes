@@ -77,7 +77,7 @@ if p < r
     Merge(A, p, q, r)
 ```
 
-时间复杂度：$\Theta(n\log n)$
+综上：时间复杂度：$\Theta(n\log n)$
 
 
 
@@ -95,7 +95,7 @@ if p < r
 
 1. Divide: Partition array into 2 subarrays around an pivot x
 
-   $ elems in loewr subarray <= x <= elems in upper subarray
+   such elems in lower subarray <= x <= elems in upper subarray
 
 2. Conquer: sort the two subarrays
 
@@ -105,7 +105,7 @@ if p < r
 
 ##### Normal QuickSort
 
-*$Partition(A, p, q)$* // A[p...q]
+$Partition(A, p, q)$ // A[p...q]
 
 ```c++
 x = A[p]
@@ -120,7 +120,7 @@ return i
 
 
 
-*$QuickSort(A, p, q)$*
+$QuickSort(A, p, q)$
 
 ```C++
 if p < q
