@@ -98,3 +98,11 @@ console.log(date.toString());
 s="this will run python3 program"
 print(s)
 ```
+
+---
+
+#### 草稿
+$$
+$$
+
+

@@ -28,7 +28,7 @@ public:
 ```py
 # 初始化 base case
 dp[0][0][...] = base
-# 状态转·转移
+# 状态转移
 for 状态1 in 状态1的所有取值:
     for 状态2 in 状态2的所有取值:
         for ...

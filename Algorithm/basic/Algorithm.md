@@ -1,5 +1,6 @@
 [TOC]
 
+<br>
 ##### what is important in programming
 
 > performance 性能
@@ -26,6 +27,7 @@
 
 
 
+<br>
 ##### T(n)
 
 - ignore machine-dependent constants
@@ -33,6 +35,7 @@
 
  
 
+<br>
 ##### 主定理练习
 
 1. $T(n)=4T(n/2)+n $
@@ -49,12 +52,14 @@
 
  
 
+<br>
 ##### 斐波那契定理
 
 $\begin{bmatrix}F_{n-1}&F_n\\F_n&F_{n-1}\end{bmatrix}=\begin{bmatrix}1&1\\1&0\end{bmatrix}^n$
 
 
 
+<br>
 ##### Decision-tree
 
 sort <$a_1, a_2, a_3$>
@@ -79,6 +84,7 @@ graph TD;
 
 
 
+<br>
 ##### Counting-Sort
 
 基于计数的排序
@@ -104,6 +110,7 @@ for j = n downto 1
 时间复杂度：$O(k + n)$
 空间复杂度：$O(k)$
 
+<br>
 ##### Radix Sort
 
 基数排序
@@ -130,18 +137,41 @@ for j = n downto 1
 * 对 r 求导，可以得出 当 $r=\lg{n}$ 时，有 $O(\frac{bn}{\lg{n}})$
 
 
+
+<br>
 ##### order statistics
 
-给n个数，找第k小
+给n个数 A[1...n]，找第k小
 
-方法1
+<br>
 
-排序，返回 A[k] 
+**方法1**
 
-方法2：分治法
+升序排序，返回 A[k] 
 
+**方法2：分治法**
 
 Rand-Select(A, p, q, i)  // 找 A[p~q] 的第 i 小
 ```cpp
-
+if p = q
+	return A[p]
+r = Rand-Partition(A, p, q)
+// Rand-Partition 参考快排，随机选取一个数，并将该数放在 A[p...q] 的某个位置 r ，使得 A[p...r-1] < A[r] < A[r+1...q]，并返回下标 r 
+if i = r
+	return A[r]
+else if i < r
+	return Rand-Select(A, p, r - 1, i)
+else
+	return Rand-Select(A, r + 1, q, i) 
 ```
+
+时间复杂度：$O(n)$
+最坏情况：$O(n^2)$ --- 数组已排序
+
+**例子： i = 7**
+$A = [6, 10, 13, 5, 8, 3, 2, 11]$
+
+选取 6 作为划分元素，调用划分函数 `Partition(A, 0, A.size()-1)`
+得到 $A'=[2,5,3,6,8,13,10,11]$，其中 `r->6, r=4`
+此时即使再排序，6 的位置依然不变，结合方法一排序后的答案，我们知道 6 即是第 4 小（下标从1开始)的数
+然后判断大小递归即可
