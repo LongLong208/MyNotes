@@ -1,3 +1,9 @@
+```cpp {cmd="cppal" id="start" hide}
+//algorithm
+class Solution{
+public:
+```
+
 数学基础
 
 [TOC]
@@ -14,12 +20,6 @@
 <hr width="60%">
 ```
 
-```cpp {cmd="cppal" id="start" hide}
-//algorithm
-class Solution{
-public:
-```
-
 <br>
 
 ---
@@ -31,10 +31,11 @@ public:
 $720.5_{(8)} = \enspace ?$
 
 $$
-    720.5_{(8)} = 7×8^{2}+2×8^{1}+0×8^{0}+5×8^{−1} = 464.625
+720.5_{(8)} = 7×8^{2}+2×8^{1}+0×8^{0}+5×8^{−1} = 464.625
 $$
 
 <br><hr width="60%">
+
 
 ### 十进制转N进制
 
@@ -81,7 +82,7 @@ $$
 结合律： | & ^
 
 分配律： | 对 &，| 对 &，& 对 ^（类比 乘法对加法）
-德摩根率： $\sim(a~\&~b) = ~\sim a~ | ~ \sim b,~ ~ ~\sim(a~|~b) = ~\sim a~ \& ~ \sim b$
+德摩根率： $\sim(a~\&~b) = ~\sim a~ | ~ \sim b, ~ ~ ~\sim(a~|~b) = ~\sim a~ \& ~ \sim b$
 取反性质： $-1 =~ \sim 0,~ ~ ~-a = ~\sim (a-1)$
 
 与运算性质： $a ~\&~ 0 = a,~ ~ ~a~\&~(-1)=a,~ ~ ~a~\&~(\sim a)=0$
@@ -89,6 +90,7 @@ $$
 异或运算性质： $a ~\^{} ~ 0 = a,~ ~ ~a ~\^{} ~ (-1) = \sim a,~ ~ ~a~\^{}~a=0$
 
 **其他性质：**
+
 - $a ~\&~ (a−1)$ 可将 $a$ 的二进制表示中最后一个1 变成 0
 - $a~\&~(-a)$ 结果为 只保留 $a$ 二进制中最后一个 1 ，其他全 0 （ $a ~\&~ (\sim(a-1))$ 等价）
 - 让 $[a, b]$ 区间的所有数按位与，结果是如下形式的二进制字符串
@@ -224,10 +226,28 @@ if(n)
 
 
         实现：
+        ```cpp
+        class UnionFind {
+            int root[100];
+        
+        public:
+            int find(int x){
+                return x;
+            }
+            int union_(int x, int y){
+                int rootY = find(y);
+                if (find(x) != rootY)
+                    for(auto& i : root)
+                        if(i == rootY)
+                            i = rootY;
+            }
+        };
+        ```
+
         `find(x)` : `return root[x]`
-
+    
         `union(x, y)` :
-
+    
         ```cpp
         rootY = find(y);
         if (find(x) != rootY)
@@ -238,12 +258,12 @@ if(n)
 
 
     - QuickUnion 的并查集
-
+    
         `root` 数组存放每个结点的父结点
         特点：
         
-        - `find` : $O(n)$ ，需要寻找才能返回根结点
-        - `union` : $O(1)$ ~ $O(n)$ ，只需要将的其中一个结点的父结点更新
+        - `find` : $O(h)$ ，$h$ 为并查集形成的树的高度，需要寻找才能返回根结点
+        - `union` : $O(1)$ ~ $O(n)$，时间复杂度取决于 `find` 函数 ，只需要将的其中一个结点的父结点更新
 
 
         实现：
@@ -253,15 +273,21 @@ if(n)
             x = root[x]
         return x;
         ```
-
+    
         `union(x, y)` :
-
+    
         ```cpp
         rootX = find(x);
         rootY = find(y);
         if (rootX != rootY)
             root[rootY] = rootX;
         ```
+
+<br>
+
+* 按秩合并的并查集
+
+    低树往高树合并（谁高谁做根结点）
 
 
 <br><hr width="60%">
@@ -302,7 +328,7 @@ if(n)
              }
          }
      }
-     ```
+    ```
 
 时间复杂度：$O(n^3)$
 空间复杂度：$O(n^2)$
