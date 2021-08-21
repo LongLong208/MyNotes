@@ -4,7 +4,9 @@ class Solution{
 public:
 ```
 
-数学基础
+<font style="font-size:30px; font-weight:bold;">数学基础</font>
+
+
 
 [TOC]
 
@@ -12,13 +14,71 @@ public:
 
 <br>
 
-模板：
+### 模板
+
+
 
 ```markdown
----
-## 新分类
-<hr width="60%">
+
+___
+## 大分类
+<hr width=60%>
+
+### 小分类（具体问题）
+
+#### 方法或内容分类
+
+
+分隔符：
+大分类之间的间隔使用：
+
+<br>
+
+___
+
+小分类或方法之间分隔使用： 
+
+<br>
+<hr width=60%>
+
+最小的间隔：
+
+<br>
+<hr width=20%>
+
 ```
+
+**示例：**
+
+<div style="padding:2% 5% 2% 5%; background-color:#323232">
+
+---
+## 三角形
+<hr width=60%>
+
+### 三角形的周长
+
+周长公式： $C = a + b + c$
+
+<br><hr width=60%>
+
+### 三角形的面积
+
+#### 公式1
+
+$S=\frac{d \times h}{2} $
+
+<br><hr width=60%>
+
+#### 公式2
+
+$S=\sqrt{p(p-a)(p-b)(p-c)},~ p = \frac{a+b+c}{2}$
+
+<br>
+
+---
+
+</div>
 
 <br>
 
@@ -226,15 +286,21 @@ if(n)
 
 
         实现：
-        ```cpp
+        ```cpp{cmd="cppclass"}
+        //define
         class UnionFind {
-            int root[100];
+            vector<int> root;
         
         public:
-            int find(int x){
-                return x;
+            UnionFind(int size){
+                root.resize(size);
+                for(int i = 0; i < root.size(); ++i)
+                    root[i] = i;
             }
-            int union_(int x, int y){
+            int find(int x){
+                return root[x];
+            }
+            void union_(int x, int y){
                 int rootY = find(y);
                 if (find(x) != rootY)
                     for(auto& i : root)
@@ -244,18 +310,11 @@ if(n)
         };
         ```
 
-        `find(x)` : `return root[x]`
-    
-        `union(x, y)` :
-    
-        ```cpp
-        rootY = find(y);
-        if (find(x) != rootY)
-            for(auto& i : root)
-                if(i == rootY)
-                    i = rootY;
-        ```
+        | QuickFind  | 构造函数 |  find  | union  |
+        | :--------: | :------: | :----: | :----: |
+        | 时间复杂度 |  $O(n)$  | $O(1)$ | $O(n)$ |
 
+    <br>
 
     - QuickUnion 的并查集
     
@@ -267,27 +326,121 @@ if(n)
 
 
         实现：
-        `find(x)` : 
-        ```cpp
-        while (x != root[x])
-            x = root[x]
-        return x;
+
+        ```cpp{cmd="cppclass"}
+        //define
+        class UnionFind {
+            vector<int> root;
+        
+        public:
+            UnionFind(int size){
+                root.resize(size);
+                for(int i = 0; i < root.size(); ++i)
+                    root[i] = i;
+            }
+            int find(int x){
+                while (x != root[x])
+                    x = root[x];
+                return x;
+            }
+            void union_(int x, int y){
+                int rootX = find(x);
+                int rootY = find(y);
+                if (rootX != rootY)
+                    root[rootY] = rootX;
+            }
+        };
         ```
-    
-        `union(x, y)` :
-    
-        ```cpp
-        rootX = find(x);
-        rootY = find(y);
-        if (rootX != rootY)
-            root[rootY] = rootX;
-        ```
+
+        | QuickUnion | 构造函数 |  find  | union  |
+        | :--------: | :------: | :----: | :----: |
+        | 时间复杂度 |  $O(n)$  | $O(d)$ | $O(d)$ |
+        
+        $d$ 为并查集中结点所在的树的平均深度
 
 <br>
 
-* 按秩合并的并查集
+* 按秩合并的 QuickUnion
+    `find` 函数不变
+    `union` 函数：低树往高树合并（谁高谁做根结点）
 
-    低树往高树合并（谁高谁做根结点）
+    实现：
+
+    ```cpp{cmd="cppclass"}
+    //define
+    class UnionFind{
+        vector<int> root;
+        vector<int> rank;   // rank 数组储存每个点在树中的深度
+
+    public:
+        UnionFind(int size) {
+            root.resize(size);
+            rank.resize(size);
+            for(int i = 0; i < root.size(); ++i) {
+                root[i] = i;
+                rank[i] = 1;
+            }
+        }
+        int find(int x) {
+            while (x != root[x])
+                x = root[x];
+            return x;
+        }
+        void union_(int x, int y) {
+            int rootX = find(x);
+            int rootY = find(y);
+            if (rootX != rootY) {
+                if (rank[rootX] > rank[rootY]) {
+                    root[rootY] = rootX;
+                } else if (rank[rootX] < rank[rootY]) {
+                    root[rootX] = rootY;
+                } else {
+                    root[rootY] = rootX;
+                    rank[rootX] += 1;
+                }
+            }
+        }
+    };
+    ```
+    
+    | 按秩合并的QuickUnion | 构造函数 |    find     |    union    |
+    | :------------------: | :------: | :---------: | :---------: |
+    |      时间复杂度      |  $O(n)$  | $O(\log n)$ | $O(\log n)$ |
+
+<br>
+
+* 路径压缩的 QuickUnion
+    调用 `find` 函数后，将该查找路径上的所有结点的父结点，都改为根结点
+    实现：
+    ```cpp{cmd="cppclass"}
+    //define
+    class UnionFind {
+        vector<int> root;
+
+    public:
+        UnionFind(int size) {
+            root.resize(size);
+            for(int i = 0; i < root.size(); ++i)
+                root[i] = i;
+        }
+        int find(int x) {
+            if (x == root[x])
+                return x;
+            return root[x] = find(root[x]);
+        }
+        void union_(int x, int y) {
+            int rootX = find(x);
+            int rootY = find(y);
+            if (rootX != rootY)
+                root[rootY] = rootX;
+        }
+    };
+    ```
+
+    | 路径压缩的QuickUnion | 构造函数 |    find     |    union    |
+    | :------------------: | :------: | :---------: | :---------: |
+    |      时间复杂度      |  $O(n)$  | $O(\log n)$ | $O(\log n)$ |
+
 
 
 <br><hr width="60%">

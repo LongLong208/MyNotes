@@ -22,7 +22,6 @@ int main(int argc, char *argv[])
             continue;
         if (string(temp) == "//use")
             break;
-        a += '\t';
         a += temp;
         a += '\n';
     }
