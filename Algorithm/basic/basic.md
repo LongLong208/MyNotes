@@ -1,5 +1,5 @@
-```cpp {cmd="cppal" id="start" hide}
-//algorithm
+```cpp {cmd="run" id="sf" hide}
+//sf
 class Solution{
 public:
 ```
@@ -183,7 +183,8 @@ $$
 
 代码
 
-```cpp {cmd="cppal" continue="start"}
+```cpp {cmd="run" continue="sf"}
+
 vector<int> grayCode(int n) {
     vector<int> ans;
     ans.push_back(0);
@@ -195,7 +196,7 @@ vector<int> grayCode(int n) {
     return ans;
 }
 ```
-```cpp {cmd="cppal" continue hide}
+```cpp {cmd="run" continue hide}
 
 };
 Solution so;
@@ -206,7 +207,7 @@ if(n)
     cout<<so.grayCode(n);
 //test
 ```
-```cpp {cmd="cppal" continue}
+```cpp {cmd="run" continue}
 3
 ```
 
@@ -286,7 +287,7 @@ if(n)
 
 
         实现：
-        ```cpp{cmd="cppclass"}
+        ```cpp{cmd="run"}
         //define
         class UnionFind {
             vector<int> root;
@@ -327,7 +328,7 @@ if(n)
 
         实现：
 
-        ```cpp{cmd="cppclass"}
+        ```cpp{cmd="run"}
         //define
         class UnionFind {
             vector<int> root;
@@ -366,7 +367,7 @@ if(n)
 
     实现：
 
-    ```cpp{cmd="cppclass"}
+    ```cpp{cmd="run"}
     //define
     class UnionFind{
         vector<int> root;
@@ -412,7 +413,7 @@ if(n)
 * 路径压缩的 QuickUnion
     调用 `find` 函数后，将该查找路径上的所有结点的父结点，都改为根结点
     实现：
-    ```cpp{cmd="cppclass"}
+    ```cpp{cmd="run"}
     //define
     class UnionFind {
         vector<int> root;

@@ -1,8 +1,55 @@
-#ifndef CPPALMETHOD_H
-#define CPPALMETHOD_H
+#ifndef CUSTOMMETHOD_H
+#define CUSTOMMETHOD_H
 
 #include <bits/stdc++.h>
 using namespace std;
+
+/* 
+ * 打印 vector
+ *
+ * 例子：
+ * vector<int> v;
+ * cout << v;
+ * 
+ **/
+template <typename T>
+ostream &operator<<(ostream &out, vector<T> v);
+
+/*
+ * 输入一个 vector
+ * 
+ * 形如：
+ * [1,2,3,4,5,6]
+ * [abc,bca,cab]
+ * 类型取决于定义的 vector 的模板
+ * 
+ * 例如：
+ * vector<int> vector<string>
+ * 
+ * 例子：
+ * vector<int> v;
+ * cout >> v;
+ * 
+ **/
+template <typename T>
+istream &operator>>(istream &in, vector<T> &v);
+
+/* 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *      函数实现
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ **/
 
 template <typename T>
 ostream &operator<<(ostream &out, vector<T> v)
