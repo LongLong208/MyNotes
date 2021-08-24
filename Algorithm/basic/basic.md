@@ -209,6 +209,8 @@ if(n)
 ```
 ```cpp {cmd="run" continue}
 3
+4
+5
 ```
 
 <br><hr width="60%">
