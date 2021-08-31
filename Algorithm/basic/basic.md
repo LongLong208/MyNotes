@@ -1,10 +1,40 @@
+<head>
+<style type="text/css">  
+*{
+    font-family:consolas;
+}
+html body h2{
+    color:#a4f3d1;
+    text-align:center;
+}
+html body h3{
+    color:#e06666;
+}
+html body h4{
+    color:pink;
+}
+html body h5{
+    color:#e4e79b;
+}
+.short {
+    width:60%;
+    background-color:rgba(0,0,0,0);
+    border-bottom:4px dotted #515151;
+}
+</style>
+</head>
+
 ```cpp {cmd="run" id="sf" hide}
 //sf
 class Solution{
 public:
 ```
 
-<font style="font-size:30px; font-weight:bold;">数学基础</font>
+```cpp {cmd="run" id="sf2" hide}
+//sf
+```
+
+<font style="font-size:30px; font-weight:bold;">算法</font>
 
 
 
@@ -22,7 +52,7 @@ public:
 
 ___
 ## 大分类
-<hr width=60%>
+<hr class=short>
 
 ### 小分类（具体问题）
 
@@ -36,10 +66,10 @@ ___
 
 ___
 
-小分类或方法之间分隔使用： 
+小分类之间分隔使用： 
 
 <br>
-<hr width=60%>
+<hr class=short>
 
 最小的间隔：
 
@@ -52,15 +82,22 @@ ___
 
 <div style="padding:2% 5% 2% 5%; background-color:#323232">
 
+
+<!-- ********************************************************************************* -->
+<!-- ********************************************************************************! -->
+<!-- ********************************************************************************? -->
+<!-- *****************************************************************************todo -->
+
 ---
 ## 三角形
-<hr width=60%>
+<hr class=short>
+
 
 ### 三角形的周长
 
 周长公式： $C = a + b + c$
 
-<br><hr width=60%>
+<br><hr class=short>
 
 ### 三角形的面积
 
@@ -68,23 +105,386 @@ ___
 
 $S=\frac{d \times h}{2} $
 
-<br><hr width=60%>
+<br><br>
 
 #### 公式2
 
 $S=\sqrt{p(p-a)(p-b)(p-c)},~ p = \frac{a+b+c}{2}$
 
 <br>
+<br>
+<br>
+
+
+
+<!-- *****************************************************************************todo -->
+<!-- ********************************************************************************? -->
+<!-- ********************************************************************************! -->
+<!-- ********************************************************************************* -->
 
 ---
 
 </div>
 
 <br>
+<br>
+<br>
+
+---
+## 一些笔记
+<hr class=short>
+
+### 面试问题
+
+https://leetcode-cn.com/leetbook/read/top-interview-questions/xmted6/
+
+```mermaid
+graph LR;
+T{问题类型}
+
+A(操作系统)
+T --- A
+A --- 内存管理
+A --- 线程处理
+A --- 文件系统
+A --- 网络
+
+B(编程)
+T --- B
+B --- 语言
+B --- 递归,继承,类型
+
+C(算法)
+T --- C
+C --- 时间复杂度
+C --- 搜索
+C --- 排序
+C --- 图
+
+D(数据结构)
+T --- D
+D --- 数组
+D --- 堆,队列,栈
+D --- 树,图
+D --- 集
+D --- 哈希,映射
+
+E(数学)
+T --- E
+E --- 概率
+E --- 平方
+E --- 阶乘
+E --- 整除
+
+T ---- F(系统设计)
+
+```
+
+<br><br><hr class=short>
+
+### 算法与数据结构
+
+https://leetcode-cn.com/leetbook/read/top-interview-questions/xmted6/
+
+#### 算法
+
+1. 排序算法：快排、归并、计数
+2. 搜索算法：回溯、递归、剪枝技巧
+3. 图论：最短路、最小生成树、网络流建模
+4. 动态规划：背包问题、最长子序列、计数问题
+5. 技巧：分治、倍增、二分、贪心
+
+#### 数据结构
+
+1. 数组与链表：单/双向链表、跳舞链
+2. 栈与队列
+3. 树与图：最近公共祖先、并查集
+4. 哈希表
+5. 堆：大/小根堆、可并堆
+6. 字符串：字典树、后缀树
+
+<br>
+<br>
+<br>
+
+---
+
+## 数论
+算法中，数论常见的问题都是关于质数
+<hr class=short>
+
+### 质数
+
+#### 质数的判断
+
+对某个数 $n$ 是不是质数的判断：
+
+遍历 $1 < x \le \sqrt{n}$ ， 若有 `n % x==0`，则不是质数
+
+遍历前可先判断： $n$ 是不是 `大于 2 的偶数`
+
+若满足此条件则必不为质数
+
+<br>
+<br>
+
+#### 分解质因数
+
+任何一个大于 1 的正整数 $n$，如果 $n$ 不是质数，那么 $n$ 可以唯一地分解成有限个质数的乘积
+
+<br>
+<br>
+
+#### 最大公约数 gcd
+
+求两数 $a,b$ 的最大公约数算法
+
+##### 更相减损术
+
+核心：`gcd(a, b) = gcd(b, a - b)`
+
+```cpp {cmd=run continue=sf2}
+int gcd(int a, int b)
+{
+    if(a == b)  // 递归出口
+        return a;
+    if(a != b && a % 2 == 0 && b % 2 == 0)
+    {
+        // a b 都是偶数，用 2 约分
+        while(a % 2 == 0) a /= 2;
+        while(b % 2 == 0) b /= 2;
+        return gcd(a, b);
+    }
+    if(a < b)
+        return gcd(a, b - a);
+    return gcd(b, a-b);
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+int a,b;
+input >> a >> b;
+if(input)
+    output << gcd(a, b);
+//test
+```
+```cpp {cmd=run continue}
+63 98
+260 104
+```
+
+<br>
+<br>
+
+##### 辗转相除法（欧几里得算法）
+
+核心：`gcd(a, b) = gcd(b, a mod b)`
+
+```cpp {cmd=run continue=sf2}
+int gcd(int a, int b)
+{
+    if(a < b)
+        return gcd(b, a);
+    if(a % b == 0)
+        return b;
+    return gcd(b, a % b);
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+int a,b;
+input >> a >> b;
+if(input)
+    output << gcd(a, b);
+//test
+```
+```cpp {cmd=run continue}
+63 98
+260 104
+```
+
+<br><br>
+
+##### 裴蜀定理
+
+表述：若 $\gcd (a, b) = c$, 那么对于任意整数对 $(x, y)$, $ax+by$ 一定是 $c$ 的倍数
+
+特别的， 一定存在整数对 $x, y$, 使得 $ax+by=c$
+
+推论：$a, b$ 互质 $\Leftrightarrow$ 存在整数对 $(x, y)$，使得 $ax+by=1$ 
+
+
+<br>
+<br>
+<br>
+
+---
+
+## 数学几何
+
+<br><hr class=short>
+
+### 平面几何
+
+#### 直线
+
+##### 直线方程
+
+一般式：$Ax+By+C=0$
+
+斜截式：$y=kx+b$
+
+截距式：$\frac{x}{a}+\frac{y}{b} = 1$
+
+点斜式：$y-y_0=k(x-x_0)$
+
+两点式：$\frac{x~-~x2}{x1-x2} = \frac{y~-~y2}{y1-y2}$
+
+<br><br>
+
+##### 点到直线的距离
+
+点 $(x_0, y_0)$ 到直线 $Ax+By+C=0$ 的距离
+
+公式： $d=\frac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2}}$
+
+<br><br>
+
+#### 矩形
+
+##### 矩形重叠问题
+
+以 $[x1, y1, x2, y2]$ 的形式给出两个矩形 $rec1$, $rec2$ ，其中矩形的两边分别平行于 $x$ 轴和 $y$ 轴， $[x1, y1]$ 表示矩形左下角的点坐标， $[x2, y2]$ 表示矩形右上角坐标
+
+问题：输入 $ax1, ay1, ax2, ay2, bx1, by1, bx2, by2$ ， 返回两个矩形是否重叠
+
+思路：两个矩形重叠时，他们的 x 和 y 坐标范围有重叠
+
+关键代码： 
+
+```cpp 
+ax1 < bx2 && bx1 < ax2 && ay1 < by2 && by1 < ay2
+```
+
+<br><br>
+
+##### 矩形重叠面积
+
+矩形表示方式同上
+
+问题：输入 $ax1, ay1, ax2, ay2, bx1, by1, bx2, by2$ ， 返回两个矩形的重叠面积
+
+关键代码：
+
+```cpp
+(min(ax2, bx2) - max(ax1, bx1)) * (min(ay2, by2) - max(ay1, by1))
+```
+
+<br><br>
+
+#### 圆
+
+##### 圆的方程
+
+$(x-a)^2+(y-b)^2=r^2$
+
+其中： 圆心坐标：$[a, b]$，半径：$r$
+
+
+<br>
+<br>
+<br>
+
+---
+## 随机算法
+<hr class=short>
+
+### 权重随机算法
+
+输入数组 `name` 和正整数数组 `w` ，其中每个元素 `w[i]` 表示选择到 `name[i]` 的权重，那么调用随机选择函数时，选择到 `i` 的概率为 $w[i]~/~sum(w)$
+
+请你设计一个算法，实现这个随机选择函数
+
+方法：前缀和 + 二分查找
+
+思路：构造 `w` 数组的前缀和数组 `s`，随机生成一个索引 `x`，返回数组 `s` 中第一个大于等于 `x` 的元素的下标
+
+表格解析：
+
+|     w[i]     |   1   |   1   |   2   |   3   |
+| :----------: | :---: | :---: | :---: | :---: |
+|     s[i]     |   1   |   2   |   4   |   7   |
+| 随机索引 `x` |   1   |   2   |  3 4  | 5 6 7 |
+
+解释：如 x = 5,6,7 时，匹配到的是 w 中权重为 3 的下标，而且刚好 x 的取值有 3 个，满足的权重为 3 的要求
+
+
+代码：
+```cpp {cmd=run continue=sf2}
+class RandomSelect {
+        vector<int> pre;
+public:
+    RandomSelect(vector<int>& w) {
+        srand(time(0));
+        pre.resize(w.size() + 1);
+        pre[0] = 0;
+        for (int i = 1; i < pre.size(); ++i) {
+            pre[i] = pre[i - 1] + w[i - 1];
+        }
+    }
+    
+    int pickIndex() {
+        int ran = rand() % pre[pre.size() - 1] + 1;
+        int l = 1, r = pre.size() - 1, m = (l + r) / 2;
+        int index = pre.size() - 1;
+        while(l <= r) {
+            if (pre[m] >= ran) {
+                r = m - 1;
+                index = m;
+            } else {
+                l = m + 1;
+            }
+            m = (l + r) / 2;
+        }
+
+        return index - 1;
+    }
+};
+```
+```cpp {cmd=run continue hide}
+//entry
+vector<int> w;
+vector<string> name;
+input >> w >> name;
+if(input)
+{
+    RandomSelect rs(w);
+    vector<vector<string>> res;
+    for (int i = 0; i < 5; ++i) {
+        vector<string> temp;
+        for (int j = 0; j < 10; ++j) {
+            temp.push_back(name[rs.pickIndex()]);
+        }
+        res.push_back(temp);
+    }
+    cout << res;
+}
+//test
+```
+```cpp {cmd=run continue}
+//模拟一下某游戏抽卡
+[40,50,8,2][白,紫,橙,彩]
+```
+
+
+
+<br>
+<br>
+<br>
 
 ---
 ## 位运算
-<hr width="60%">
+<hr class=short>
 
 ### N进制转十进制
 
@@ -94,7 +494,7 @@ $$
 720.5_{(8)} = 7×8^{2}+2×8^{1}+0×8^{0}+5×8^{−1} = 464.625
 $$
 
-<br><hr width="60%">
+<br><br>
 
 
 ### 十进制转N进制
@@ -116,7 +516,7 @@ $$
 
 余数反向遍历： 1 1 0 0 1 0， 因此 $50_{(10)} = 110010_{(2)}$
 
-<br><hr width="60%">
+<br><br>
 
 #### 小数转换
 
@@ -133,7 +533,7 @@ $$
 
 整数部分正序遍历： 1 0 1 1，因此 $0.6875_{(10)} = 0.1011_{(2)}$
 
-<br><hr width="60%">
+<br><hr class=short>
 
 ### 位运算的性质
 
@@ -156,7 +556,7 @@ $$
 - 让 $[a, b]$ 区间的所有数按位与，结果是如下形式的二进制字符串
   - 前面是：a 和 b 的公共前缀；后面补 0
 
-<br><hr width="60%">
+<br><hr class=short>
 
 ### 格雷编码
 
@@ -184,7 +584,6 @@ $$
 代码
 
 ```cpp {cmd="run" continue="sf"}
-
 vector<int> grayCode(int n) {
     vector<int> ans;
     ans.push_back(0);
@@ -213,7 +612,7 @@ if(n)
 5
 ```
 
-<br><hr width="60%">
+<br><hr class=short>
 
 ### 状态压缩
 
@@ -225,228 +624,233 @@ if(n)
 
 
 <br>
+<br>
+<br>
 
 ---
 ## 图
-<hr width="60%">
+<hr class=short>
 
 ### 并查集
 
-* 一些定义：
-    父结点：顶点的直接父亲结点。（自己也可以是自己的父结点）
-    根结点：没有父节点的结点。（由于自己可以是自己的父结点，所以自己也可以是自己的根结点）
+#### 一些定义：
+父结点：顶点的直接父亲结点。（自己也可以是自己的父结点）
+根结点：没有父节点的结点。（由于自己可以是自己的父结点，所以自己也可以是自己的根结点）
 
 <br>
 
-* 并查集基本思想：
-    将一系列元素按照他们的关系合并到一系列集合中，并选取一个代表元素（父节点或根节点）。若查询两个元素间有无关系，则只需要返回他们各自的代表元素并比较，就能知道他们是否有关系（是否在同一个集合中）
+#### 并查集基本思想：
+将一系列元素按照他们的关系合并到一系列集合中，并选取一个代表元素（父节点或根节点）。若查询两个元素间有无关系，则只需要返回他们各自的代表元素并比较，就能知道他们是否有关系（是否在同一个集合中）
 
 <br>
 
-* 并查集编程思想：
-    例：
-    ```mermaid
-    graph TD;
-    0 --- 1
-    1 --- 3
-    0 --- 2
-    4 --- 8
-    5 --- 6
-    5 --- 7
-    9
-    ```
-    查询上图中 $(0, 3)$ $(1, 5)$ $(7,8)$ 的连通性
+#### 并查集编程思想：
+例：
+```mermaid
+graph TD;
+0 --- 1
+1 --- 3
+0 --- 2
+4 --- 8
+5 --- 6
+5 --- 7
+9
+```
+查询上图中 $(0, 3)$ $(1, 5)$ $(7,8)$ 的连通性
 
-    解法：
-    
-    1. 生成并查集数组 $root[10]$
-        初始化： `root[i] = i` 
-        将 `root[i]` 设为 `i` 的父结点，无父结点就设为 `i` 本身
+解法：
 
-    | 元素  |   0   |   0   |   0   |   1   |   4   |   5   |   5   |   5   |   4   |   9   |
-    | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-    | 下标  |   0   |   1   |   2   |   3   |   4   |   5   |   6   |   7   |   8   |   9   |
+1. 生成并查集数组 $root[10]$
+  初始化： `root[i] = i` 
+  将 `root[i]` 设为 `i` 的父结点，无父结点就设为 `i` 本身
 
-    2. 查询 $0$ 和 $3$ 的根节点 （find 函数）
-        `find(i)`: 
-        - 当 `root[i] == i` 时，返回 `i` （ `i` 是根节点）
-        - 当 `root[i] != i` 时，返回 `find(root[i])` （ `i` 不是根节点）
+| 元素  |   0   |   0   |   0   |   1   |   4   |   5   |   5   |   5   |   4   |   9   |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 下标  |   0   |   1   |   2   |   3   |   4   |   5   |   6   |   7   |   8   |   9   |
 
-    3. 若新增连接 $(4, 7)$ ，`root` 如何变化？ （union 函数）
-        `union(i, j)`: `k = find(i); root[k] = j;`
+2. 查询 $0$ 和 $3$ 的根节点 （find 函数）
+  `find(i)`: 
+  - 当 `root[i] == i` 时，返回 `i` （ `i` 是根节点）
+  - 当 `root[i] != i` 时，返回 `find(root[i])` （ `i` 不是根节点）
 
-<br>
-
-* 并查集两种实现方法
-
-    - QuickFind 的并查集
-
-        `root` 数组存放每个结点的根结点
-        特点：
-        
-        - `find` : $O(1)$ ，直接返回的就是根结点
-        - `union` : $O(n)$ ，需要将的其中一个的集合全部的根结点更新
-
-
-        实现：
-        ```cpp{cmd="run"}
-        //define
-        class UnionFind {
-            vector<int> root;
-        
-        public:
-            UnionFind(int size){
-                root.resize(size);
-                for(int i = 0; i < root.size(); ++i)
-                    root[i] = i;
-            }
-            int find(int x){
-                return root[x];
-            }
-            void union_(int x, int y){
-                int rootY = find(y);
-                if (find(x) != rootY)
-                    for(auto& i : root)
-                        if(i == rootY)
-                            i = rootY;
-            }
-        };
-        ```
-
-        | QuickFind  | 构造函数 |  find  | union  |
-        | :--------: | :------: | :----: | :----: |
-        | 时间复杂度 |  $O(n)$  | $O(1)$ | $O(n)$ |
-
-    <br>
-
-    - QuickUnion 的并查集
-    
-        `root` 数组存放每个结点的父结点
-        特点：
-        
-        - `find` : $O(h)$ ，$h$ 为并查集形成的树的高度，需要寻找才能返回根结点
-        - `union` : $O(1)$ ~ $O(n)$，时间复杂度取决于 `find` 函数 ，只需要将的其中一个结点的父结点更新
-
-
-        实现：
-
-        ```cpp{cmd="run"}
-        //define
-        class UnionFind {
-            vector<int> root;
-        
-        public:
-            UnionFind(int size){
-                root.resize(size);
-                for(int i = 0; i < root.size(); ++i)
-                    root[i] = i;
-            }
-            int find(int x){
-                while (x != root[x])
-                    x = root[x];
-                return x;
-            }
-            void union_(int x, int y){
-                int rootX = find(x);
-                int rootY = find(y);
-                if (rootX != rootY)
-                    root[rootY] = rootX;
-            }
-        };
-        ```
-
-        | QuickUnion | 构造函数 |  find  | union  |
-        | :--------: | :------: | :----: | :----: |
-        | 时间复杂度 |  $O(n)$  | $O(d)$ | $O(d)$ |
-        
-        $d$ 为并查集中结点所在的树的平均深度
+3. 若新增连接 $(4, 7)$ ，`root` 如何变化？ （union 函数）
+  `union(i, j)`: `k = find(i); root[k] = j;`
 
 <br>
 
-* 按秩合并的 QuickUnion
-    `find` 函数不变
-    `union` 函数：低树往高树合并（谁高谁做根结点）
+#### 并查集两种实现方法
 
-    实现：
+##### QuickFind 的并查集
 
-    ```cpp{cmd="run"}
-    //define
-    class UnionFind{
-        vector<int> root;
-        vector<int> rank;   // rank 数组储存每个点在树中的深度
+`root` 数组存放每个结点的根结点
+特点：
 
-    public:
-        UnionFind(int size) {
-            root.resize(size);
-            rank.resize(size);
-            for(int i = 0; i < root.size(); ++i) {
-                root[i] = i;
-                rank[i] = 1;
-            }
-        }
-        int find(int x) {
-            while (x != root[x])
-                x = root[x];
-            return x;
-        }
-        void union_(int x, int y) {
-            int rootX = find(x);
-            int rootY = find(y);
-            if (rootX != rootY) {
-                if (rank[rootX] > rank[rootY]) {
-                    root[rootY] = rootX;
-                } else if (rank[rootX] < rank[rootY]) {
-                    root[rootX] = rootY;
-                } else {
-                    root[rootY] = rootX;
-                    rank[rootX] += 1;
-                }
-            }
-        }
-    };
-    ```
-    
-    | 按秩合并的QuickUnion | 构造函数 |    find     |    union    |
-    | :------------------: | :------: | :---------: | :---------: |
-    |      时间复杂度      |  $O(n)$  | $O(\log n)$ | $O(\log n)$ |
+- `find` : $O(1)$ ，直接返回的就是根结点
+- `union` : $O(n)$ ，需要将的其中一个的集合全部的根结点更新
+
+
+实现：
+```cpp {cmd=run}
+//define
+class UnionFind {
+  vector<int> root;
+
+public:
+  UnionFind(int size){
+      root.resize(size);
+      for(int i = 0; i < root.size(); ++i)
+          root[i] = i;
+  }
+  int find(int x){
+      return root[x];
+  }
+  void union_(int x, int y){
+      int rootY = find(y);
+      if (find(x) != rootY)
+          for(auto& i : root)
+              if(i == rootY)
+                  i = rootY;
+  }
+};
+```
+
+| QuickFind  | 构造函数 |  find  | union  |
+| :--------: | :------: | :----: | :----: |
+| 时间复杂度 |  $O(n)$  | $O(1)$ | $O(n)$ |
 
 <br>
 
-* 路径压缩的 QuickUnion
-    调用 `find` 函数后，将该查找路径上的所有结点的父结点，都改为根结点
-    实现：
-    ```cpp{cmd="run"}
-    //define
-    class UnionFind {
-        vector<int> root;
+##### QuickUnion 的并查集
 
-    public:
-        UnionFind(int size) {
-            root.resize(size);
-            for(int i = 0; i < root.size(); ++i)
-                root[i] = i;
+`root` 数组存放每个结点的父结点
+特点：
+
+- `find` : $O(h)$ ，$h$ 为并查集形成的树的高度，需要寻找才能返回根结点
+- `union` : $O(1)$ ~ $O(n)$，时间复杂度取决于 `find` 函数 ，只需要将的其中一个结点的父结点更新
+
+
+实现：
+
+```cpp {cmd=run}
+//define
+class UnionFind {
+    vector<int> root;
+
+public:
+    UnionFind(int size){
+        root.resize(size);
+        for(int i = 0; i < root.size(); ++i)
+            root[i] = i;
+    }
+    int find(int x){
+        while (x != root[x])
+            x = root[x];
+        return x;
+    }
+    void union_(int x, int y){
+        int rootX = find(x);
+        int rootY = find(y);
+        if (rootX != rootY)
+            root[rootY] = rootX;
+    }
+};
+```
+
+| QuickUnion | 构造函数 |  find  | union  |
+| :--------: | :------: | :----: | :----: |
+| 时间复杂度 |  $O(n)$  | $O(d)$ | $O(d)$ |
+
+$d$ 为并查集中结点所在的树的平均深度
+
+<br>
+
+#### 按秩合并的 QuickUnion
+`find` 函数不变
+`union` 函数：低树往高树合并（谁高谁做根结点）
+
+实现：
+
+```cpp {cmd=run}
+//define
+class UnionFind{
+    vector<int> root;
+    vector<int> rank;   // rank 数组储存每个点在树中的深度
+
+public:
+    UnionFind(int size) {
+        root.resize(size);
+        rank.resize(size);
+        for(int i = 0; i < root.size(); ++i) {
+            root[i] = i;
+            rank[i] = 1;
         }
-        int find(int x) {
-            if (x == root[x])
-                return x;
-            return root[x] = find(root[x]);
-        }
-        void union_(int x, int y) {
-            int rootX = find(x);
-            int rootY = find(y);
-            if (rootX != rootY)
+    }
+    int find(int x) {
+        while (x != root[x])
+            x = root[x];
+        return x;
+    }
+    void union_(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+        if (rootX != rootY) {
+            if (rank[rootX] > rank[rootY]) {
                 root[rootY] = rootX;
+            } else if (rank[rootX] < rank[rootY]) {
+                root[rootX] = rootY;
+            } else {
+                root[rootY] = rootX;
+                rank[rootX] += 1;
+            }
         }
-    };
-    ```
+    }
+};
+```
 
-    | 路径压缩的QuickUnion | 构造函数 |    find     |    union    |
-    | :------------------: | :------: | :---------: | :---------: |
-    |      时间复杂度      |  $O(n)$  | $O(\log n)$ | $O(\log n)$ |
+| 按秩合并的QuickUnion | 构造函数 |    find     |    union    |
+| :------------------: | :------: | :---------: | :---------: |
+|      时间复杂度      |  $O(n)$  | $O(\log n)$ | $O(\log n)$ |
+
+<br>
+
+#### 路径压缩的 QuickUnion
+调用 `find` 函数后，将该查找路径上的所有结点的父结点，都改为根结点
+实现：
+```cpp {cmd=run}
+//define
+class UnionFind {
+    vector<int> root;
+
+public:
+    UnionFind(int size) {
+        root.resize(size);
+        for(int i = 0; i < root.size(); ++i)
+            root[i] = i;
+    }
+    int find(int x) {
+        if (x == root[x])
+            return x;
+        return root[x] = find(root[x]);
+    }
+    void union_(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+        if (rootX != rootY)
+            root[rootY] = rootX;
+    }
+};
+```
+
+| 路径压缩的QuickUnion | 构造函数 |    find     |    union    |
+| :------------------: | :------: | :---------: | :---------: |
+|      时间复杂度      |  $O(n)$  | $O(\log n)$ | $O(\log n)$ |
+
+
+<br>
 
 
 
-<br><hr width="60%">
+<br><hr class=short>
 
 ### 最短路径
 
@@ -489,7 +893,7 @@ if(n)
 时间复杂度：$O(n^3)$
 空间复杂度：$O(n^2)$
 
-<br><hr width=60%>
+<br><br>
 
 #### Bellman-Ford 算法
 
@@ -504,74 +908,200 @@ if(n)
 3. 
 
 
+<br><br><br>
 ---
+## 数组
+<hr class=short>
 
-## 几何
+### Boyer-Moore 投票算法
 
-<br><hr width="60%">
+适用情况：找出数组中的众数，众数个数大于 $\lfloor n/2 \rfloor$
 
-### 平面几何
+思路：删除一对不相同的元素，不会影响最终结果，删除到最后剩下的一定是众数（因为思路是两两抵消，所以众数个数一定要多于数组的一半，否则获得的答案可能错误）
 
-#### 直线
+实现：
 
-##### 直线方程
+1. 维护一个候选众数 `candidate` 和它出现的次数 count
+   
+2. 初始化：count = 0
+   
+3. 遍历数组元素 `x` ：
+   - 当 `count == 0` 时，令 `candidate = x`
+   - 当 `x == candidate` 时，`++count`
+   - 当 `x != candidate` 时，`--count`
 
-一般式：$Ax+By+C=0$
+4. 遍历结束后，`candidate` 即是整个数组的众数
 
-斜截式：$y=kx+b$
+代码：
 
-截距式：$\frac{x}{a}+\frac{y}{b} = 1$
-
-点斜式：$y-y_0=k(x-x_0)$
-
-两点式：$\frac{x~-~x2}{x1-x2} = \frac{y~-~y2}{y1-y2}$
-
-<hr width=20%>
-
-##### 点到直线的距离
-
-点 $(x_0, y_0)$ 到直线 $Ax+By+C=0$ 的距离
-
-公式： $d=\frac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2}}$
-
-<br><hr width="60%">
-
-#### 矩形
-
-##### 矩形重叠问题
-
-以 $[x1, y1, x2, y2]$ 的形式给出两个矩形 $rec1$, $rec2$ ，其中矩形的两边分别平行于 $x$ 轴和 $y$ 轴， $[x1, y1]$ 表示矩形左下角的点坐标， $[x2, y2]$ 表示矩形右上角坐标
-
-问题：输入 $ax1, ay1, ax2, ay2, bx1, by1, bx2, by2$ ， 返回两个矩形是否重叠
-
-思路：两个矩形重叠时，他们的 x 和 y 坐标范围有重叠
-
-关键代码： 
-
-```cpp 
-ax1 < bx2 && bx1 < ax2 && ay1 < by2 && by1 < ay2
+```cpp{cmd=run continue=sf2}
+int majorityElement(vector<int>& nums) {
+    int ans, count = 0;
+    for(int i = 0; i < nums.size(); ++i){
+        if(count == 0)
+            ans = nums[i];
+        if(ans == nums[i])
+            ++count;
+        else
+            --count;
+    }
+    return ans;
+}
+```
+```cpp{cmd=run continue hide}
+//entry
+vector<int> v;
+input >> v;
+if(input)
+    cout << majorityElement(v);
+//test
+```
+```cpp{cmd=run continue}
+[1,1,1,1,2,2]
+[2,2,1,1,1,2,2]
+[3,2,3]
+[1,1,1,2,2,3,4,5] //这个不行
 ```
 
-<hr width=20%>
+<hr class=short>
 
-##### 矩形重叠面积
+### 前缀和与差分
 
-矩形表示方式同上
+#### 前缀和
 
-问题：输入 $ax1, ay1, ax2, ay2, bx1, by1, bx2, by2$ ， 返回两个矩形的重叠面积
+前缀和即数组的前 `n` 项和
 
-关键代码：
+如 （建议前缀和数组下标从 1 开始，可以免除一些麻烦）
+`s[0] = 0`
+`s[1] = a[0]`
+`s[2] = a[0] + a[1]`
+...
 
-```cpp
-(min(ax2, bx2) - max(ax1, bx1)) * (min(ay2, by2) - max(ay1, by1))
+<br>
+
+#### 差分
+
+差分与前缀和互为逆运算，即为通过前缀和数组 `s` 求原数组
+
+方法： `a[i] = s[i] - s[i-1]`
+
+<br><hr class=short>
+
+#### 一维数组前缀和
+
+适用范围：求数组区间 (l, r) 的和
+
+方法：构造前缀和数组 s ，`s[r] - s[l]` 即为所求区间和（差分）
+
+（求 a[0] 时为 s[1] - s[0] = a[0] - 0，这就是下标从 1 开始的好处，统一了差分的形式）
+
+代码：迭代构造前缀和
+```cpp {cmd=run continue=sf2}
+vector<int> prefix_sum(vector<int>& v) {
+    vector<int> res(v.size() + 1);
+    res[0] = 0;
+    for (int i = 1; i < res.size(); ++i) {
+        res[i] = res[i - 1] + v[i - 1];
+    }
+    return res;
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+vector<int> v;
+input >> v;
+if(input)
+    cout << prefix_sum(v);
+//test
+```
+```cpp {cmd=run continue}
+[1,2,3,4,5,6]
 ```
 
-<br><hr width="60%">
+<br><hr class=short>
 
-#### 圆
+#### 数组区间增量
 
-##### 圆的方程
+> **leetcode 1109. 航班预订统计**
+> 这里有 n 个航班，它们分别从 1 到 n 进行编号。
+>
+> 有一份航班预订表 bookings ，表中第 i 条预订记录 bookings[i] = [firsti, lasti, seatsi] 意味着在从 firsti 到 lasti （包含 firsti 和 lasti ）的 每个航班 上预订了 seatsi 个座位。
+> 
+> 请你返回一个长度为 n 的数组 answer，其中 answer[i] 是航班 i 上预订的座位总数。
+> 
+>  
+> 
+> > 示例 1：
+> > 输入：bookings = [ [1,2,10],[2,3,20],[2,5,25] ], n = 5
+> > 输出：[10,55,45,25,25]
+> > 解释：
+> > |  航班编号  |   1   |   2   |   3   |   4   |   5   |
+> > | :--------: | :---: | :---: | :---: | :---: | :---: |
+> > | 预订记录 1 |  10   |  10   |   >   |       |       |
+> > | 预订记录 2 |  [ ]()    |  20   |  20   |   >   |       |
+> > | 预订记录 3 |  [ ]()    |  25   |  25   |  25   |  25   |
+> > |  总座位数  |  10   |  55   |  45   |  25   |  25   |
+> > 因此，answer = [10,55,45,25,25]
+>
 
-$(x-a)^2+(y-b)^2=r^2$
+- 每个预定记录数组都可以看成是 `answer` 数组的一个区间增量
 
-其中： 圆心坐标：$[a, b]$，半径：$r$
+    bookings[0] = [1,2,10] 表示 answer 数组区间 [1,2] 增加 10
+    bookings[1] = [2,3,20] 表示 answer 数组区间 [2,3] 增加 20
+    bookings[2] = [2,5,25] 表示 answer 数组区间 [2,5] 增加 25
+
+    <br>
+
+
+- 将 `bookings` 转换为数组 `b`
+
+    b[0] = [10,10,0,0,0]
+    b[1] = [0,20,20,0,0]
+    b[2] = [0,25,25,25,25]
+
+    <br>
+
+    answer[i] = b[0][i] + b[1][i] + b[2][i]
+
+    <br>
+
+    到这里暴力法应该很容易想到了
+
+    <br>
+
+- 对数组 `b` 进行差分（前缀和的逆运算）得到数组 `d`
+
+    d[0] = [10,0,-10,0,0]
+    d[1] = [0,20,0,-20,0]
+    d[2] = [0,25,0,0,0]
+
+    <br>
+
+    差分数组求和后 dsum = [10,45,-10,-20,0]
+    对 dsum 求前缀和得 answer = [10,55,45,25,25]
+
+    <br>
+
+    此处观察可知，题目 `bookings[0]` 数组给出了 区间 [1,2] = 10 ，
+    可转换为 `d[0]` 中的 d[0][1] = 10, d[0][3] = -10
+
+    因此 区间 (l,r) 的增量 x ，可以转换为 差分数组中的 d[l] = x, d[r+1] = -x
+
+    <br>
+
+
+    由此题可知 对数组集合 `s` （或多个数组）
+    数组的求和 = 对每个数组差分后求和，再求前缀和
+
+    <br>
+
+    即
+    $\sum{s} = P(\sum{D(s)})$
+    P() 为求前缀和
+    D() 为求差分
+
+<br>
+<br>
+<br>
+
+---
