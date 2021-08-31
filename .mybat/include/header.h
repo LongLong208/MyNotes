@@ -6,4 +6,7 @@
 
 // 可以在这里添加需要包含的头文件
 
+#include "LinkedList.h"
+#include "Tree.h"
+
 #endif
