@@ -28,24 +28,55 @@ string TreeNode<Type>::toMermaid()
     char id = 'a';
     res << "```mermaid \n";
     res << "graph TD; \n";
-    res << id << "[" << this->val << "] \n";
+    res << id;
+    res << "[ ";
+    res << val;
+    res << " ] \n";
 
+    /* left */
     if (this->left)
         q.push(pair<char, TreeNode<Type> *>(id, this->left));
+
+    /* !left, right*/
+    if (!this->left && this->right)
+        q.push(pair<char, TreeNode<Type> *>(id, nullptr));
+
+    /* right*/
     if (this->right)
         q.push(pair<char, TreeNode<Type> *>(id, this->right));
+
+    /* left, !right*/
+    if (this->left && !this->right)
+        q.push(pair<char, TreeNode<Type> *>(id, nullptr));
+
     ++id;
 
     while (!q.empty())
     {
         pair<char, TreeNode<Type> *> temp = q.front();
         q.pop();
-        res << id << "[" << temp.second->val << "] \n";
+        res << id << "[ ";
+        if (temp.second)
+            res << temp.second->val;
+        res << " ] \n";
         res << temp.first << " --- " << id << "\n";
-        if (temp.second->left)
+
+        /* left */
+        if (temp.second && temp.second->left)
             q.push(pair<char, TreeNode<Type> *>(id, temp.second->left));
-        if (temp.second->right)
+
+        /* !left, right*/
+        if (temp.second && !temp.second->left && temp.second->right)
+            q.push(pair<char, TreeNode<Type> *>(id, nullptr));
+
+        /* right*/
+        if (temp.second && temp.second->right)
             q.push(pair<char, TreeNode<Type> *>(id, temp.second->right));
+
+        /* left, !right*/
+        if (temp.second && temp.second->left && !temp.second->right)
+            q.push(pair<char, TreeNode<Type> *>(id, nullptr));
+
         ++id;
     }
 
@@ -56,6 +87,21 @@ string TreeNode<Type>::toMermaid()
 template <class Type>
 ostream &operator<<(ostream &out, TreeNode<Type> *root)
 {
+    vector<Type> v;
+    queue<TreeNode<Type> *> q;
+    if (root)
+        q.push(root);
+    while (!q.empty())
+    {
+        root = q.front();
+        q.pop();
+        v.push_back(root->val);
+        if (root->left)
+            q.push(root->left);
+        if (root->right)
+            q.push(root->right);
+    }
+    out << v;
     return out;
 }
 
@@ -63,17 +109,16 @@ template <class Type>
 istream &operator>>(istream &in, TreeNode<Type> *&root)
 {
     vector<string> v;
-    queue<TreeNode<Type> *> q;
+    queue<TreeNode<Type> **> q;
 
     in >> v;
-    q.push(root);
+
+    q.push(&root);
     int i = 0;
     while (!q.empty())
     {
-        TreeNode<Type> *cur = q.front();
+        TreeNode<Type> **cur = q.front();
         q.pop();
-
-        /* 建左子树 */
         if (i < v.size())
         {
             stringstream ss(v[i++]);
@@ -81,21 +126,9 @@ istream &operator>>(istream &in, TreeNode<Type> *&root)
             {
                 Type temp;
                 ss >> temp;
-                cur->left = new TreeNode<Type>(temp);
-                q.push(cur->left);
-            }
-        }
-
-        /* 建右子树 */
-        if (i < v.size())
-        {
-            stringstream ss(v[i++]);
-            if (ss.str() != "null")
-            {
-                Type temp;
-                ss >> temp;
-                cur->right = new TreeNode<Type>(temp);
-                q.push(cur->right);
+                *cur = new TreeNode<Type>(temp);
+                q.push(&(*cur)->left);
+                q.push(&(*cur)->right);
             }
         }
     }
