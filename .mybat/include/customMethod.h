@@ -93,4 +93,16 @@ istream &operator>>(istream &in, vector<T> &v)
     return in;
 }
 
+ostream &begin_out(ostream &out, string cla = "code-output")
+{
+    out << ("<div class=" + cla + "> \n\n");
+    return out;
+}
+
+ostream &end_out(ostream &out)
+{
+    out << "</div> \n\n";
+    return out;
+}
+
 #endif

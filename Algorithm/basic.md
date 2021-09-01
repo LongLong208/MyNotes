@@ -1,5 +1,5 @@
 <head>
-<style type="text/css">  
+<style>
 *{
     font-family:consolas;
 }
@@ -16,10 +16,21 @@ html body h4{
 html body h5{
     color:#e4e79b;
 }
+html body code {
+    color: #83ee73;
+}
 .short {
     width:60%;
     background-color:rgba(0,0,0,0);
     border-bottom:4px dotted #515151;
+}
+.code-output {
+    background-color: #323232;
+    padding: .8em;
+    margin: 1em 0px;
+}
+.code-hr {
+    margin:3em 0px .5em 0px;
 }
 </style>
 </head>
@@ -678,7 +689,7 @@ graph TD;
 
 <br>
 
-#### 并查集两种实现方法
+#### 普通并查集两种实现方法
 
 ##### QuickFind 的并查集
 
@@ -774,7 +785,7 @@ $d$ 为并查集中结点所在的树的平均深度
 //define
 class UnionFind{
     vector<int> root;
-    vector<int> rank;   // rank 数组储存每个点在树中的深度
+    vector<int> rank;   // rank 数组储存每个结点所在的高度
 
 public:
     UnionFind(int size) {
@@ -815,6 +826,26 @@ public:
 
 #### 路径压缩的 QuickUnion
 调用 `find` 函数后，将该查找路径上的所有结点的父结点，都改为根结点
+
+路径压缩本质是 执行 `find()` 的过程将下图左图，转化为右图
+
+```mermaid
+graph TB;
+subgraph  After
+    g[0] --- h[1]
+    g --- i[2]
+    g --- j[3]
+    g --- k[4]
+    g --- l[5]
+end
+subgraph  Before
+    a[0] --- b[1] --- c[2]
+    a --- d[3]
+    d --- e[4]
+    d --- f[5]
+end
+```
+
 实现：
 ```cpp {cmd=run}
 //define
@@ -845,11 +876,102 @@ public:
 | :------------------: | :------: | :---------: | :---------: |
 |      时间复杂度      |  $O(n)$  | $O(\log n)$ | $O(\log n)$ |
 
-
 <br>
 
+#### 基于路径压缩的按秩合并优化的并查集
+
+`find()` 路径优化
+`union()` 按秩合并
+
+实现：
+```cpp {cmd=run}
+//define
+class UnionFind {
+public:
+    vector<int> root;
+    vector<int> rank;
+
+    UnionFind(int size) {
+        root.resize(size);
+        rank.resize(size);
+        for(int i = 0; i < root.size(); ++i){
+            root[i] = i;
+            rank[i] = 1;
+        }
+    }
+    int find(int x) {
+        if (x == root[x])
+            return x;
+        return root[x] = find(root[x]);
+    }
+    void union_(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+        if (rootX != rootY) {
+            if (rank[rootX] > rank[rootY]) {
+                root[rootY] = rootX;
+            } else if (rank[rootX] < rank[rootY]) {
+                root[rootX] = rootY;
+            } else {
+                root[rootY] = rootX;
+                rank[rootX] += 1;
+            }
+        }
+    }
+};
+```
+
+```cpp {cmd=run continue modify_source}
+//use
+UnionFind uf(10);
+uf.union_(0,1);
+uf.union_(0,2);
+uf.union_(1,3);
+
+uf.union_(4,5);
+uf.union_(5,6);
+
+uf.union_(2,4);
 
 
+
+// output
+begin_out(cout) << "```mermaid \n" << "graph TD; \n";
+for (int i = 0; i < uf.root.size(); ++i) {
+    if(uf.root[i] != i)
+        cout << uf.root[i] << " --- " << i << endl;
+    else
+        cout << i << endl;
+}
+cout << "``` \n";
+end_out(cout);
+```
+
+<!-- code_chunk_output -->
+
+<div class=code-output> 
+
+```mermaid 
+graph TD; 
+0
+0 --- 1
+0 --- 2
+0 --- 3
+0 --- 4
+4 --- 5
+4 --- 6
+7
+8
+9
+``` 
+</div> 
+
+
+
+<!-- /code_chunk_output -->
+
+
+<br>
 <br><hr class=short>
 
 ### 最短路径
@@ -1061,7 +1183,7 @@ if(input)
 
     <br>
 
-    answer[i] = b[0][i] + b[1][i] + b[2][i]
+    `answer[i] = b[0][i] + b[1][i] + b[2][i]`
 
     <br>
 
