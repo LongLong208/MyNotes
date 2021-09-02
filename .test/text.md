@@ -71,7 +71,29 @@ int main(void)
 {
 char *pathvar;
 pathvar = getenv("MDCPP");
-printf("pathvar=%s",pathvar);
+printf("pathvar = %s",pathvar);
 return 0;
 }
+```
+
+```cpp{cmd=run}
+//sf
+//entry
+vector<vector<vector<vector<int>>>>  a;
+input >> a;
+if(input)
+    output << a;
+//test
+[
+    [
+        [
+            [1,8],
+            [2]
+        ],
+        [
+            [3],
+            [4]
+        ]
+    ]
+]
 ```

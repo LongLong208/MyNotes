@@ -35,13 +35,8 @@ html body code {
 </style>
 </head>
 
-```cpp {cmd="run" id="sf" hide}
-//sf
-class Solution{
-public:
-```
 
-```cpp {cmd="run" id="sf2" hide}
+```cpp {cmd="run" id="sf" hide}
 //sf
 ```
 
@@ -254,7 +249,7 @@ https://leetcode-cn.com/leetbook/read/top-interview-questions/xmted6/
 
 核心：`gcd(a, b) = gcd(b, a - b)`
 
-```cpp {cmd=run continue=sf2}
+```cpp {cmd=run continue=sf}
 int gcd(int a, int b)
 {
     if(a == b)  // 递归出口
@@ -291,7 +286,7 @@ if(input)
 
 核心：`gcd(a, b) = gcd(b, a mod b)`
 
-```cpp {cmd=run continue=sf2}
+```cpp {cmd=run continue=sf}
 int gcd(int a, int b)
 {
     if(a < b)
@@ -431,7 +426,7 @@ $(x-a)^2+(y-b)^2=r^2$
 
 
 代码：
-```cpp {cmd=run continue=sf2}
+```cpp {cmd=run continue=sf}
 class RandomSelect {
         vector<int> pre;
 public:
@@ -971,8 +966,291 @@ graph TD;
 <!-- /code_chunk_output -->
 
 
-<br>
-<br><hr class=short>
+<br><br><hr class=short>
+
+### 深度优先搜索
+
+方法：使用栈
+
+输入：
+
+    一维数组 V ，V[i] 表示顶点 i
+    二维数组 E ，E[i][j] 表示点 i 和点 j 之间是否相连（或相连的权值）
+
+输出：深度优先搜索遍历序列
+
+代码
+
+```cpp {cmd=run continue=sf}
+string DepthFirstSearch(vector<string>& V, vector<vector<int>>& E) {
+    vector<bool> visit(V.size(), false);
+    stack<int> S;
+    stringstream res("");
+    S.push(0);
+    while (!S.empty()) {
+        int i = S.top();
+        S.pop();
+        if(visit[i]) continue;
+        res << V[i] <<' ';
+        visit[i] = true;
+        for (int j = 0; j < E[i].size(); ++j) {
+            if (E[i][j]) {
+                S.push(j);
+            }
+        }
+    }
+    return res.str();
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+vector<string> V;
+vector<vector<int>> E; 
+
+input >> V >> E;
+if(input){
+    output << DepthFirstSearch(V, E);
+}
+//test
+```
+```cpp {cmd=run continue}
+[A,B,C,D,E,F]
+[
+    [1,1,1,1,0,0],
+    [1,1,0,0,1,1],
+    [1,0,1,0,1,0],
+    [1,0,0,1,1,0],
+    [0,1,1,1,1,1],
+    [0,1,0,0,1,1]
+]
+```
+
+<br><br><hr class=short>
+
+### 广度优先搜索
+
+方法：使用队列（跟dfs代码几乎一样，就是栈换成了队列）
+
+输入：
+
+    一维数组 V ，V[i] 表示顶点 i
+    二维数组 E ，E[i][j] 表示点 i 和点 j 之间是否相连（或相连的权值）
+
+输出：广度优先搜索遍历序列
+
+代码
+
+```cpp {cmd=run continue=sf}
+string BreathFirstSearch(vector<string>& V, vector<vector<int>>& E) {
+    vector<bool> visit(V.size(), false);
+    queue<int> Q;
+    stringstream res("");
+    Q.push(0);
+    while (!Q.empty()) {
+        int i = Q.front();
+        Q.pop();
+        if(visit[i]) continue;
+        res << V[i] <<' ';
+        visit[i] = true;
+        for (int j = 0; j < E[i].size(); ++j) {
+            if (E[i][j]) {
+                Q.push(j);
+            }
+        }
+    }
+    return res.str();
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+vector<string> V;
+vector<vector<int>> E; 
+
+input >> V >> E;
+if(input){
+    output << BreathFirstSearch(V, E);
+}
+//test
+```
+```cpp {cmd=run continue}
+[A,B,C,D,E,F]
+[
+    [1,1,1,1,0,0],
+    [1,1,0,0,1,1],
+    [1,0,1,0,1,0],
+    [1,0,0,1,1,0],
+    [0,1,1,1,1,1],
+    [0,1,0,0,1,1]
+]
+```
+
+<br><br><hr class=short>
+
+### 所有路径
+
+求图中两点的所有路径，且每个结点只能经过一次
+
+输入：
+
+    一维数组 V，V[i] 表示顶点 i
+    二维数组 E，E[i][j] 表示点 i 和点 j 之间是否相连（或相连的权值）
+    顶点 a, b
+
+输出：
+
+    数组 O，存放了 a->b 的所有路径
+
+代码
+
+深度优先搜索所有路径
+
+```cpp {cmd=run continue=sf}
+vector<vector<string>> dfsPath(vector<string>& V, vector<vector<int>>& E, int a, int b) {
+    vector<bool> visit(V.size(), false);
+    stack<vector<int>> S;
+    vector<vector<string>> res;
+    vector<int> start{a};
+    S.push(start);
+
+    while (!S.empty()) {
+        vector<int> cur = S.top();
+        S.pop();
+        int i = cur.back();
+
+        /* 判断是否到达终点 */
+        if (i == b) {
+            vector<string> temp;
+            for(int j = 0; j < cur.size(); ++j) {
+                temp.push_back(V[cur[j]]);
+            }
+            res.push_back(temp);
+            continue;
+        }
+
+        /* 获取下一结点，并将路径入栈 */
+        for(int j = 0; j < E[i].size(); ++j) {
+            if(E[i][j] && i != j) {
+
+                /* 判断是否已访问 */
+                bool visit = false;
+                for(int k = 0; k < cur.size(); ++k) {
+                    if(j == cur[k])
+                        visit = true;
+                }
+                if(visit) continue;
+
+                /* 结点 j 加入路径 */
+                vector<int> temp = cur;
+                temp.push_back(j);
+                S.push(temp);
+            }
+        }
+    }
+
+    return res;
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+vector<string> V;
+vector<vector<int>> E; 
+int a, b;
+
+input >> V >> E >> a >> b;
+if(input){
+    output << dfsPath(V, E, a, b);
+}
+//test
+```
+```cpp {cmd=run continue}
+[A,B,C,D,E,F]
+[
+    [1,1,1,1,0,0],
+    [1,1,0,0,1,1],
+    [1,0,1,0,1,0],
+    [1,0,0,1,1,0],
+    [0,1,1,1,1,1],
+    [0,1,0,0,1,1]
+]
+0 1
+```
+
+<br><br>
+
+广度优先搜索所有路径
+
+```cpp {cmd=run continue=sf}
+vector<vector<string>> dfsPath(vector<string>& V, vector<vector<int>>& E, int a, int b) {
+    vector<bool> visit(V.size(), false);
+    queue<vector<int>> S;
+    vector<vector<string>> res;
+    vector<int> start{a};
+    S.push(start);
+
+    while (!S.empty()) {
+        vector<int> cur = S.front();
+        S.pop();
+        int i = cur.back();
+
+        /* 判断是否到达终点 */
+        if (i == b) {
+            vector<string> temp;
+            for(int j = 0; j < cur.size(); ++j) {
+                temp.push_back(V[cur[j]]);
+            }
+            res.push_back(temp);
+            continue;
+        }
+
+        /* 获取下一结点，并将路径入栈 */
+        for(int j = 0; j < E[i].size(); ++j) {
+            if(E[i][j] && i != j) {
+
+                /* 判断是否已访问 */
+                bool visit = false;
+                for(int k = 0; k < cur.size(); ++k) {
+                    if(j == cur[k])
+                        visit = true;
+                }
+                if(visit) continue;
+
+                /* 结点 j 加入路径 */
+                vector<int> temp = cur;
+                temp.push_back(j);
+                S.push(temp);
+            }
+        }
+    }
+
+    return res;
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+vector<string> V;
+vector<vector<int>> E; 
+int a, b;
+
+input >> V >> E >> a >> b;
+if(input){
+    output << dfsPath(V, E, a, b);
+}
+//test
+```
+```cpp {cmd=run continue}
+[A,B,C,D,E,F]
+[
+    [1,1,1,1,0,0],
+    [1,1,0,0,1,1],
+    [1,0,1,0,1,0],
+    [1,0,0,1,1,0],
+    [0,1,1,1,1,1],
+    [0,1,0,0,1,1]
+]
+0 1
+```
+
+<br><br><hr class=short>
 
 ### 最短路径
 
@@ -1056,7 +1334,7 @@ graph TD;
 
 代码：
 
-```cpp{cmd=run continue=sf2}
+```cpp{cmd=run continue=sf}
 int majorityElement(vector<int>& nums) {
     int ans, count = 0;
     for(int i = 0; i < nums.size(); ++i){
@@ -1118,7 +1396,7 @@ if(input)
 （求 a[0] 时为 s[1] - s[0] = a[0] - 0，这就是下标从 1 开始的好处，统一了差分的形式）
 
 代码：迭代构造前缀和
-```cpp {cmd=run continue=sf2}
+```cpp {cmd=run continue=sf}
 vector<int> prefix_sum(vector<int>& v) {
     vector<int> res(v.size() + 1);
     res[0] = 0;

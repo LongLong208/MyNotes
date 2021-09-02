@@ -76,20 +76,46 @@ istream &operator>>(istream &in, vector<T> &v)
             break;
     while (in >> a)
     {
-        stringstream ss;
-        while (a != ',' && a != ']')
+        if (a == '[')
         {
+            int l = 0;
+            stringstream ss("");
+            while (a != ']' || l > 0)
+            {
+                if (a == ']')
+                    --l;
+                ss << a;
+                in >> a;
+                if (a == '[')
+                    ++l;
+            }
             ss << a;
-            in >> a;
+            ss >> temp;
+            vec.push_back(temp);
         }
-        ss >> temp;
-        vec.push_back(temp);
-        if (a == ']')
+        else if (a == ',')
         {
-            v = vec;
+            continue;
+        }
+        else if (a == ']')
+        {
             break;
         }
+        else
+        {
+            stringstream ss("");
+            while (a != ',' && a != ']')
+            {
+                ss << a;
+                in >> a;
+            }
+            ss >> temp;
+            vec.push_back(temp);
+            if (a == ']')
+                break;
+        }
     }
+    v = vec;
     return in;
 }
 
