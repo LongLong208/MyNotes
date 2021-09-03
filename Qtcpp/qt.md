@@ -840,6 +840,7 @@ mPlane.setPixmap(QPixmap("filepath"));
 % QGraphicsPixmapItem::setPos(int x, int y)
 % QGraphicsPixmapItem::setX(int x)
 % QGraphicsPixmapItem::setY(int y)
+%"
 
 // 添加图片元素到场景
 mScene.addItem(&mBackGround1);
