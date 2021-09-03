@@ -1,5 +1,5 @@
-#ifndef CUSTOMMETHOD_H
-#define CUSTOMMETHOD_H
+#ifndef STREAM_H
+#define STREAM_H
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -118,7 +118,7 @@ istream &operator>>(istream &in, vector<T> &v)
     v = vec;
     return in;
 }
-
+/* 
 ostream &begin_out(ostream &out, string cla = "code-output")
 {
     out << ("<div class=" + cla + "> \n\n");
@@ -129,6 +129,6 @@ ostream &end_out(ostream &out)
 {
     out << "</div> \n\n";
     return out;
-}
+} */
 
 #endif

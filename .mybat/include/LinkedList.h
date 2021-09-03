@@ -2,7 +2,7 @@
 #define LINKEDLIST_H
 
 #include <bits/stdc++.h>
-#include "customMethod.h"
+#include "stream.h"
 using namespace std;
 
 template <class Type>

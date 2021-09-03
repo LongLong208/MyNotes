@@ -1280,6 +1280,22 @@ if(input){
 2. 将小边依次加入最小生成树中，形成环则跳过
 3. 直到选择 n - 1 条边为止
 
+代码：
+```cpp {cmd=run continue=sf}
+template<class Type, bool direct, bool weight>
+Graph<Type, direct, weight> Kruskal(Graph<Type, direct, weight> graph) {
+
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+
+//test
+```
+```cpp {cmd=run continue}
+
+```
+
 
 <br><br><hr class=short>
 

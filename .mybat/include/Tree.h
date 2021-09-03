@@ -2,7 +2,7 @@
 #define TREE_H
 
 #include <bits/stdc++.h>
-#include "customMethod.h"
+#include "stream.h"
 using namespace std;
 
 template <class Type>
@@ -18,6 +18,7 @@ public:
     TreeNode(Type value, TreeNode *l, TreeNode *r) : val(value), left(l), right(r) {}
 
     string toMermaid();
+    //todo Graph<Type, direct, weight> toGraph();
 };
 
 template <class Type>

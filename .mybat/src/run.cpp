@@ -80,8 +80,9 @@ public:
             res += code[i] + "\n";
             ++i;
         }
-        res += "#define end_out \"</div>\" \n";
-        res += "void algorthmTestEntry(istream &input, ostream &output, string &info) \n";
+        // res += "#define end_out \"</div>\" \n";
+        res += "bool modify_source = false;\n";
+        res += "void algorthmTestEntry(istream &input, ostream &output) \n";
         res += "{ \n";
         while (i < code.size() && code[i] != "//test")
         {
@@ -100,7 +101,7 @@ public:
         }
         res += "\";";
         res += "\n\tif (instr == \"\")\n\t\treturn 0;";
-        res += "\n\tstringstream input(instr);\n\tvector<time_t> times;\n\tstring info(\"\");\n\twhile (input){\n\t\ttime_t begin_t = clock();\n\t\talgorthmTestEntry(input, cout, info);\n\t\ttime_t finish_t = clock();\n\t\ttimes.push_back(finish_t - begin_t);\n\t\tcout << endl;\n\t}\n\ttime_t aver = 0;\n\tfor (int i = 0; i < times.size(); ++i){\n\t\taver += times[i];}\n\taver /= times.size();\n\tcout <<\"<hr class=code-hr>\"<< \"average time: \" << aver << \" ms\" << endl << info;\n";
+        res += "\n\tprint(instr, cout, algorthmTestEntry, modify_source);\n";
         main2(res);
         return res;
     }
