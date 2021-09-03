@@ -494,11 +494,13 @@ if(input)
 
 ### N进制转十进制
 
-$720.5_{(8)} = \enspace ?$
+$ 720.5_{(8)} = ~ ? $
 
-$$
-720.5_{(8)} = 7×8^{2}+2×8^{1}+0×8^{0}+5×8^{−1} = 464.625 
-$$
+<div align=center>
+
+$720.5_{(8)} = 7×8^{2}+2×8^{1}+0×8^{0}+5×8^{−1} = 464.625$
+
+</div>
 
 <br><br>
 
@@ -507,18 +509,19 @@ $$
 
 #### 整数转换
 
-$50_{(10)} = \enspace ? _{(2)}$
+$ 50_{(10)} = ~ ? _{(2)} $
 
-$$
-\begin {gather*}
-50 \div 2 = 25 &余& 0  \\
-25 \div 2 = 12 &余& 1  \\
-12 \div 2 = 6 &余& 0  \\
-6 \div 2 = 3 &余& 0 \\
-3 \div 2 = 1 &余& 1 \\
-1 \div 2 = 0 &余& 1 
-\end {gather*}
-$$
+
+<div align=center>
+
+$ 50 \div 2 = 25 ~余~ 0  $
+$ 25 \div 2 = 12 ~余~ 1  $
+$ 12 \div 2 = 6 ~余~ 0  $
+$ 6 \div 2 = 3 ~余~ 0 $
+$ 3 \div 2 = 1 ~余~ 1 $
+$ 1 \div 2 = 0 ~余~ 1 $
+
+</div>
 
 余数反向遍历： 1 1 0 0 1 0， 因此 $50_{(10)} = 110010_{(2)}$
 
@@ -526,16 +529,19 @@ $$
 
 #### 小数转换
 
-$0.6875_{(10)} = \enspace ? _{(2)}$
+$
+0.6875_{(10)} = ~ ? _{(2)}
+$
 
-$$
-\begin {gather*}
-0.6875×2=1.375 &整数部分& 1 \\
-0.375×2=0.75 &整数部分& 0\\
-0.75×2=1.5 &整数部分& 1\\
-0.5×2=1 &整数部分& 1\\
-\end {gather*}
-$$
+<div align=center>
+
+$ 0.6875×2=1.375 ~整数部分~ 1  $
+$ 0.375×2=0.75 ~整数部分~ 0 $
+$ 0.75×2=1.5 ~整数部分~ 1 $
+$ 0.5×2=1 ~整数部分~ 1 $
+
+</div>
+
 
 整数部分正序遍历： 1 0 1 1，因此 $0.6875_{(10)} = 0.1011_{(2)}$
 
@@ -1252,6 +1258,31 @@ if(input){
 
 <br><br><hr class=short>
 
+### 最小生成树
+
+`最小生成树` 是指带权无向图中，生成的总权重最小的，具有所有顶点的连通子图
+
+#### 切分定理
+
+> 切分：指将图切成两个部分
+> 
+> 横切边：如果一条边的两个顶点属于切分的两个部分，则为横切边
+> 
+> 切分定理：在连通带权无向图中，给定任意的切分，如果有一条横切边的权值严格小于所有其他横切边，则这条边必然属于图的最小生成树的一条边
+
+<br>
+
+#### Kruskal 算法
+
+方法：
+
+1. 将所有边从小到大排序
+2. 将小边依次加入最小生成树中，形成环则跳过
+3. 直到选择 n - 1 条边为止
+
+
+<br><br><hr class=short>
+
 ### 最短路径
 
 #### Floyd 算法
@@ -1309,6 +1340,141 @@ if(input){
 
 
 <br><br><br>
+
+
+---
+## 排序
+<hr class=short>
+
+### 快速排序
+
+原理：
+
+- 选择一个元素，将它放到合适的位置，使得左边的数都比它小，右边的数都比它大
+- 对左边和右边递归调用快速排序
+
+方法：
+
+- 我称之为填挖法
+- 随机选择一个划分元素，移到 a[0]，并使用变量 m 保存
+- 维护两个指针 i, j，初始化 i = 0, j = size() - 1
+- 当我们选择完划分元素 a[0] 后，a[0] 处（也是此时的a[0]）相当于是一个坑
+- 此时，j 逆向遍历，将满足 a[j] < a[m] 的元素 a[j] 放到 坑处（a[i]），此时 a[j] 也相当于是一个坑
+- 然后，i 正向遍历，将满足 a[i] > a[m] 的元素 a[i] 放到坑处（a[j]），此时 a[i] 再次成为了坑
+- 重复遍历直到，i == j，将划分元素 m 放到 i==j 处 
+
+代码：
+```cpp {cmd=run continue=sf}
+int partition(vector<int>& arr, int left, int right) {
+    int m = arr[left];
+    while (left < right) {
+        while (m <= arr[right] && left < right) --right;
+        arr[left] = arr[right];
+
+        while (arr[left] <= m && left < right) ++left;
+        arr[right] = arr[left];
+    }
+    arr[left] = m;
+    return left;
+}
+void quickSort(vector<int>& arr, int left, int right) {
+    if(left < right) {
+        int r = partition(arr, left, right);
+        quickSort(arr, r + 1, right);
+        quickSort(arr, left, r - 1);
+    }
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+vector<int> v;
+input >> v;
+if(input){
+    quickSort(v, 0, v.size() - 1);
+    output << v;
+}
+//test
+```
+```cpp {cmd=run continue}
+[2,6,8,3,4,7,0,5,9,1]
+```
+
+<br><br>
+
+##### 扩展
+
+排序统计
+
+输入：
+
+    数组 a
+    整数 k
+
+输出：
+
+    数组中第 k 小元素
+
+思路：
+
+使用快排的划分函数，将数组通过下标 `r` 分为两部分，左边元素都小于 `a[r]` ， 右边元素都大于 `a[r]`
+当 `r == k` 时，`a[r]` 即为答案
+
+代码
+
+
+```cpp {cmd=run continue=sf}
+/* 划分 */
+int partition(vector<int>& arr, int left, int right) {
+    int m = arr[left];
+    while (left < right) {
+        while (m <= arr[right] && left < right) --right;
+        arr[left] = arr[right];
+
+        while (arr[left] <= m && left < right) ++left;
+        arr[right] = arr[left];
+    }
+    arr[left] = m;
+    return left;
+}
+/* 随机选择划分元素 */
+int RandPartition(vector<int>& arr, int left, int right) {
+    int ran = rand() % (right + 1 - left) + left;
+    swap(arr[left], arr[ran]);
+    return partition(arr, left, right);
+}
+/* 选择第 k 小 */
+int select(vector<int>& arr, int k) {
+    int left = 0, right = arr.size() - 1;
+    int r;
+    --k;    /* 下标转换，因为第 k 小的元素排序最后下标其实是 k - 1 */
+    while(true) {
+        r = RandPartition(arr, left, right);
+        if(r < k)
+            left = r + 1;
+        else if(r > k)
+            right = r - 1;
+        else
+            break;
+    }
+    return arr[k];
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+vector<int> v;
+int k;
+input >> v >> k;
+if(input) {
+    output << select(v, k);
+}
+//test
+```
+```cpp {cmd=run continue}
+[1,2,9,8,7,3,4,5,6,0] 3
+```
+
+<br><br><br>
+
 ---
 ## 数组
 <hr class=short>
