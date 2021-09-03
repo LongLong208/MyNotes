@@ -1274,6 +1274,8 @@ if(input){
 
 #### Kruskal 算法
 
+Kruskal 算法适合简单图
+
 方法：
 
 1. 将所有边从小到大排序
@@ -1282,8 +1284,8 @@ if(input){
 
 代码：
 ```cpp {cmd=run continue=sf}
-template<class Type, bool direct, bool weight>
-Graph<Type, direct, weight> Kruskal(Graph<Type, direct, weight> graph) {
+template<class Type>
+Graph<Type, 0, 1> Kruskal(Graph<Type, 0, 1> graph) {
 
 }
 ```
