@@ -703,12 +703,12 @@ graph TD;
 
 实现：
 ```cpp {cmd=run}
-//define
-class UnionFind {
+//class
+class UnionFind_Test {
   vector<int> root;
 
 public:
-  UnionFind(int size){
+  UnionFind_Test(int size){
       root.resize(size);
       for(int i = 0; i < root.size(); ++i)
           root[i] = i;
@@ -744,12 +744,12 @@ public:
 实现：
 
 ```cpp {cmd=run}
-//define
-class UnionFind {
+//class
+class UnionFind_Test {
     vector<int> root;
 
 public:
-    UnionFind(int size){
+    UnionFind_Test(int size){
         root.resize(size);
         for(int i = 0; i < root.size(); ++i)
             root[i] = i;
@@ -783,13 +783,13 @@ $d$ 为并查集中结点所在的树的平均深度
 实现：
 
 ```cpp {cmd=run}
-//define
-class UnionFind{
+//class
+class UnionFind_Test{
     vector<int> root;
     vector<int> rank;   // rank 数组储存每个结点所在的高度
 
 public:
-    UnionFind(int size) {
+    UnionFind_Test(int size) {
         root.resize(size);
         rank.resize(size);
         for(int i = 0; i < root.size(); ++i) {
@@ -849,12 +849,12 @@ end
 
 实现：
 ```cpp {cmd=run}
-//define
-class UnionFind {
+//class
+class UnionFind_Test {
     vector<int> root;
 
 public:
-    UnionFind(int size) {
+    UnionFind_Test(int size) {
         root.resize(size);
         for(int i = 0; i < root.size(); ++i)
             root[i] = i;
@@ -886,13 +886,13 @@ public:
 
 实现：
 ```cpp {cmd=run}
-//define
-class UnionFind {
+//class
+class UnionFind_Test {
 public:
     vector<int> root;
     vector<int> rank;
 
-    UnionFind(int size) {
+    UnionFind_Test(int size) {
         root.resize(size);
         rank.resize(size);
         for(int i = 0; i < root.size(); ++i){
@@ -924,7 +924,7 @@ public:
 
 ```cpp {cmd=run continue modify_source}
 //use
-UnionFind uf(10);
+UnionFind_Test uf(10);
 uf.union_(0,1);
 uf.union_(0,2);
 uf.union_(1,3);
@@ -934,10 +934,8 @@ uf.union_(5,6);
 
 uf.union_(2,4);
 
-
-
 // output
-begin_out(cout) << "```mermaid \n" << "graph TD; \n";
+cout << "```mermaid \n" << "graph TD; \n";
 for (int i = 0; i < uf.root.size(); ++i) {
     if(uf.root[i] != i)
         cout << uf.root[i] << " --- " << i << endl;
@@ -945,12 +943,9 @@ for (int i = 0; i < uf.root.size(); ++i) {
         cout << i << endl;
 }
 cout << "``` \n";
-end_out(cout);
 ```
 
 <!-- code_chunk_output -->
-
-<div class=code-output> 
 
 ```mermaid 
 graph TD; 
@@ -965,8 +960,6 @@ graph TD;
 8
 9
 ``` 
-</div> 
-
 
 
 <!-- /code_chunk_output -->
@@ -1278,26 +1271,285 @@ Kruskal 算法适合简单图
 
 方法：
 
-1. 将所有边从小到大排序
-2. 将小边依次加入最小生成树中，形成环则跳过
-3. 直到选择 n - 1 条边为止
+1. 将所有边从小到大排序（使用最小堆，每次选取堆顶元素即可）
+2. 将小边依次加入最小生成树中，形成环则跳过（使用并查集查询两点是否已在同一颗树中）
+3. 直到选择 `n - 1` 条边为止
 
-代码：
+
+代码思路：
+
+需要使用：堆，并查集
+1. 将所有边插入堆中
+2. 取出堆顶的边 `(p1,p2)`，在并查集中判断 `p1` 和 `p2` 是否已连接，若是，则丢弃重取
+3. 若 `p1` `p2` 未连接，则边 `(p1,p2)` 为最终结果生成树的其中一条边，在并查集中连接 `p1` `p2`
+4. 循环 23. 直到选出了 `n-1` 条边
+
+
 ```cpp {cmd=run continue=sf}
-template<class Type>
-Graph<Type, 0, 1> Kruskal(Graph<Type, 0, 1> graph) {
+/* 边 */
+template<class CostType>
+class Edge{
+public:
+    int p1;
+    int p2;
+    CostType cost;
 
+    Edge(int point1, int point2, CostType c):p1(point1), p2(point2), cost(c){}
+};
+
+/* 堆使用的比较函数 */
+auto com = [](Edge<double> e1, Edge<double> e2)->bool{return e1.cost < e2.cost;};
+
+
+/* Kruskal 算法 */
+template<class Type>
+Graph<Type, 0, 1> Kruskal(Graph<Type, 0, 1>& graph) {
+    Heap<Edge<double>, decltype(com)> edges(com);
+
+    /* 初始化堆，将所有边插入到堆中 */
+    for (int i = 0; i < graph.edge.size(); ++i) {
+        for (int j = i + 1; j < graph.edge[i].size(); ++j) {
+            if(graph.edge[i][j] > 0){
+                edges.push(Edge<double>(i, j, graph.edge[i][j]));
+            }
+        }
+    }
+
+    /* 初始化并查集 */
+    UnionFind uf(graph.vertex.size());
+    int n = graph.vertex.size() - 1;
+
+    /* 结果图的邻接矩阵 */
+    vector<vector<double>> edgeRes(graph.vertex.size(), vector<double>(graph.vertex.size(), 0));
+
+    /* 开始选边 */
+    for(int i = 0; i < n; ++i) {
+        /* 取出最小堆顶的边 */
+        Edge<double> e = edges.top();
+        edges.pop();
+        /* 在并查集中查询这条边的两点是否已经在同一个生成树 */
+        if(!uf.connected(e.p1, e.p2)){
+            /* 不是则连接，并将权值赋给结果邻接矩阵 */
+            uf.unite(e.p1, e.p2);
+            edgeRes[e.p1][e.p2] = edgeRes[e.p2][e.p1] = e.cost;
+        }
+        /* 已在同一邻接矩阵，则需要多找一条边 */
+        else
+            ++n;
+    }
+
+    /* 生成结果图 */
+    Graph<Type, 0, 1> res(graph.vertex, edgeRes);
+    return res;
 }
 ```
 ```cpp {cmd=run continue hide}
 //entry
-
+modify_source = true;
+Graph<string, 0, 1> g;
+input >> g;
+if(input) {
+    output << "原图：\n" << g << "最小生成树：\n" << Kruskal(g);
+}
 //test
 ```
-```cpp {cmd=run continue}
-
+```cpp {cmd=run continue modify_source}
+[A,B,C,D,E]
+[
+    [0,0.5,0,0,1],
+    [0.5,0,4,3,1.5],
+    [0,4,0,0,0],
+    [0,3,0,0,2],
+    [1,1.5,0,2,0]
+]
 ```
 
+<!-- code_chunk_output -->
+
+<div class=code-output> 
+
+原图：
+```mermaid 
+graph LR; 
+a[ A ] 
+b[ B ] 
+c[ C ] 
+d[ D ] 
+e[ E ] 
+a ---|0.5| b 
+a ---|1| e 
+b ---|4| c 
+b ---|3| d 
+b ---|1.5| e 
+d ---|2| e 
+```
+最小生成树：
+```mermaid 
+graph LR; 
+a[ A ] 
+b[ B ] 
+c[ C ] 
+d[ D ] 
+e[ E ] 
+a ---|0.5| b 
+a ---|1| e 
+b ---|4| c 
+d ---|2| e 
+```
+
+
+<hr class=code-hr> average time: 0 ms
+
+
+</div> 
+
+
+
+<!-- /code_chunk_output -->
+
+<br><br>
+
+#### Prim 算法
+
+Prim 算法适合复杂图
+
+思路：
+1. 将顶点分为未访问和已访问两个集合（使用 `visit` 数组标记）
+2. 将第一个顶点加入已访问集合，遍历已访问集合，对于连接已访问集合中的顶点的最短的边（使用 `堆` 数据结构），若这条边的另一个顶点未访问，则加入已访问集合
+3. 直到未访问集合为空
+
+代码思路：
+
+需要使用：visit 数组， 堆
+1. 将点 0 加入已访问，并用 `i` 维护最新加入的结点
+2. 对于最新加入的结点 `i`，将它的连接到所有未访问结点插入堆中
+3. 取堆顶的边`(p1,p2)`，判断点 `p2` 是否已访问，若是，则丢弃重取
+4. 若 `p2` 未访问，则边 `(p1,p2)` 为最终结果生成树的其中一条边，将点 `p2` 加入已访问，令 `i = p2`
+5. 循环 234. 直到所有点已访问
+
+```cpp {cmd=run continue=sf}
+/* 边 */
+template<class CostType>
+class Edge{
+public:
+    int p1;
+    int p2;
+    CostType cost;
+
+    Edge(int point1, int point2, CostType c):p1(point1), p2(point2), cost(c){}
+};
+
+/* 堆使用的比较函数 */
+auto com = [](Edge<double> e1, Edge<double> e2)->bool{return e1.cost < e2.cost;};
+
+/* Prim 算法 */
+template<class Type>
+Graph<Type, 0, 1> Prim(Graph<Type, 0, 1>& graph) {
+    /* visit 数组初始化 */
+    vector<bool> visit(graph.vertex.size(), false);
+    /* 堆初始化 */
+    Heap<Edge<double>, decltype(com)> edges(com);
+    /* 结果图的临界矩阵 */
+    vector<vector<double>> edgeRes(graph.vertex.size(), vector<double>(graph.vertex.size(), 0));
+
+    /* 将点 0 标记为已访问，i 维护当前最新加入的边 */
+    int i = 0;
+    visit[i] = true;
+    int n = graph.vertex.size() - 1;
+
+    /* 开始选点 */
+    while(n > 0) {
+        /* 对于所有未访问的点 j，将边 i->j 加入堆 */
+        for(int j = 0; j < visit.size(); ++j) {
+            if(visit[j]) continue;
+            if(graph.edge[i][j] > 0)
+                edges.push(Edge<double>(i, j, graph.edge[i][j]));
+        }
+
+        /* 从堆中取出边 p1->p2 */
+        Edge<double> e = edges.top();
+        edges.pop();
+
+        /* p1 肯定是已访问，判断 p2 是否访问，如果已访问，则为不需要的边，丢弃 */
+        while(visit[e.p2]){
+            e = edges.top();
+            edges.pop();
+        }
+
+        /* 将点 p2 加入已访问集合 */
+        i = e.p2;
+        visit[i] = true;
+        --n;
+        edgeRes[e.p1][e.p2] = edgeRes[e.p2][e.p1] = e.cost;
+    }
+
+    Graph<Type, 0, 1> res(graph.vertex, edgeRes);
+    return res;
+}
+```
+```cpp {cmd=run continue}
+//entry
+modify_source = true;
+Graph<string, 0, 1> g;
+input >> g;
+if(input) {
+    output << "原图：\n" << g << "最小生成树：\n" << Prim(g);
+}
+//test
+```
+```cpp {cmd=run continue modify_source}
+[A,B,C,D,E]
+[
+    [0,0.5,0,0,1],
+    [0.5,0,4,3,1.5],
+    [0,4,0,0,0],
+    [0,3,0,0,2],
+    [1,1.5,0,2,0]
+]
+```
+
+<!-- code_chunk_output -->
+
+<div class=code-output> 
+
+原图：
+```mermaid 
+graph LR; 
+a[ A ] 
+b[ B ] 
+c[ C ] 
+d[ D ] 
+e[ E ] 
+a ---|0.5| b 
+a ---|1| e 
+b ---|4| c 
+b ---|3| d 
+b ---|1.5| e 
+d ---|2| e 
+```
+最小生成树：
+```mermaid 
+graph LR; 
+a[ A ] 
+b[ B ] 
+c[ C ] 
+d[ D ] 
+e[ E ] 
+a ---|0.5| b 
+a ---|1| e 
+b ---|4| c 
+d ---|2| e 
+```
+
+
+<hr class=code-hr> average time: 0 ms
+
+
+</div> 
+
+
+
+<!-- /code_chunk_output -->
 
 <br><br><hr class=short>
 
@@ -1689,3 +1941,118 @@ if(input)
 <br>
 
 ---
+## 堆
+<hr class=short>
+
+### 堆的基本定义
+
+堆是一种数据结构，它是一颗完全二叉树，其中`每个结点的值都小于其子结点的值`，称之为最小堆（小根堆），反之为最大堆（大根堆）
+
+**堆与优先队列**
+
+优先队列中的元素都有优先度，表示了元素与元素之间的关系，而优先队列是一种数据类型，优先队列并不是堆，但堆可以说是优先队列的一种实现方式
+
+<br><hr class=short>
+
+### 堆的实现
+
+这里以最小堆为例
+
+堆是一颗完全二叉树，其中每个结点值都小于其子结点值
+
+堆的操作：
+
+- 维护结点 `x` 使其在正确的位置：自底向上，判断 `x` 是否大于其父结点，若不满足，则与父结点交换，直到 `x` 为根结点或 `x` 大于其父结点
+- 插入：插入到最右下结点的下一个位置 `end` （如果满了，就新加一行），然后维护结点 `end`
+- 取顶点值：将顶点值与最后一个位置 `end` 的结点交换，然后删除顶点值(end处)，并自顶向下，若 `end` 比子结点大，则与最小的子结点交换，直到 `end` 为叶子或 `end` 比子结点小
+
+此处就使用 `vector` 实现
+
+```cpp {cmd=run}
+//class
+template<class Type, class Compare = std::less<Type>>
+class Heap_Test{
+protected:
+    vector<Type> data;
+    int end;     // end 指向末尾元素的后一个
+    Compare com; // com 比较函数或函数对象，当 com(data1, data2) 返回 true 时，data1 比 data2 接近堆顶
+
+    void adjust(int i) {
+        if(i >= end) return;
+        while(i > 0 && com(data[i], data[(i - 1) / 2])){
+            swap(data[i], data[(i - 1) / 2]);
+            i = (i - 1) / 2;
+        }
+    }
+public:
+    Heap_Test():end(0){}
+    Heap_Test(Compare compare):end(0), com(compare){}
+    inline bool isEmpty(){return end == 0;}
+    inline int size(){return end;}
+    void insert(Type x) {
+        if(end < data.size())
+            data[end] = x;
+        else
+            data.push_back(x);
+        ++end;
+        adjust(end - 1);
+    }
+    void push(Type x) {insert(x);}
+    Type top(){
+        return data[0];
+    }
+    void pop(){
+        --end;
+        swap(data[0], data[end]);
+        int i = 0;
+        while (i < end) {
+            int left = i * 2 + 1;
+            int right = i * 2 + 2;
+            if (left < end && com(data[left], data[i]) || right < end && com(data[right], data[i]))
+            {
+                int min_d;
+                if(right < end && com(data[right], data[left])) {
+                    min_d = right;
+                } else {
+                    min_d = left;
+                }
+                swap(data[i], data[min_d]);
+                i = min_d;
+            } else {
+                break;
+            }
+        }
+    }
+};
+
+```
+```cpp {cmd=run continue}
+//use
+Heap_Test<int> heap;
+heap.push(9);
+heap.push(7);
+heap.push(6);
+heap.push(1);
+heap.push(2);
+heap.push(3);
+heap.push(5);
+heap.push(4);
+heap.push(8);
+
+
+vector<int> v;
+while(!heap.isEmpty()) {
+    v.push_back(heap.top());
+    heap.pop();
+}
+cout  << endl << v << endl;
+```
+
+
+<br>
+<br>
+<br>
+
+---
+
+

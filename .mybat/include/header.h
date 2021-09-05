@@ -9,6 +9,7 @@
 #include "Graph.h"
 #include "Mermaid.h"
 #include "UnionFind.h"
+#include "Heap.h"
 
 // 可以在这里添加需要包含的头文件
 

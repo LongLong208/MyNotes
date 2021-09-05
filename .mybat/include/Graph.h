@@ -10,11 +10,11 @@ class Graph
 {
 public:
     vector<Type> vertex;
-    vector<vector<int> > edge;
+    vector<vector<double> > edge;
     Graph() {}
     Graph(vector<Type> v) : vertex(v) {}
-    Graph(vector<vector<int> > e) : edge(e) {}
-    Graph(vector<Type> v, vector<vector<int> > e) : vertex(v), edge(e) {}
+    Graph(vector<vector<double> > e) : edge(e) {}
+    Graph(vector<Type> v, vector<vector<double> > e) : vertex(v), edge(e) {}
     string toMermaid();
 };
 
@@ -38,8 +38,11 @@ string Graph<Type, direct, weight>::toMermaid()
             if (edge[i][j] != 0)
             {
                 res << (char)(i + 'a') << " ---";
+                if (direct)
+                    res << '>';
                 if (weight)
                     res << "|" << edge[i][j] << "|";
+
                 res << " " << (char)(j + 'a') << " \n";
             }
         }
@@ -52,7 +55,7 @@ template <class Type, bool direct, bool weight>
 istream &operator>>(istream &in, Graph<Type, direct, weight> &graph)
 {
     vector<Type> v;
-    vector<vector<int> > e;
+    vector<vector<double> > e;
     in >> v >> e;
     Graph<Type, direct, weight> temp(v, e);
     graph = temp;
@@ -60,7 +63,7 @@ istream &operator>>(istream &in, Graph<Type, direct, weight> &graph)
 }
 
 template <class Type, bool direct, bool weight>
-ostream &operator<<(ostream &out, Graph<Type, direct, weight> &graph)
+ostream &operator<<(ostream &out, Graph<Type, direct, weight> graph)
 {
     out << graph.toMermaid();
     return out;
