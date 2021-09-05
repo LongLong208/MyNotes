@@ -1302,15 +1302,15 @@ auto com = [](Edge<double> e1, Edge<double> e2)->bool{return e1.cost < e2.cost;}
 
 
 /* Kruskal 算法 */
-template<class Type>
-Graph<Type, 0, 1> Kruskal(Graph<Type, 0, 1>& graph) {
-    Heap<Edge<double>, decltype(com)> edges(com);
+template<class Type, class CostType>
+Graph<Type, 0, 1, CostType> Kruskal(Graph<Type, 0, 1, CostType>& graph) {
+    Heap<Edge<CostType>, decltype(com)> edges(com);
 
     /* 初始化堆，将所有边插入到堆中 */
     for (int i = 0; i < graph.edge.size(); ++i) {
         for (int j = i + 1; j < graph.edge[i].size(); ++j) {
             if(graph.edge[i][j] > 0){
-                edges.push(Edge<double>(i, j, graph.edge[i][j]));
+                edges.push(Edge<CostType>(i, j, graph.edge[i][j]));
             }
         }
     }
@@ -1320,12 +1320,12 @@ Graph<Type, 0, 1> Kruskal(Graph<Type, 0, 1>& graph) {
     int n = graph.vertex.size() - 1;
 
     /* 结果图的邻接矩阵 */
-    vector<vector<double>> edgeRes(graph.vertex.size(), vector<double>(graph.vertex.size(), 0));
+    vector<vector<CostType>> edgeRes(graph.vertex.size(), vector<CostType>(graph.vertex.size(), 0));
 
     /* 开始选边 */
     for(int i = 0; i < n; ++i) {
         /* 取出最小堆顶的边 */
-        Edge<double> e = edges.top();
+        Edge<CostType> e = edges.top();
         edges.pop();
         /* 在并查集中查询这条边的两点是否已经在同一个生成树 */
         if(!uf.connected(e.p1, e.p2)){
@@ -1339,14 +1339,14 @@ Graph<Type, 0, 1> Kruskal(Graph<Type, 0, 1>& graph) {
     }
 
     /* 生成结果图 */
-    Graph<Type, 0, 1> res(graph.vertex, edgeRes);
+    Graph<Type, 0, 1, CostType> res(graph.vertex, edgeRes);
     return res;
 }
 ```
 ```cpp {cmd=run continue hide}
 //entry
 modify_source = true;
-Graph<string, 0, 1> g;
+Graph<string, 0, 1, double> g;
 input >> g;
 if(input) {
     output << "原图：\n" << g << "最小生成树：\n" << Kruskal(g);
@@ -1407,6 +1407,7 @@ d ---|2| e
 
 <!-- /code_chunk_output -->
 
+
 <br><br>
 
 #### Prim 算法
@@ -1443,14 +1444,14 @@ public:
 auto com = [](Edge<double> e1, Edge<double> e2)->bool{return e1.cost < e2.cost;};
 
 /* Prim 算法 */
-template<class Type>
-Graph<Type, 0, 1> Prim(Graph<Type, 0, 1>& graph) {
+template<class Type, class CostType>
+Graph<Type, 0, 1, CostType> Prim(Graph<Type, 0, 1, CostType> graph) {
     /* visit 数组初始化 */
     vector<bool> visit(graph.vertex.size(), false);
     /* 堆初始化 */
-    Heap<Edge<double>, decltype(com)> edges(com);
+    Heap<Edge<CostType>, decltype(com)> edges(com);
     /* 结果图的临界矩阵 */
-    vector<vector<double>> edgeRes(graph.vertex.size(), vector<double>(graph.vertex.size(), 0));
+    vector<vector<CostType>> edgeRes(graph.vertex.size(), vector<CostType>(graph.vertex.size(), 0));
 
     /* 将点 0 标记为已访问，i 维护当前最新加入的边 */
     int i = 0;
@@ -1463,11 +1464,11 @@ Graph<Type, 0, 1> Prim(Graph<Type, 0, 1>& graph) {
         for(int j = 0; j < visit.size(); ++j) {
             if(visit[j]) continue;
             if(graph.edge[i][j] > 0)
-                edges.push(Edge<double>(i, j, graph.edge[i][j]));
+                edges.push(Edge<CostType>(i, j, graph.edge[i][j]));
         }
 
         /* 从堆中取出边 p1->p2 */
-        Edge<double> e = edges.top();
+        Edge<CostType> e = edges.top();
         edges.pop();
 
         /* p1 肯定是已访问，判断 p2 是否访问，如果已访问，则为不需要的边，丢弃 */
@@ -1483,14 +1484,14 @@ Graph<Type, 0, 1> Prim(Graph<Type, 0, 1>& graph) {
         edgeRes[e.p1][e.p2] = edgeRes[e.p2][e.p1] = e.cost;
     }
 
-    Graph<Type, 0, 1> res(graph.vertex, edgeRes);
+    Graph<Type, 0, 1, CostType> res(graph.vertex, edgeRes);
     return res;
 }
 ```
-```cpp {cmd=run continue}
+```cpp {cmd=run continue hide}
 //entry
 modify_source = true;
-Graph<string, 0, 1> g;
+Graph<string, 0, 1, double> g;
 input >> g;
 if(input) {
     output << "原图：\n" << g << "最小生成树：\n" << Prim(g);
@@ -1555,58 +1556,121 @@ d ---|2| e
 
 ### 最短路径
 
-#### Floyd 算法
+#### 松弛操作
 
-方法：动态规划
+`relax(p1, p2, p3): min(p1->p2, p1->p3->p2)`
 
-适用范围：任何图，但最短路必须存在（不能有负环）
+就是在点 p1, p2 之间，寻找另一个点 p3 ，使得满足 p1->p3, p3->p2 的权值之和 小于 p1->p2 的权值
 
-实现：
-1. 使用一个数组 `f[k][x][y]` 表示 仅通过结点 1 到 $k$，结点 $x$ 到结点 $y$ 的最短路径长度
-2. 初始化base case `f[0][x][y]` 有以下取值：
-   1. 当 x 直接与 y 相连时，x 与 y 的边权；
-   2. 当 x 与 y 不直接相连时， $+\infty$ ;
-   3. 当 x = y 时，0
-3. 状态转移方程：`f[k][x][y] = min(f[k][x][y], f[k-1][x][k] + f[k-1][k][y])`
+<br>
 
-     ```cpp
-     for(int k = 1; k < n; ++k){
-         for(int x = 1; x < n; ++x){
-             for(int y = 1; y < n; ++y){
-                 f[k][x][y] = min(f[k][x][y], f[k-1][x][k] + f[k-1][k][y]);
-             }
-         }
-     }
-     ```
+#### Dijkstra 算法
 
-4. 优化：数组下标 k 对结果无影响，即将状态转移方程改为：`f[x][y] = min(f[x][y], f[x][k] + f[k][y])`
+应用范围：非负权图
 
-    ```cpp
-    for(int k = 1; k < n; ++k){
-         for(int x = 1; x < n; ++x){
-             for(int y = 1; y < n; ++y){
-                 f[x][y] = min(f[x][y], f[x][k] + f[k][y]);
-             }
-         }
-     }
-    ```
+思想：贪心法
 
-时间复杂度：$O(n^3)$
-空间复杂度：$O(n^2)$
+代码思想：
+需要使用： visit 数组， 最短路径表
 
-<br><br>
+最短路径表结构：
+|  结点  | 最短距离 | 上一个顶点 |
+| :----: | :------: | :--------: |
+|   A    |    0     |     -      |
+|   B    |    1     |     A      |
+| ...... |
 
-#### Bellman-Ford 算法
+1. 构建最短路径表（最短距离 `dist` 数组，上一个顶点 `last` 数组），对所有顶点 `dist = -1, last = -1`
+2. 将起点 `s` 距离设为 0 （ `dist[s] = 0` ），使用 `i` 维护当前访问结点（ `i = s` ）
+3. 对结点 `i` 遍历它的所有边 `(i, j, cost)`，若对于点 `j`，未访问且满足 `dist[j] > dist[i] + cost`， 则更新最短路径表：`dist[j] = dist[i] + cost` `last[j] = i`
+4. 遍历完成后，`visit[i] = true` `++i`
+5. 循环 34. 直到所有点已访问
 
-方法：基于松弛（relax）操作
 
-适用范围：支持负权
+```cpp {cmd=run continue=sf}
+/* 最短路径表 */
+class Path_Table {
+public:
+    vector<int> dist;
+    vector<int> last;
 
-实现：
-1. 假设起始结点为 $S$，任意结点 $u$，定义 `dist[u]` 为 $S$ 到 $u$ 的最短路径长度；
-   定义松弛操作 `relax(u, v): dist[v] = min(dist[v], dist[u] + edge_len[u,v])`
-2. 初始化：`dist[u] = edge_len(S, u)`
-3. 
+    Path_Table(int size):dist(size, -1), last(size, -1){}
+};
+
+/* Dijkstra 算法 */
+template<class Type, bool direct, bool weight, class CostType>
+Path_Table Dijkstra(Graph<Type, direct, weight, CostType> graph, int start) {
+    Path_Table ptable(graph.vertex.size());
+    ptable.dist[start] = 0;
+    int i = start;
+    do{
+        for (int j = 0; j < graph.edge[i].size(); ++j) {
+            if(graph.edge[i][j] <= 0)  continue;
+            if(ptable.dist[j] == -1 || ptable.dist[j] > ptable.dist[i] + graph.edge[i][j]) {
+                ptable.dist[j] = ptable.dist[i] + graph.edge[i][j];
+                ptable.last[j] = i;
+            }
+        }
+        i = (i + 1) % graph.vertex.size();
+    }while (i != start); 
+    return ptable;
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+modify_source = true;
+Graph<string, 0, 1, int> g;
+input >> g;
+if (input) {
+    output << "原图：" << endl << g << endl;
+    Path_Table pt = Dijkstra(g, 2);
+    output << pt.dist << endl << pt.last;
+}
+//test
+```
+```cpp {cmd=run continue modify_source}
+[B,C,A,D,E]
+[
+    [0,0,1,2,1],
+    [0,0,1,1,0],
+    [1,1,0,3,0],
+    [2,1,3,0,2],
+    [1,0,0,2,0]
+]
+```
+
+<!-- code_chunk_output -->
+
+<div class=code-output> 
+
+原图：
+```mermaid 
+graph LR; 
+a[ B ] 
+b[ C ] 
+c[ A ] 
+d[ D ] 
+e[ E ] 
+a ---|1| c 
+a ---|2| d 
+a ---|1| e 
+b ---|1| c 
+b ---|1| d 
+c ---|3| d 
+d ---|2| e 
+```
+
+[1,1,0,2,2]
+[2,2,-1,1,0]
+
+<hr class=code-hr> average time: 0 ms
+
+
+</div> 
+
+
+
+<!-- /code_chunk_output -->
 
 
 <br><br><br>

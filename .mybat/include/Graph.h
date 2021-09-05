@@ -5,21 +5,21 @@
 #include "stream.h"
 using namespace std;
 
-template <class Type, bool direct = 0, bool weight = 0>
+template <class Type, bool direct = 0, bool weight = 0, class CostType = int>
 class Graph
 {
 public:
     vector<Type> vertex;
-    vector<vector<double> > edge;
+    vector<vector<CostType> > edge;
     Graph() {}
     Graph(vector<Type> v) : vertex(v) {}
-    Graph(vector<vector<double> > e) : edge(e) {}
-    Graph(vector<Type> v, vector<vector<double> > e) : vertex(v), edge(e) {}
+    Graph(vector<vector<CostType> > e) : edge(e) {}
+    Graph(vector<Type> v, vector<vector<CostType> > e) : vertex(v), edge(e) {}
     string toMermaid();
 };
 
-template <class Type, bool direct, bool weight>
-string Graph<Type, direct, weight>::toMermaid()
+template <class Type, bool direct, bool weight, class CostType>
+string Graph<Type, direct, weight, CostType>::toMermaid()
 {
     stringstream res;
 
@@ -51,19 +51,19 @@ string Graph<Type, direct, weight>::toMermaid()
     return res.str();
 }
 
-template <class Type, bool direct, bool weight>
-istream &operator>>(istream &in, Graph<Type, direct, weight> &graph)
+template <class Type, bool direct, bool weight, class CostType>
+istream &operator>>(istream &in, Graph<Type, direct, weight, CostType> &graph)
 {
     vector<Type> v;
-    vector<vector<double> > e;
+    vector<vector<CostType> > e;
     in >> v >> e;
-    Graph<Type, direct, weight> temp(v, e);
+    Graph<Type, direct, weight, CostType> temp(v, e);
     graph = temp;
     return in;
 }
 
-template <class Type, bool direct, bool weight>
-ostream &operator<<(ostream &out, Graph<Type, direct, weight> graph)
+template <class Type, bool direct, bool weight, class CostType>
+ostream &operator<<(ostream &out, Graph<Type, direct, weight, CostType> graph)
 {
     out << graph.toMermaid();
     return out;
