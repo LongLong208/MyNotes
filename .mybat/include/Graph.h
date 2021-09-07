@@ -11,10 +11,11 @@ class Graph
 public:
     vector<Type> vertex;
     vector<vector<CostType> > edge;
-    Graph() {}
-    Graph(vector<Type> v) : vertex(v) {}
-    Graph(vector<vector<CostType> > e) : edge(e) {}
-    Graph(vector<Type> v, vector<vector<CostType> > e) : vertex(v), edge(e) {}
+    CostType maximum;
+    Graph(CostType m = 0) : maximum(m) {}
+    Graph(vector<Type> v, CostType m = 0) : vertex(v), maximum(m) {}
+    Graph(vector<vector<CostType> > e, CostType m = 0) : edge(e), maximum(m) {}
+    Graph(vector<Type> v, vector<vector<CostType> > e, CostType m = 0) : vertex(v), edge(e), maximum(m) {}
     string toMermaid();
 };
 
@@ -35,7 +36,7 @@ string Graph<Type, direct, weight, CostType>::toMermaid()
         int j = direct ? 0 : i + 1;
         for (; j < edge[i].size(); ++j)
         {
-            if (edge[i][j] != 0)
+            if (edge[i][j] != maximum && i != j)
             {
                 res << (char)(i + 'a') << " ---";
                 if (direct)
@@ -58,6 +59,18 @@ istream &operator>>(istream &in, Graph<Type, direct, weight, CostType> &graph)
     vector<vector<CostType> > e;
     in >> v >> e;
     Graph<Type, direct, weight, CostType> temp(v, e);
+    temp.maximum = graph.maximum;
+    if (temp.maximum != 0)
+    {
+        for (int i = 0; i < temp.edge.size(); ++i)
+        {
+            for (int j = 0; j < temp.edge[i].size(); ++j)
+            {
+                if (temp.edge[i][j] == 0 && i != j)
+                    temp.edge[i][j] = temp.maximum;
+            }
+        }
+    }
     graph = temp;
     return in;
 }

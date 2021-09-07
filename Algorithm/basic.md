@@ -3,6 +3,9 @@
 *{
     font-family:consolas;
 }
+html body a code:hover{
+    border:1px solid #83ee73;
+}
 html body h2{
     color:#a4f3d1;
     text-align:center;
@@ -34,7 +37,6 @@ html body code {
 }
 </style>
 </head>
-
 
 ```cpp {cmd="run" id="sf" hide}
 //sf
@@ -411,7 +413,7 @@ $(x-a)^2+(y-b)^2=r^2$
 
 请你设计一个算法，实现这个随机选择函数
 
-方法：前缀和 + 二分查找
+[【前缀和】](#前缀和) + [【二分查找】](#二分查找)
 
 思路：构造 `w` 数组的前缀和数组 `s`，随机生成一个索引 `x`，返回数组 `s` 中第一个大于等于 `x` 的元素的下标
 
@@ -1267,6 +1269,8 @@ if(input){
 
 #### Kruskal 算法
 
+【贪心法】
+
 Kruskal 算法适合简单图
 
 方法：
@@ -1364,6 +1368,8 @@ if(input) {
 ]
 ```
 
+
+
 <!-- code_chunk_output -->
 
 <div class=code-output> 
@@ -1411,6 +1417,8 @@ d ---|2| e
 <br><br>
 
 #### Prim 算法
+
+【贪心法】
 
 Prim 算法适合复杂图
 
@@ -1556,6 +1564,13 @@ d ---|2| e
 
 ### 最短路径
 
+一些定义：
+
+正权图：所有边权值和 $\ge 0$
+负权图：所有边权值和 $< 0$
+
+
+
 #### 松弛操作
 
 `relax(p1, p2, p3): min(p1->p2, p1->p3->p2)`
@@ -1566,9 +1581,9 @@ d ---|2| e
 
 #### Dijkstra 算法
 
-应用范围：非负权图
+应用范围：无负权的图
 
-思想：贪心法
+【贪心法】
 
 代码思想：
 需要使用： visit 数组， 最短路径表
@@ -1582,8 +1597,8 @@ d ---|2| e
 
 1. 构建最短路径表（最短距离 `dist` 数组，上一个顶点 `last` 数组），对所有顶点 `dist = -1, last = -1`
 2. 将起点 `s` 距离设为 0 （ `dist[s] = 0` ），使用 `i` 维护当前访问结点（ `i = s` ）
-3. 对结点 `i` 遍历它的所有边 `(i, j, cost)`，若对于点 `j`，未访问且满足 `dist[j] > dist[i] + cost`， 则更新最短路径表：`dist[j] = dist[i] + cost` `last[j] = i`
-4. 遍历完成后，`visit[i] = true` `++i`
+3. 对结点 `i` 遍历它的所有边 `(i, j, cost)`，若对于点 `j`，满足 `dist[j] > dist[i] + cost`， 则更新最短路径表：`dist[j] = dist[i] + cost` `last[j] = i`
+4. 遍历完成后，`visit[i] = true` `i` 变为下一个未访问的且 `dist[i]` 最小的结点
 5. 循环 34. 直到所有点已访问
 
 
@@ -1594,32 +1609,38 @@ public:
     vector<int> dist;
     vector<int> last;
 
-    Path_Table(int size):dist(size, -1), last(size, -1){}
+    Path_Table(int size):dist(size, INT_MAX >> 1), last(size, -1){}
 };
 
 /* Dijkstra 算法 */
 template<class Type, bool direct, bool weight, class CostType>
 Path_Table Dijkstra(Graph<Type, direct, weight, CostType> graph, int start) {
     Path_Table ptable(graph.vertex.size());
+    vector<bool> visit(graph.vertex.size(), false);
+
     ptable.dist[start] = 0;
-    int i = start;
-    do{
-        for (int j = 0; j < graph.edge[i].size(); ++j) {
-            if(graph.edge[i][j] <= 0)  continue;
-            if(ptable.dist[j] == -1 || ptable.dist[j] > ptable.dist[i] + graph.edge[i][j]) {
-                ptable.dist[j] = ptable.dist[i] + graph.edge[i][j];
-                ptable.last[j] = i;
+    for (int i = 0; i < graph.vertex.size(); ++i) {
+        int x = -1;
+        for (int y = 0; y < graph.vertex.size(); ++y) {
+            if(!visit[y] && (x == -1 || ptable.dist[y] < ptable.dist[x]))
+                x = y;
+        }
+        visit[x] = true;
+        for (int y = 0; y < graph.vertex.size(); ++y) {
+            if(ptable.dist[y] > ptable.dist[x] + graph.edge[x][y]){
+                ptable.dist[y] = ptable.dist[x] + graph.edge[x][y];
+                ptable.last[y] = x;
             }
         }
-        i = (i + 1) % graph.vertex.size();
-    }while (i != start); 
+    }
+
     return ptable;
 }
 ```
 ```cpp {cmd=run continue hide}
 //entry
 modify_source = true;
-Graph<string, 0, 1, int> g;
+Graph<string, 0, 1, int> g(INT_MAX >> 1);
 input >> g;
 if (input) {
     output << "原图：" << endl << g << endl;
@@ -1673,6 +1694,302 @@ d ---|2| e
 <!-- /code_chunk_output -->
 
 
+<br><br>
+
+
+#### Floyd 算法
+
+【动态规划】
+
+适用范围：非负权环图
+
+数组 `dp[k][u]` ：对于起始点 `start` 最多经过 `k` 条边到达点 `u` 的最短距离 
+
+初始化：`dp[0][start] = 0`
+状态转移：`dp[k][u] = min(dp[k][u], dp[k-1][v] + cost)`
+解释： `dp[k-1][v] + cost` 表示 经过 `k-1` 条边到达点 `v`，再经过边 `(v, u, cost)` 到达点 `u` 的距离
+
+这个算法其实可以求最多经过 `k` 个结点的最短路径，而且 dp 数组可优化为两个一维数组（滑动窗口），因为计算 `dp[k]` 时，只需要 `dp[k-1]`， dp[0]...dp[k-1] 都不需要
+
+```cpp {cmd=run continue=sf}
+/* Floyd 算法 */
+template<class Type>
+vector<int> Floyd(Graph<Type, 1, 1, int> graph, int start) {
+    vector<vector<int>> dp(graph.vertex.size(), vector<int>(graph.vertex.size(), INT_MAX >> 1));
+    dp[0][start] = 0;
+    for (int k = 1; k < graph.vertex.size(); ++k) {
+        for(int u = 0; u < graph.vertex.size(); ++u) {
+            for (int v = 0; v < graph.vertex.size(); ++v) {
+                dp[k][u] = min(dp[k][u], dp[k-1][v] + graph.edge[v][u]);
+            }
+        }
+    }
+    return dp[dp.size()-1];
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+modify_source = true;
+Graph<string, 1, 1, int> g(INT_MAX >> 1);
+input >> g;
+if (input) {
+    output << "原图：" << endl << g << endl << Floyd(g, 1);
+}
+//test
+```
+```cpp {cmd=run continue modify_source}
+[2,0,1,3]
+[
+    [0,0,0,100],
+    [500,0,100,200],
+    [100,0,0,0],
+    [0,0,-150,0]
+]
+```
+
+<!-- code_chunk_output -->
+
+<div class=code-output> 
+
+原图：
+```mermaid 
+graph LR; 
+a[ 2 ] 
+b[ 0 ] 
+c[ 1 ] 
+d[ 3 ] 
+a --->|100| d 
+b --->|500| a 
+b --->|100| c 
+b --->|200| d 
+c --->|100| a 
+d --->|-150| c 
+```
+
+[150,0,50,200]
+
+<hr class=code-hr> average time: 0 ms
+
+
+</div> 
+
+
+
+<!-- /code_chunk_output -->
+
+
+<br><br>
+
+#### Bellman-Ford 算法
+
+适用范围：非负权环图
+
+Bellman-Ford 算法其实是对 Floyd 算法的优化，Bellman-Ford 算法不再考虑最多走 `k` 条边时的情况，而是直接遍历所有边
+
+定理1：在一个有 N 个顶点的 `非负权环图` 中，两点之间的最短路径最多经过 `N-1` 条边。
+- 非负权环图：没有负权环的图
+
+思路：
+
+维护数组 dist[i]
+
+1. 初始化 `dist[i] = ∞`， `dist[start] = 0`
+2. 对每一条边 `(p1, p2, cost)` ，进行松弛操作，`dist[p2] = min(dist[p2], dist[p1] + cost)`
+3. 遍历 2. 直到 `dist` 不变化，或 `N-1` 次
+
+
+代码：
+```cpp {cmd=run continue=sf}
+/* Bellman-Ford 算法 */
+template<class Type>
+vector<int> Bellman_Ford(Graph<Type, 1, 1, int> graph, int start) {
+    vector<int> dist(graph.vertex.size(), INT_MAX >> 1);
+    dist[start] = 0;
+    for (int i = 0; i < graph.vertex.size() - 1; ++i) {
+        bool change = false;
+        for(int u = 0; u < graph.vertex.size(); ++u) {
+            for(int v = 0; v < graph.vertex.size(); ++v) {
+                if (dist[u] > dist[v] + graph.edge[v][u]) {
+                    change = true;
+                    dist[u] = dist[v] + graph.edge[v][u];
+                }
+            }
+        }
+        if(!change)
+            break;
+    }
+    return dist;
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+modify_source = true;
+Graph<string, 1, 1, int> g(INT_MAX >> 1);
+input >> g;
+if (input) {
+    output << "原图：" << endl << g << endl << Bellman_Ford(g, 1);
+}
+//test
+```
+```cpp {cmd=run continue modify_source}
+[2,0,1,3]
+[
+    [0,0,0,100],
+    [500,0,100,200],
+    [100,0,0,0],
+    [0,0,-150,0]
+]
+```
+
+<!-- code_chunk_output -->
+
+<div class=code-output> 
+
+原图：
+```mermaid 
+graph LR; 
+a[ 2 ] 
+b[ 0 ] 
+c[ 1 ] 
+d[ 3 ] 
+a --->|100| d 
+b --->|500| a 
+b --->|100| c 
+b --->|200| d 
+c --->|100| a 
+d --->|-150| c 
+```
+
+[150,0,50,200]
+
+<hr class=code-hr> average time: 0 ms
+
+
+</div> 
+
+
+
+<!-- /code_chunk_output -->
+
+<br>
+
+##### Bellman-Ford 算法检测负权环
+
+> Bellman-Ford 算法如何检测「负权环」
+>「Bellman-Ford 算法」虽然不能检测到「负权环图」的最短路径，但是它能检测到「图」中是否存在「负权环」。
+>
+> 检测方法： 当小伙伴对所有边进行 N-1 次松弛之后，再进行第 N 次松弛。根据「Bellman-Ford 算法」，所有的边在 N-1 次松弛之后，所有的距离必然是最短距离。如果在进行第 N 次松弛后，对于一条边 edge(u, v)，还存在 distances[u] + weight(u, v) < distances(v) 的情况，也就是说，还存在更短的路径。此时就能说明「图」中存在「负权环」。
+>
+> 作者：爱学习的饲养员
+> 链接：https://leetcode-cn.com/leetbook/read/graph/rq3glc/
+> 来源：力扣（LeetCode）
+> 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+<br><br>
+
+#### SPFA 算法
+
+基于 [`队列`](#队列) 优化的 [`Bellman Ford 算法`](#bellman-ford-算法)
+
+思路：
+需要：队列 q， 距离数组 dist， 访问标记数组 visit
+
+1. 初始化 `dist[i] = ∞`， `dist[start] = 0`，点 `start` 入队， `visit[start] = true`
+2. 从队列中取出第一个结点 `v`，取消已访问 `v` 标记（`visit[v] = false`） ，对于 `v` 的所有出边 `(v, u, cost)`，进行松弛操作， `dist[u] = min(dist[u], dist[v] + cost)`，并将修改改过的结点 `u` 加入队列
+3. 循环 2. 直到队列为空
+
+
+代码：
+```cpp {cmd=run continue=sf}
+/* SPFA 算法 */
+template<class Type>
+vector<int> SPFA(Graph<Type, 1, 1, int> graph, int start) {
+    vector<int> dist(graph.vertex.size(), INT_MAX >> 1);
+    vector<bool> visit(graph.vertex.size(), false);
+    queue<int> q;
+    dist[start] = 0;
+    q.push(start);
+    visit[start];
+    while (!q.empty()) {
+        int v = q.front();
+        q.pop();
+        visit[v] = false;
+        for (int u = 0; u < graph.vertex.size(); ++u) {
+            if(dist[u] > dist[v] + graph.edge[v][u]) {
+                dist[u] = dist[v] + graph.edge[v][u];
+                q.push(u);
+                visit[u] = true;
+            }
+        }
+    }
+    return dist;
+}
+```
+```cpp {cmd=run continue hide}
+//entry
+modify_source = true;
+Graph<string, 1, 1, int> g(INT_MAX >> 1);
+input >> g;
+if (input) {
+    output << "原图：" << endl << g << endl << SPFA(g, 1);
+}
+//test
+```
+```cpp {cmd=run continue modify_source}
+[2,0,1,3]
+[
+    [0,0,0,100],
+    [500,0,100,200],
+    [100,0,0,0],
+    [0,0,-150,0]
+]
+```
+
+<!-- code_chunk_output -->
+
+<div class=code-output> 
+
+原图：
+```mermaid 
+graph LR; 
+a[ 2 ] 
+b[ 0 ] 
+c[ 1 ] 
+d[ 3 ] 
+a --->|100| d 
+b --->|500| a 
+b --->|100| c 
+b --->|200| d 
+c --->|100| a 
+d --->|-150| c 
+```
+
+[150,0,50,200]
+
+<hr class=code-hr> average time: 0 ms
+
+
+</div> 
+
+
+
+<!-- /code_chunk_output -->
+
+<br><br>
+
+### 拓扑排序
+
+拓扑排序是针对 `有向无环图` 的一种算法，它是对图中所有顶点按照先后顺序的一种线性排序
+
+拓扑排序针对的图必须同时满足：
+
+- 有向无环图
+- 至少有一个顶点入度为 0，即至少有一个起点
+
+<br>
+
+#### Kahn 算法
+
 <br><br><br>
 
 
@@ -1681,6 +1998,8 @@ d ---|2| e
 <hr class=short>
 
 ### 快速排序
+
+[【动态规划】](#动态规划) [【分治法】](#分治法)
 
 原理：
 
@@ -1865,9 +2184,7 @@ if(input)
 
 <hr class=short>
 
-### 前缀和与差分
-
-#### 前缀和
+### 前缀和
 
 前缀和即数组的前 `n` 项和
 
