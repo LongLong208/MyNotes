@@ -172,11 +172,17 @@ pre[data-line] .line-highlight[data-end]:after {
   top: auto;
   bottom: .4em;
 }
+
+/* MyCss */
 *{
     font-family:consolas;
 }
-html body a code:hover{
-    border:1px solid #83ee73;
+html body a{
+    color:#079de4;
+}
+html body a:hover{
+    color:#89d185;
+    /* border: 1px solid currentColor; */
 }
 html body h1{
     color:#cccccc;

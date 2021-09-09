@@ -1,7 +1,15 @@
 ---
+html:
+  embed_local_images: false
+  embed_svg: true
+  offline: false
+
+print_background: false
+
 export_on_save:
   html: true
 ---
+
 
 <!-- @import "_pre.css" -->
 
