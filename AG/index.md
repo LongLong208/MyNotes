@@ -5,11 +5,11 @@
 
 <br>
 
-### 自定义类解释
+## 自定义类解释
 
 <hr class=short>
 
-#### Graph
+### Graph
 
 图类
 
@@ -35,7 +35,7 @@ template <
 
 <br><hr class=short>
 
-#### Heap
+### Heap
 
 堆（优先队列）
 
