@@ -1,8 +1,5 @@
 <!-- @import "_pre.css" -->
 
-<head>
-    <title>算法</title>
-</head>
 
 # 算法 {ignore}
 
