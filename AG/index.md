@@ -243,7 +243,7 @@ html body pre{
     margin:3em 0px .5em 0px;
 }
 html body svg rect{
-  fill:#bbbbbb !important;
+  fill:#cccccc !important;
 }
 </style>
 
