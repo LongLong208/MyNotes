@@ -492,54 +492,24 @@ html body pre{
 </style>
 <h1 class="mume-header undefined" id="%E7%AE%97%E6%B3%95">&#x7B97;&#x6CD5;</h1>
 
+<p><font style="font-size:24px">&#x76EE;&#x5F55;</font></p>
+<font style="font-size:20px">
+<p><a href="#%E6%95%B0%E8%AE%BA">&#x6570;&#x8BBA;</a><br>
+<a href="#%E5%87%A0%E4%BD%95">&#x51E0;&#x4F55;</a><br>
+<a href="#%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95">&#x968F;&#x673A;&#x7B97;&#x6CD5;</a><br>
+<a href="#%E4%BD%8D%E8%BF%90%E7%AE%97">&#x4F4D;&#x8FD0;&#x7B97;</a><br>
+<a href="#%E6%95%B0%E7%BB%84">&#x6570;&#x7EC4;</a><br>
+<a href="#%E5%93%88%E5%B8%8C%E8%A1%A8">&#x54C8;&#x5E0C;&#x8868;</a><br>
+<a href="#%E5%A0%86">&#x5806;</a><br>
+<a href="#%E5%9B%BE">&#x56FE;</a><br>
+<a href="#%E6%8E%92%E5%BA%8F">&#x6392;&#x5E8F;</a></p>
 <br>
-<h2 class="mume-header" id="%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E8%A7%A3%E9%87%8A">&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x89E3;&#x91CA;</h2>
-
-<hr class="short">
-<h3 class="mume-header" id="graph">Graph</h3>
-
-<p>&#x56FE;&#x7C7B;</p>
-<pre data-role="codeBlock" data-info="cpp" class="language-cpp"><span class="token keyword">template</span> <span class="token operator">&lt;</span>
-    <span class="token keyword">class</span> <span class="token class-name">Type</span><span class="token punctuation">,</span>
-    <span class="token keyword">bool</span> direct <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> 
-    <span class="token keyword">bool</span> weight <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>
-    <span class="token keyword">class</span> <span class="token class-name">CostType</span> <span class="token operator">=</span> <span class="token keyword">int</span>
-<span class="token operator">&gt;</span> <span class="token keyword">class</span> <span class="token class-name">Graph</span>
-</pre><p><code>Type</code> : &#x70B9;&#x7684;&#x540D;&#x79F0;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x5982; <em><code>string</code></em>, <em><code>int</code></em> &#x7B49;<br>
-<code>direct</code> : &#x4E3A; 0 &#x65F6;&#x662F;&#x65E0;&#x5411;&#x56FE;&#xFF0C; &#x4E3A; 1 &#x65F6;&#x662F;&#x6709;&#x5411;&#x56FE;<br>
-<code>weight</code> : &#x4E3A; 0 &#x65F6;&#x662F;&#x65E0;&#x6743;&#x56FE;&#xFF0C; &#x4E3A; 1 &#x65F6;&#x662F;&#x6709;&#x6743;&#x56FE;<br>
-<code>CostType</code> : &#x6743;&#x503C;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x5982; <em><code>int</code></em>, <em><code>double</code></em> &#x7B49;</p>
-<p>&#x6210;&#x5458;</p>
-<p><em><code>vector&lt;Type&gt;</code></em> <code>vertex</code> :  &#x70B9;&#x96C6;<br>
-<em><code>vector&lt;vector&lt;CostType&gt;&gt;</code></em> <code>edge</code> : &#x90BB;&#x63A5;&#x77E9;&#x9635;</p>
-<p><br></p><hr class="short"><p></p>
-<h3 class="mume-header" id="heap">Heap</h3>
-
-<p>&#x5806;&#xFF08;&#x4F18;&#x5148;&#x961F;&#x5217;&#xFF09;</p>
-<p>&#x8BE6;&#x89C1; <a href="#%E5%A0%86">&#x3010;&#x5806;&#x3011;</a></p>
-<pre data-role="codeBlock" data-info="cpp" class="language-cpp"><span class="token keyword">template</span> <span class="token operator">&lt;</span>
-    <span class="token keyword">class</span> <span class="token class-name">Type</span><span class="token punctuation">,</span> 
-    <span class="token keyword">class</span> <span class="token class-name">Compare</span> <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span>less<span class="token operator">&lt;</span>Type<span class="token operator">&gt;</span> 
-<span class="token operator">&gt;</span> <span class="token keyword">class</span> <span class="token class-name">Heap</span>
-</pre><p><code>Type</code> : &#x7ED3;&#x70B9;&#x6570;&#x636E;&#x7C7B;&#x578B;<br>
-<code>Compare</code> : &#x6BD4;&#x8F83;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#xFF0C;&#x7528;&#x4E8E;&#x7EF4;&#x62A4;&#x5806;&#x7684;&#x6BD4;&#x8F83;&#x51FD;&#x6570;&#xFF0C;&#x5F53; <code>Compare(a, b)</code> &#x8FD4;&#x56DE; <em><code>true</code></em> &#x65F6;&#xFF0C;<code>a</code> &#x66F4;&#x63A5;&#x8FD1;&#x5806;&#x9876;</p>
-<p>&#x6210;&#x5458;&#xFF1A;</p>
-<p><code>push(data)</code> : &#x5C06; <code>data</code> &#x63D2;&#x5165;&#x5806;&#x4E2D;<br>
-<code>top()</code> : &#x8FD4;&#x56DE;&#x5806;&#x9876;&#x5143;&#x7D20;&#xFF0C;&#x4F46;&#x4E0D;&#x53D6;&#x51FA;<br>
-<code>pop()</code> : &#x53D6;&#x51FA;&#x5806;&#x9876;&#x5143;&#x7D20;&#xFF0C;&#x4F46;&#x4E0D;&#x8FD4;&#x56DE;</p>
+<p><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E8%A7%A3%E9%87%8A">&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x89E3;&#x91CA;</a></p>
 <br>
 <br>
 <br>
+</font>
 <hr>
-<h1 class="mume-header" id="%E4%BB%A5%E4%B8%8B%E6%98%AF%E7%AC%94%E8%AE%B0">&#x4EE5;&#x4E0B;&#x662F;&#x7B14;&#x8BB0;</h1>
-
-<hr>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <link rel="stylesheet" href="file:///D:\1Notes\AG\_pre.css">
 <h2 class="mume-header" id="%E6%95%B0%E8%AE%BA">&#x6570;&#x8BBA;</h2>
 
@@ -1071,12 +1041,31 @@ D() &#x4E3A;&#x6C42;&#x5DEE;&#x5206;</p>
 <link rel="stylesheet" href="file:///D:\1Notes\AG\_pre.css">
 <h2 class="mume-header" id="%E5%93%88%E5%B8%8C%E8%A1%A8">&#x54C8;&#x5E0C;&#x8868;</h2>
 
+<p><code>&#x54C8;&#x5E0C;&#x8868;</code> &#x662F;&#x4E00;&#x79CD;&#x4F7F;&#x7528; &#x54C8;&#x5E0C;&#x51FD;&#x6570; &#x7EC4;&#x7EC7;&#x6570;&#x636E;&#xFF0C;&#x4EE5;&#x652F;&#x6301;&#x5FEB;&#x901F;&#x63D2;&#x5165;&#x548C;&#x641C;&#x7D22;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;</p>
+<p>&#x6709;&#x4E24;&#x79CD;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x54C8;&#x5E0C;&#x8868;&#xFF1A;&#x54C8;&#x5E0C;&#x96C6;&#x5408; &#x548C; &#x54C8;&#x5E0C;&#x6620;&#x5C04;</p>
+<p><code>&#x54C8;&#x5E0C;&#x96C6;&#x5408;</code> &#x662F; <code>&#x96C6;&#x5408;</code> &#x7684;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#x4E4B;&#x4E00;&#xFF0C;&#x7528;&#x4E8E;&#x5B58;&#x50A8; &#x975E;&#x91CD;&#x590D;&#x503C;<br>
+<code>&#x54C8;&#x5E0C;&#x6620;&#x5C04;</code> &#x662F; <code>&#x6620;&#x5C04;</code> &#x7684;&#x5B9E;&#x73B0;&#x4E4B;&#x4E00;&#xFF0C;&#x7528;&#x4E8E;&#x5B58;&#x50A8; (key, value) &#x952E;&#x503C;&#x5BF9;</p>
+<br>
+<h4 class="mume-header" id="%E5%93%88%E5%B8%8C%E8%A1%A8%E7%9A%84%E5%8E%9F%E7%90%86">&#x54C8;&#x5E0C;&#x8868;&#x7684;&#x539F;&#x7406;</h4>
+
+<p>&#x54C8;&#x5E0C;&#x8868;&#xFF08;&#x53C8;&#x79F0;&#x6563;&#x5217;&#x8868;&#xFF09;&#x7684;&#x539F;&#x7406;&#x4E3A;&#xFF1A;&#x501F;&#x52A9; &#x54C8;&#x5E0C;&#x51FD;&#x6570;&#xFF0C;&#x5C06;&#x952E;&#x6620;&#x5C04;&#x5230;&#x5B58;&#x50A8;&#x6876;&#x5730;&#x5740;</p>
+<ul>
+<li>
+<p>&#x9996;&#x5148;&#x5F00;&#x8F9F;&#x4E00;&#x5B9A;&#x957F;&#x5EA6;&#x7684;&#xFF0C;&#x5177;&#x6709;&#x8FDE;&#x7EED;&#x7269;&#x7406;&#x5730;&#x5740;&#x7684;&#x6876;&#x6570;&#x7EC4;&#xFF1B;</p>
+</li>
+<li>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x63D2;&#x5165;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x952E;&#x65F6;&#xFF0C;&#x54C8;&#x5E0C;&#x51FD;&#x6570;&#x5C06;&#x51B3;&#x5B9A;&#x8BE5;&#x952E;&#x5E94;&#x8BE5;&#x5206;&#x914D;&#x5230;&#x54EA;&#x4E2A;&#x6876;&#x4E2D;&#xFF0C;&#x5E76;&#x5C06;&#x8BE5;&#x952E;&#x5B58;&#x50A8;&#x5728;&#x76F8;&#x5E94;&#x7684;&#x6876;&#x4E2D;&#xFF1B;</p>
+</li>
+<li>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x641C;&#x7D22;&#x4E00;&#x4E2A;&#x952E;&#x65F6;&#xFF0C;&#x54C8;&#x5E0C;&#x8868;&#x5C06;&#x4F7F;&#x7528;&#x54C8;&#x5E0C;&#x51FD;&#x6570;&#x6765;&#x627E;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x6876;&#xFF0C;&#x5E76;&#x5728;&#x8BE5;&#x6876;&#x4E2D;&#x8FDB;&#x884C;&#x641C;&#x7D22;&#x3002;</p>
+</li>
+</ul>
 <br>
 <br>
 <br>
 <hr>
 <link rel="stylesheet" href="file:///D:\1Notes\AG\_pre.css">
-<h2 class="mume-header" id="%E5%A0%86">&#x5806;</h2>
+<h2 class="mume-header" id="%E5%A0%86%E7%AE%97%E6%B3%95"><a href="#%E7%AE%97%E6%B3%95">&#x5806;</a></h2>
 
 <hr class="short">
 <h3 class="mume-header" id="%E5%A0%86%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89">&#x5806;&#x7684;&#x57FA;&#x672C;&#x5B9A;&#x4E49;</h3>
@@ -2477,17 +2466,51 @@ c ---&gt; d
 </div> 
 <p><br><br><br></p>
 <hr>
+<br>
+<br>
+<br>
+<link rel="stylesheet" href="file:///D:\1Notes\AG\_pre.css">
+<h2 class="mume-header" id="%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E8%A7%A3%E9%87%8A">&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x89E3;&#x91CA;</h2>
+
+<hr class="short">
+<h3 class="mume-header" id="graph">Graph</h3>
+
+<p>&#x56FE;&#x7C7B;</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp"><span class="token keyword">template</span> <span class="token operator">&lt;</span>
+    <span class="token keyword">class</span> <span class="token class-name">Type</span><span class="token punctuation">,</span>
+    <span class="token keyword">bool</span> direct <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> 
+    <span class="token keyword">bool</span> weight <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token keyword">class</span> <span class="token class-name">CostType</span> <span class="token operator">=</span> <span class="token keyword">int</span>
+<span class="token operator">&gt;</span> <span class="token keyword">class</span> <span class="token class-name">Graph</span>
+</pre><p><code>Type</code> : &#x70B9;&#x7684;&#x540D;&#x79F0;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x5982; <em><code>string</code></em>, <em><code>int</code></em> &#x7B49;<br>
+<code>direct</code> : &#x4E3A; 0 &#x65F6;&#x662F;&#x65E0;&#x5411;&#x56FE;&#xFF0C; &#x4E3A; 1 &#x65F6;&#x662F;&#x6709;&#x5411;&#x56FE;<br>
+<code>weight</code> : &#x4E3A; 0 &#x65F6;&#x662F;&#x65E0;&#x6743;&#x56FE;&#xFF0C; &#x4E3A; 1 &#x65F6;&#x662F;&#x6709;&#x6743;&#x56FE;<br>
+<code>CostType</code> : &#x6743;&#x503C;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x5982; <em><code>int</code></em>, <em><code>double</code></em> &#x7B49;</p>
+<p>&#x6210;&#x5458;</p>
+<p><em><code>vector&lt;Type&gt;</code></em> <code>vertex</code> :  &#x70B9;&#x96C6;<br>
+<em><code>vector&lt;vector&lt;CostType&gt;&gt;</code></em> <code>edge</code> : &#x90BB;&#x63A5;&#x77E9;&#x9635;</p>
+<p><br></p><hr class="short"><p></p>
+<h3 class="mume-header" id="heap">Heap</h3>
+
+<p>&#x5806;&#xFF08;&#x4F18;&#x5148;&#x961F;&#x5217;&#xFF09;</p>
+<p>&#x8BE6;&#x89C1; <a href="#%E5%A0%86">&#x3010;&#x5806;&#x3011;</a></p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp"><span class="token keyword">template</span> <span class="token operator">&lt;</span>
+    <span class="token keyword">class</span> <span class="token class-name">Type</span><span class="token punctuation">,</span> 
+    <span class="token keyword">class</span> <span class="token class-name">Compare</span> <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span>less<span class="token operator">&lt;</span>Type<span class="token operator">&gt;</span> 
+<span class="token operator">&gt;</span> <span class="token keyword">class</span> <span class="token class-name">Heap</span>
+</pre><p><code>Type</code> : &#x7ED3;&#x70B9;&#x6570;&#x636E;&#x7C7B;&#x578B;<br>
+<code>Compare</code> : &#x6BD4;&#x8F83;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#xFF0C;&#x7528;&#x4E8E;&#x7EF4;&#x62A4;&#x5806;&#x7684;&#x6BD4;&#x8F83;&#x51FD;&#x6570;&#xFF0C;&#x5F53; <code>Compare(a, b)</code> &#x8FD4;&#x56DE; <em><code>true</code></em> &#x65F6;&#xFF0C;<code>a</code> &#x66F4;&#x63A5;&#x8FD1;&#x5806;&#x9876;</p>
+<p>&#x6210;&#x5458;&#xFF1A;</p>
+<p><code>push(data)</code> : &#x5C06; <code>data</code> &#x63D2;&#x5165;&#x5806;&#x4E2D;<br>
+<code>top()</code> : &#x8FD4;&#x56DE;&#x5806;&#x9876;&#x5143;&#x7D20;&#xFF0C;&#x4F46;&#x4E0D;&#x53D6;&#x51FA;<br>
+<code>pop()</code> : &#x53D6;&#x51FA;&#x5806;&#x9876;&#x5143;&#x7D20;&#xFF0C;&#x4F46;&#x4E0D;&#x8FD4;&#x56DE;</p>
+<br>
+<br>
+<br>
+<hr>
 </div>
       </div>
       <div class="md-sidebar-toc"><ul>
-<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E8%A7%A3%E9%87%8A">&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x89E3;&#x91CA;</a>
-<ul>
-<li><a href="#graph">Graph</a></li>
-<li><a href="#heap">Heap</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BB%A5%E4%B8%8B%E6%98%AF%E7%AC%94%E8%AE%B0">&#x4EE5;&#x4E0B;&#x662F;&#x7B14;&#x8BB0;</a>
-<ul>
 <li><a href="#%E6%95%B0%E8%AE%BA">&#x6570;&#x8BBA;</a>
 <ul>
 <li><a href="#%E8%B4%A8%E6%95%B0">&#x8D28;&#x6570;</a>
@@ -2561,8 +2584,12 @@ c ---&gt; d
 </li>
 </ul>
 </li>
-<li><a href="#%E5%93%88%E5%B8%8C%E8%A1%A8">&#x54C8;&#x5E0C;&#x8868;</a></li>
-<li><a href="#%E5%A0%86">&#x5806;</a>
+<li><a href="#%E5%93%88%E5%B8%8C%E8%A1%A8">&#x54C8;&#x5E0C;&#x8868;</a>
+<ul>
+<li><a href="#%E5%93%88%E5%B8%8C%E8%A1%A8%E7%9A%84%E5%8E%9F%E7%90%86">&#x54C8;&#x5E0C;&#x8868;&#x7684;&#x539F;&#x7406;</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A0%86%E7%AE%97%E6%B3%95">&#x5806;</a>
 <ul>
 <li><a href="#%E5%A0%86%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89">&#x5806;&#x7684;&#x57FA;&#x672C;&#x5B9A;&#x4E49;</a></li>
 <li><a href="#%E5%A0%86%E7%9A%84%E5%AE%9E%E7%8E%B0">&#x5806;&#x7684;&#x5B9E;&#x73B0;</a></li>
@@ -2625,6 +2652,10 @@ c ---&gt; d
 </li>
 </ul>
 </li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E8%A7%A3%E9%87%8A">&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x89E3;&#x91CA;</a>
+<ul>
+<li><a href="#graph">Graph</a></li>
+<li><a href="#heap">Heap</a></li>
 </ul>
 </li>
 </ul>

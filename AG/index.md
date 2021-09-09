@@ -244,77 +244,37 @@ html body pre{
 
 # 算法 {ignore}
 
+<font style=font-size:24px>目录</font>
+
+
+
+
+<font style=font-size:20px>
+
+[数论](#数论)
+[几何](#几何)
+[随机算法](#随机算法)
+[位运算](#位运算)
+[数组](#数组)
+[哈希表](#哈希表)
+[堆](#堆)
+[图](#图)
+[排序](#排序)
+
 <br>
 
-## 自定义类解释
-
-<hr class=short>
-
-### Graph
-
-图类
-
-```cpp
-template <
-    class Type,
-    bool direct = 0, 
-    bool weight = 0,
-    class CostType = int
-> class Graph
-```
-
-`Type` : 点的名称的数据类型，如 *`string`*, *`int`* 等
-`direct` : 为 0 时是无向图， 为 1 时是有向图
-`weight` : 为 0 时是无权图， 为 1 时是有权图
-`CostType` : 权值的数据类型，如 *`int`*, *`double`* 等
-
-成员
-
-*`vector<Type>`* `vertex` :  点集
-*`vector<vector<CostType>>`* `edge` : 邻接矩阵
-
-
-<br><hr class=short>
-
-### Heap
-
-堆（优先队列）
-
-详见 [【堆】](#堆)
-
-```cpp
-template <
-    class Type, 
-    class Compare = std::less<Type> 
-> class Heap
-```
-
-`Type` : 结点数据类型
-`Compare` : 比较函数对象，用于维护堆的比较函数，当 `Compare(a, b)` 返回 *`true`* 时，`a` 更接近堆顶
-
-成员：
-
-`push(data)` : 将 `data` 插入堆中
-`top()` : 返回堆顶元素，但不取出
-`pop()` : 取出堆顶元素，但不返回
-
+[自定义类解释](#自定义类解释)
 
 <br>
 <br>
 <br>
+
+</font>
+
 
 ---
 
-# 以下是笔记
 
----
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 <!-- @import "数论.md" -->
 <!-- @import "几何.md" -->
@@ -326,3 +286,8 @@ template <
 <!-- @import "图.md" -->
 <!-- @import "排序.md" -->
 
+<br>
+<br>
+<br>
+
+<!-- @import "自定义类解释.md" -->
