@@ -222,8 +222,8 @@ html body em code{
 .code-hr {
     margin:3em 0px .5em 0px;
 }
-</style>
 
+</style>
 
 # 算法 {ignore}
 
