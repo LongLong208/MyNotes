@@ -1,7 +1,7 @@
-.mybat
+.mybat/cppmd.bat
+.mybat/run.exe
 .test
 .vscode
 .other
 AG/杂项
-!/.mybat/include
-!/.mybat/src
+
