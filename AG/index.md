@@ -242,8 +242,8 @@ html body pre{
 .code-hr {
     margin:3em 0px .5em 0px;
 }
-html body svg rect{
-  fill:#cccccc !important;
+html body .ditaa rect{
+  fill:#bbbbbb !important;
 }
 </style>
 
