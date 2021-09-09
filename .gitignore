@@ -3,3 +3,5 @@
 .vscode
 .other
 AG/杂项
+!/.mybat/include
+!/.mybat/src
