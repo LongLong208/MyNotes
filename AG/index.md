@@ -209,6 +209,9 @@ html body code {
 html body em code{
     color: #66d9ef;
 }
+html body pre{
+    color: #F8F8F2 !important;
+}
 .short {
     width:60%;
     background-color:rgba(0,0,0,0);
