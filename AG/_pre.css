@@ -202,10 +202,14 @@ html body h5{
     color:#e4e79b;
 }
 html body code {
-    color: #83ee73;
+    color:#7ae06c;
+    /* color: #83ee73; */
 }
 html body em code{
     color: #66d9ef;
+}
+html body strong code{
+    color: #e4e07d;
 }
 html body pre{
     color: #F8F8F2 !important;

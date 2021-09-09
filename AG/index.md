@@ -217,10 +217,14 @@ html body h5{
     color:#e4e79b;
 }
 html body code {
-    color: #83ee73;
+    color:#7ae06c;
+    /* color: #83ee73; */
 }
 html body em code{
     color: #66d9ef;
+}
+html body strong code{
+    color: #e4e07d;
 }
 html body pre{
     color: #F8F8F2 !important;
@@ -244,33 +248,9 @@ html body pre{
 
 # 算法 {ignore}
 
-<font style=font-size:24px>目录</font>
-
-
-
-
-<font style=font-size:20px>
-
-[数论](#数论)
-[几何](#几何)
-[随机算法](#随机算法)
-[位运算](#位运算)
-[数组](#数组)
-[哈希表](#哈希表)
-[堆](#堆)
-[图](#图)
-[排序](#排序)
-
-<br>
-
-[自定义类解释](#自定义类解释)
-
 <br>
 <br>
 <br>
-
-</font>
-
 
 ---
 
