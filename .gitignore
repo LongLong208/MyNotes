@@ -1,7 +1,8 @@
-/.mybat
+/.mybat/*
 
-/.test
+/.test/*
 
-/.vscode
+/.vscode/*
 
-/.[other]
+/.[other]/*
+
