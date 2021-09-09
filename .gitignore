@@ -1,5 +1,5 @@
-/.mybat
-/.test
-/.vscode
-/.[other]
+.mybat
+.test
+.vscode
+[other]
 
