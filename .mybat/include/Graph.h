@@ -17,13 +17,14 @@ public:
     Graph(vector<vector<CostType> > e, CostType m = 0) : edge(e), maximum(m) {}
     Graph(vector<Type> v, vector<vector<CostType> > e, CostType m = 0) : vertex(v), edge(e), maximum(m) {}
     string toMermaid();
+    inline size_t vSize() { return vertex.size(); }
+    inline size_t eSize() { return edge.size(); }
 };
 
 template <class Type, bool direct, bool weight, class CostType>
 string Graph<Type, direct, weight, CostType>::toMermaid()
 {
     stringstream res;
-
     res << "```mermaid \n";
     res << "graph LR; \n";
 

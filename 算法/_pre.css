@@ -1,0 +1,44 @@
+*{
+    font-family:consolas;
+}
+html body a code:hover{
+    border:1px solid #83ee73;
+}
+html body h1{
+    color:#cccccc;
+    text-align:center;
+}
+html body h2{
+    color:#a4f3d1;
+    text-align:center;
+}
+html body h3{
+    color:#e06666;
+}
+html body h4{
+    color:pink;
+}
+html body h5{
+    color:#e4e79b;
+}
+html body code {
+    color: #83ee73;
+}
+html body em code{
+    color: #66d9ef;
+}
+.short {
+    width:60%;
+    background-color:rgba(0,0,0,0);
+    border-bottom:4px dotted #515151;
+}
+.code-output {
+    background-color: #323232;
+    padding: .8em;
+    margin: 1em 0px;
+}
+.code-hr {
+    margin:3em 0px .5em 0px;
+}
+
+
