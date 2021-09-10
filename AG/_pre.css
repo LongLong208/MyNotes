@@ -533,7 +533,7 @@ bottom: .4em;
 }
 
 /* MyCss */
-*{
+p{
     font-family:consolas;
     color:#dddddd;
 }

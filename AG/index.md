@@ -189,7 +189,7 @@ pre[data-line] .line-highlight[data-end]:after {
 </style>
 <style>
 /* MyCss */
-*{
+p{
     font-family:consolas;
     color:#dddddd;
 }
@@ -247,6 +247,7 @@ html body pre{
 html body .ditaa rect{
   fill:#bbbbbb !important;
 }
+
 </style>
 
 
