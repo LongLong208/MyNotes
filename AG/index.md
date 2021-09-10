@@ -191,6 +191,7 @@ pre[data-line] .line-highlight[data-end]:after {
 /* MyCss */
 *{
     font-family:consolas;
+    color:#dddddd;
 }
 html body a{
     color:#079de4;
@@ -200,7 +201,7 @@ html body a:hover{
     /* border: 1px solid currentColor; */
 }
 html body h1{
-    color:#cccccc;
+    color:#eeeeee;
     text-align:center;
 }
 html body h2{
@@ -227,7 +228,8 @@ html body strong code{
     color: #e4e07d;
 }
 html body pre{
-    color: #F8F8F2 !important;
+    /* color: #F8F8F2 !important; */
+    color: #dddddd !important;
 }
 .short {
     width:60%;
