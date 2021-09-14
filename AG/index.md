@@ -218,7 +218,12 @@ html body h5{
     color:#e4e79b;
 }
 html body code {
-    color:#7ae06c;
+    color:#72d163;
+    /* color: #83ee73; */
+}
+html body a code:hover{
+    color:#72d163;
+    border: 1px solid currentColor;
     /* color: #83ee73; */
 }
 html body em code{
@@ -249,7 +254,6 @@ html body .ditaa rect{
 }
 
 </style>
-
 
 # 算法 {ignore}
 
