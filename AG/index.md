@@ -252,6 +252,10 @@ html body pre{
 html body .ditaa rect{
   fill:#bbbbbb !important;
 }
+html body ul li ul a{
+    color:#b2c2c2;
+}
+
 
 </style>
 
