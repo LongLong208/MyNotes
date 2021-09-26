@@ -599,3 +599,9 @@ html body .ditaa rect{
 html body ul li ul a{
     color:#b2c2c2;
 }
+html body em{
+    color :#75715e;
+}
+html body s{
+    color :#75715e;
+}
