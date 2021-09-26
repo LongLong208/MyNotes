@@ -54,7 +54,7 @@ istream &operator>>(istream &in, vector<T> &v);
 template <typename T>
 ostream &operator<<(ostream &out, vector<T> v)
 {
-    out << '[';
+    out << ' ' << '[';
     for (int i = 0; i < v.size(); ++i)
     {
         out << v[i];
@@ -118,6 +118,57 @@ istream &operator>>(istream &in, vector<T> &v)
     v = vec;
     return in;
 }
+
+istream &operator>>(istream &in, vector<string> &v)
+{
+    vector<string> vec;
+    char a;
+    while (in.get(a))
+        if (a == '[')
+            break;
+    while (in.get(a))
+    {
+        if (a == '[')
+        {
+            int l = 0;
+            string ss("");
+            while (a != ']' || l > 0)
+            {
+                if (a == ']')
+                    --l;
+                ss += a;
+                in.get(a);
+                if (a == '[')
+                    ++l;
+            }
+            ss += a;
+            vec.push_back(ss);
+        }
+        else if (a == ',')
+        {
+            continue;
+        }
+        else if (a == ']')
+        {
+            break;
+        }
+        else
+        {
+            string ss("");
+            while (a != ',' && a != ']')
+            {
+                ss += a;
+                in.get(a);
+            }
+            vec.push_back(ss);
+            if (a == ']')
+                break;
+        }
+    }
+    v = vec;
+    return in;
+}
+
 /* 
 ostream &begin_out(ostream &out, string cla = "code-output")
 {
