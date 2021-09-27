@@ -2,7 +2,7 @@
 #define GRAPH_H
 
 #include <bits/stdc++.h>
-#include "stream.h"
+#include "vector.h"
 using namespace std;
 
 template <class Type, bool direct = 0, bool weight = 0, class CostType = int>
@@ -10,16 +10,27 @@ class Graph
 {
 public:
     vector<Type> vertex;
-    vector<vector<CostType> > edge;
+    vector<vector<CostType>> edge;
     CostType maximum;
     Graph(CostType m = 0) : maximum(m) {}
-    Graph(vector<Type> v, CostType m = 0) : vertex(v), maximum(m) {}
-    Graph(vector<vector<CostType> > e, CostType m = 0) : edge(e), maximum(m) {}
-    Graph(vector<Type> v, vector<vector<CostType> > e, CostType m = 0) : vertex(v), edge(e), maximum(m) {}
+    Graph(vector<Type> v, CostType m = 0);
+    Graph(vector<vector<CostType>> e, CostType m = 0) : edge(e), maximum(m) {}
+    Graph(vector<Type> v, vector<vector<CostType>> e, CostType m = 0) : vertex(v), edge(e), maximum(m) {}
     string toMermaid();
     inline size_t vSize() { return vertex.size(); }
     inline size_t eSize() { return edge.size(); }
 };
+
+template <class Type, bool direct, bool weight, class CostType>
+Graph<Type, direct, weight, CostType>::Graph(vector<Type> v, CostType m)
+    : vertex(v), maximum(m)
+{
+    edge = vector<vector<CostType>>(v.size(), vector<CostType>(v.size(), 0));
+    for (int i = 1; i < v.size(); ++i)
+    {
+        edge[i - 1][i] = edge[i][i - 1] = edge[i][i] = 1;
+    }
+}
 
 template <class Type, bool direct, bool weight, class CostType>
 string Graph<Type, direct, weight, CostType>::toMermaid()
@@ -57,7 +68,7 @@ template <class Type, bool direct, bool weight, class CostType>
 istream &operator>>(istream &in, Graph<Type, direct, weight, CostType> &graph)
 {
     vector<Type> v;
-    vector<vector<CostType> > e;
+    vector<vector<CostType>> e;
     in >> v >> e;
     Graph<Type, direct, weight, CostType> temp(v, e);
     temp.maximum = graph.maximum;

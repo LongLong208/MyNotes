@@ -3,7 +3,7 @@
 
 #include <bits/stdc++.h>
 #include "AlgorithmMode.cpp"
-#include "stream.h"
+#include "vector.h"
 #include "LinkedList.h"
 #include "Tree.h"
 #include "Graph.h"

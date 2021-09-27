@@ -1,7 +1,8 @@
-#ifndef STREAM_H
-#define STREAM_H
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include <bits/stdc++.h>
+#include "Graph.h"
 using namespace std;
 
 /* 

@@ -2,7 +2,7 @@
 #define TREE_H
 
 #include <bits/stdc++.h>
-#include "stream.h"
+#include "vector.h"
 using namespace std;
 
 template <class Type>
@@ -24,7 +24,7 @@ public:
 template <class Type>
 string TreeNode<Type>::toMermaid()
 {
-    queue<pair<char, TreeNode<Type> *> > q;
+    queue<pair<char, TreeNode<Type> *>> q;
     stringstream res("");
     char id = 'a';
     res << "```mermaid \n";
