@@ -272,7 +272,15 @@ html body s{
 
 ---
 
+<script>
+  function jump(){
+    location.href='_pre.css';
+  }
+</script>
 
+<button onclick="jump()">
+css
+</button>
 
 <!-- @import "数论.md" -->
 <!-- @import "几何.md" -->
