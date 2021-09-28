@@ -2,10 +2,10 @@
 #define HEAP_H
 
 #include <bits/stdc++.h>
-#include "stream.h"
+#include "vector.h"
 using namespace std;
 
-template <class Type, class Compare = std::less<Type> >
+template <class Type, class Compare = std::less<Type>>
 class Heap
 {
 protected:

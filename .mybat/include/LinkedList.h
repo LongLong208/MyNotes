@@ -2,7 +2,7 @@
 #define LINKEDLIST_H
 
 #include <bits/stdc++.h>
-#include "stream.h"
+#include "vector.h"
 using namespace std;
 
 template <class Type>
