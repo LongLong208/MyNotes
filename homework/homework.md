@@ -70,6 +70,6 @@ void main() {
 \begin{}
 1 \le month \le 12 (1)\\
 1 \le day \le 31 \\
-\end{} 
+\end{}
 \]
 
