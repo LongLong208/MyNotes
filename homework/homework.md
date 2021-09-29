@@ -66,10 +66,88 @@ void main() {
 
 ## 2.3
 
+有效等价类
+
 \[
-\begin{}
-1 \le month \le 12 (1)\\
-1 \le day \le 31 \\
-\end{}
+\begin{equation}
+1 \le month \le 12
+\end{equation}
 \]
 
+\[
+\begin{equation}
+1 \le day \le 31
+\end{equation}
+\]
+
+\[
+\begin{equation}
+1812 \le year \le 2012
+\end{equation}
+\]
+
+
+无效等价类
+
+\[
+\begin{equation}
+month < 1
+\end{equation}
+\]
+
+\[
+\begin{equation}
+month > 12
+\end{equation}
+\]
+
+\[
+\begin{equation}
+day<1
+\end{equation}
+\]
+
+\[
+\begin{equation}
+day>31
+\end{equation}
+\]
+
+\[
+\begin{equation}
+year<1812
+\end{equation}
+\]
+
+\[
+\begin{equation}
+year>2012
+\end{equation}
+\]
+
+
+|      输入      |             期望输出             |  覆盖范围   |
+| :------------: | :------------------------------: | :---------: |
+| 1989年5月16日  |          1989年5月16日           | (1) (2) (3) |
+| 1989年0月16日  |   month的值不在 1-12 范围当中    | (2) (3) (4) |
+| 1989年14月16日 |   month的值不在 1-12 范围当中    | (2) (3) (5) |
+|  1989年5月0日  |    day 的值不在 1-31 范围当中    | (1) (3) (6) |
+| 1989年5月100日 |    day 的值不在 1-31 范围当中    | (1) (3) (7) |
+|   0年5月16日   | year 的值不在 1812-2012 范围当中 | (1) (2) (8) |
+| 19890年5月16日 | year 的值不在 1812-2012 范围当中 | (1) (2) (9) |
+
+<br>
+
+---
+
+## 3.1
+
+
+
+
+|   测试模块   |    三角形    |  开发者  | [ ]() |
+| :----------: | :----------: | :------: | :---: |
+|    测试员    |    [ ]()     | 测试日期 | [ ]() |
+| 软件缺陷列表 |              |          |       |
+|   缺陷编号   | 缺陷详细信息 |          |       |
+|     Bug1     |    [ ]()     |          |       |
