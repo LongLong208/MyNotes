@@ -259,7 +259,10 @@ html body em{
 html body s{
     color :#75715e;
 }
-
+html body strong {
+    /* color: rgb(176,7,14); */
+    color :red;
+}
 </style>
 
 
