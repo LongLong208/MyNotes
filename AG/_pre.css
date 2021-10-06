@@ -593,7 +593,7 @@ html body pre{
     margin:3em 0px .5em 0px;
 }
 html body .ditaa rect{
-  fill:#bbbbbb !important;
+    fill:#bbbbbb !important;
 }
 html body ul li ul a{
     color:#b2c2c2;
@@ -607,4 +607,8 @@ html body s{
 html body strong {
     /* color: rgb(176,7,14); */
     color :red;
+}
+html body blockquote {
+    /* background-color:#744f4c */
+    background-color: #313131
 }

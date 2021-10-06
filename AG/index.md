@@ -263,6 +263,10 @@ html body strong {
     /* color: rgb(176,7,14); */
     color :red;
 }
+html body blockquote {
+    /* background-color:#744f4c */
+    background-color: #313131
+}
 </style>
 
 

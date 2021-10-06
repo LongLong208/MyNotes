@@ -514,6 +514,10 @@ html body strong {
     /* color: rgb(176,7,14); */
     color :red;
 }
+html body blockquote {
+    /* background-color:#744f4c */
+    background-color: #313131
+}
 </style>
 <h1 class="mume-header undefined" id="%E7%AE%97%E6%B3%95">&#x7B97;&#x6CD5;</h1>
 
@@ -1386,9 +1390,9 @@ i : &#x51B2;&#x7A81;&#x6B21;&#x6570;</p>
 <p>&#x601D;&#x8DEF;&#xFF1A;</p>
 <p>&#x521D;&#x59CB;&#x5316;&#xFF1A;&#x6808; &#x4E0A;&#x6B21;&#x8BBF;&#x95EE;&#x6811;&#x7ED3;&#x70B9;&#x6307;&#x9488; <code>prev</code> &#x5F53;&#x524D;&#x6811;&#x7ED3;&#x70B9;&#x6307;&#x9488; <code>root</code></p>
 <ol>
-<li><code>root</code> &#x5165;&#x6808;&#xFF0C;&#x82E5; <code>root</code> &#x6709;&#x5DE6;&#x5B69;&#x5B50;&#xFF0C;&#x5219;&#x5C06;&#x5DE6;&#x5B69;&#x5B50;&#x52A0;&#x5165;&#x6808;&#x4E2D;&#xFF0C;&#x5E76;&#x5C06; <code>root</code> &#x6307;&#x5411;&#x5176;&#x5DE6;&#x5B69;&#x5B50; (&#x5148;&#x5DE6;&#x5230;&#x5E95;)</li>
-<li>&#x5F39;&#x51FA;&#x6808;&#x9876;&#x7ED3;&#x70B9;&#x5E76;&#x8D4B;&#x7ED9; <code>root</code> &#xFF0C;&#x82E5;&#x5DF2;&#x8BBF;&#x95EE;&#x5176;&#x53F3;&#x5B69;&#x5B50; <em>(root &#x65E0;&#x53F3;&#x5B69;&#x5B50;&#xFF0C;&#x6216;&#x8005; prev &#x6307;&#x5411; root &#x7684;&#x53F3;&#x5B69;&#x5B50;&#x65F6;)</em>&#xFF0C;&#x8BBF;&#x95EE; <code>root</code> &#xFF0C;&#x5E76;&#x5C06; <code>prev</code> &#x8BBE;&#x4E3A; <code>root</code>&#xFF0C; <code>root</code> &#x8BBE;&#x4E3A;&#x7A7A; <em>(&#x8868;&#x793A;&#x5B50;&#x6811; root &#x5DF2;&#x8BBF;&#x95EE;&#x5B8C;&#x6BD5;)</em> (&#x51FA;&#x6808;&#x770B;&#x53F3;)</li>
-<li>&#x82E5;&#x672A;&#x8BBF;&#x95EE;&#x5176;&#x53F3;&#x5B69;&#x5B50;&#xFF0C;&#x5219;&#x8BBF;&#x95EE;&#x53F3;&#x5B69;&#x5B50;&#xFF0C;&#x5E76;&#x5C06; <code>prev</code> &#x8BBE;&#x4E3A; <code>root-&gt;right</code></li>
+<li><code>root</code> &#x5165;&#x6808;&#xFF0C;&#x82E5; <code>root</code> &#x6709;&#x5DE6;&#x5B69;&#x5B50;&#xFF0C;&#x5219;&#x5C06;&#x5DE6;&#x5B69;&#x5B50;&#x52A0;&#x5165;&#x6808;&#x4E2D;&#xFF0C;&#x5E76;&#x5C06; <code>root</code> &#x6307;&#x5411;&#x5176;&#x5DE6;&#x5B69;&#x5B50; <strong>(&#x5148;&#x5DE6;&#x5230;&#x5E95;)</strong></li>
+<li>&#x5F39;&#x51FA;&#x6808;&#x9876;&#x7ED3;&#x70B9;&#x5E76;&#x8D4B;&#x7ED9; <code>root</code> &#xFF0C;&#x82E5;&#x5DF2;&#x8BBF;&#x95EE;&#x5176;&#x53F3;&#x5B69;&#x5B50; <em>(root &#x65E0;&#x53F3;&#x5B69;&#x5B50;&#xFF0C;&#x6216;&#x8005; prev &#x6307;&#x5411; root &#x7684;&#x53F3;&#x5B69;&#x5B50;&#x65F6;)</em>&#xFF0C;&#x8BBF;&#x95EE; <code>root</code> &#xFF0C;&#x5E76;&#x5C06; <code>prev</code> &#x8BBE;&#x4E3A; <code>root</code>&#xFF0C; <code>root</code> &#x8BBE;&#x4E3A;&#x7A7A; <em>(&#x8868;&#x793A;&#x5B50;&#x6811; root &#x5DF2;&#x8BBF;&#x95EE;&#x5B8C;&#x6BD5;)</em> <strong>(&#x51FA;&#x6808;&#x770B;&#x53F3;)</strong></li>
+<li>&#x82E5;&#x672A;&#x8BBF;&#x95EE;&#x5176;&#x53F3;&#x5B69;&#x5B50;&#xFF0C;&#x5219; <code>root</code> &#x5165;&#x6808;&#xFF0C;&#x5E76;&#x5C06; <code>root</code> &#x8BBE;&#x4E3A; <code>root-&gt;right</code> <strong>(&#x590D;&#x5165;&#x5BFB;&#x53F3;)</strong></li>
 </ol>
 <p>&#x5FAA;&#x73AF; 1. 2. 3. &#x76F4;&#x81F3;&#x6808;&#x7A7A;&#x4E14; <code>root</code> &#x6307;&#x5411;&#x7A7A;</p>
 <div class="code-chunk" data-id="code-chunk-id-20" data-cmd="run"><div class="input-div"><pre data-role="codeBlock" data-info="cpp {cmd=run}" class="language-cpp"><span class="token comment">//sf</span>
@@ -1407,7 +1411,12 @@ vector<span class="token operator">&lt;</span><span class="token keyword">int</s
         root <span class="token operator">=</span> stk<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         stk<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>root<span class="token operator">-&gt;</span>right <span class="token operator">||</span> prev <span class="token operator">==</span> root<span class="token operator">-&gt;</span>right<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            ans<span class="token punctuation">.</span>
+            ans<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>root<span class="token operator">-&gt;</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            prev <span class="token operator">=</span> root<span class="token punctuation">;</span>
+            root <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            stk<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            root <span class="token operator">=</span> root<span class="token operator">-&gt;</span>right<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
     <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
@@ -1427,6 +1436,23 @@ c --- e
 </div><p>[3,2,1]</p>
 <hr class="code-hr"> average time: 0 ms
 </div> 
+<p><br></p><hr class="short"><p></p>
+<h3 class="mume-header" id="%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E9%80%92%E5%BD%92">&#x4E8C;&#x53C9;&#x6811;&#x4E0E;&#x9012;&#x5F52;</h3>
+
+<p>&#x7531;&#x4E8E;&#x4E8C;&#x53C9;&#x6811;&#x662F;&#x9012;&#x5F52;&#x5B9A;&#x4E49;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5F88;&#x591A;&#x4E8C;&#x53C9;&#x6811;&#x7684;&#x95EE;&#x9898;&#x90FD;&#x80FD;&#x5F88;&#x65B9;&#x4FBF;&#x5730;&#x901A;&#x8FC7;&#x9012;&#x5F52;&#x7B97;&#x6CD5;&#x89E3;&#x51B3;&#xFF0C;&#x4F8B;&#x5982;&#x6811;&#x7684;&#x904D;&#x5386;&#x7B49;&#x7B49;</p>
+<p>&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x9012;&#x5F52;&#x89E3;&#x6CD5;&#x4E2D;&#x53C8;&#x5B58;&#x5728;&#x7740;&#x4E24;&#x79CD;&#x4E0D;&#x540C;&#x5730;&#x9012;&#x5F52;&#x65B9;&#x5F0F;&#xFF1A;<code>&#x81EA;&#x9876;&#x5411;&#x4E0B;</code> &#x548C; <code>&#x81EA;&#x5E95;&#x5411;&#x4E0A;</code></p>
+<p><code>&#x81EA;&#x9876;&#x5411;&#x4E0B;</code>&#xFF1A;&#x5148;&#x5904;&#x7406;&#x672C;&#x5C42;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x5C06;&#x6570;&#x636E;&#x4F20;&#x9012;&#x7ED9;&#x4E0B;&#x5C42;&#xFF0C;&#x76F4;&#x5230;&#x6700;&#x5E95;&#x5C42; &#xFF08;&#x5148;&#x5E8F;&#x904D;&#x5386;&#xFF09;<br>
+<code>&#x81EA;&#x5E95;&#x5411;&#x4E0A;</code>&#xFF1A;&#x4E0A;&#x5C42;&#x7684;&#x6570;&#x636E;&#x4F9D;&#x8D56;&#x4E8E;&#x4E0B;&#x5C42;&#xFF0C;&#x9700;&#x8981;&#x8BA9;&#x4E0B;&#x5C42;&#x5148;&#x5904;&#x7406;&#xFF0C;&#x5F97;&#x5230;&#x4E0B;&#x5C42;&#x6570;&#x636E;&#x624D;&#x80FD;&#x8BA1;&#x7B97;&#x672C;&#x5C42;&#xFF0C;&#x7136;&#x540E;&#x8FD4;&#x56DE;&#x7ED9;&#x4E0A;&#x5C42;&#xFF0C;&#x6700;&#x7EC8;&#x5230;&#x6839;&#x8282;&#x70B9;&#xFF08;&#x540E;&#x5E8F;&#x904D;&#x5386;&#xFF09;</p>
+<br>
+<h4 class="mume-header" id="%E9%80%92%E5%BD%92%E5%BB%BA%E6%A0%91">&#x9012;&#x5F52;&#x5EFA;&#x6811;</h4>
+
+<h5 class="mume-header" id="%E6%A0%B9%E6%8D%AE%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BB%BA%E6%A0%91">&#x6839;&#x636E;&#x524D;&#x5E8F;&#x4E0E;&#x4E2D;&#x5E8F;&#x904D;&#x5386;&#x5EFA;&#x6811;</h5>
+
+<p>&#x8F93;&#x5165;&#xFF1A;</p>
+<blockquote>
+<p>&#x524D;&#x5E8F;&#x904D;&#x5386;&#x5E8F;&#x5217; <code>preorder</code><br>
+&#x4E2D;&#x5E8F;&#x904D;&#x5386;&#x5E8F;&#x5217; <code>inorder</code></p>
+</blockquote>
 <br>
 <br>
 <br>
@@ -3140,6 +3166,15 @@ cout <span class="token operator">&lt;&lt;</span> <span class="token class-name"
 <li><a href="#%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86">&#x6811;&#x7684;&#x904D;&#x5386;</a>
 <ul>
 <li><a href="#%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86">&#x540E;&#x5E8F;&#x904D;&#x5386;</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E9%80%92%E5%BD%92">&#x4E8C;&#x53C9;&#x6811;&#x4E0E;&#x9012;&#x5F52;</a>
+<ul>
+<li><a href="#%E9%80%92%E5%BD%92%E5%BB%BA%E6%A0%91">&#x9012;&#x5F52;&#x5EFA;&#x6811;</a>
+<ul>
+<li><a href="#%E6%A0%B9%E6%8D%AE%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BB%BA%E6%A0%91">&#x6839;&#x636E;&#x524D;&#x5E8F;&#x4E0E;&#x4E2D;&#x5E8F;&#x904D;&#x5386;&#x5EFA;&#x6811;</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
