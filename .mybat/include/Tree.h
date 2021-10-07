@@ -5,7 +5,7 @@
 #include "vector.h"
 using namespace std;
 
-template <class Type = int>
+template <class Type>
 class TreeNode
 {
 public:
