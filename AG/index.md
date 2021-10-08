@@ -285,6 +285,7 @@ html body blockquote {
 <!-- @import "数组.md" -->
 <!-- @import "哈希表.md" -->
 <!-- @import "树.md" -->
+<!-- @import "二叉搜索树.md" -->
 <!-- @import "堆.md" -->
 <!-- @import "图.md" -->
 <!-- @import "排序.md" -->
