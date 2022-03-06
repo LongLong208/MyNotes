@@ -1,4 +1,8 @@
 ---
+title: 算法
+type: main
+date: 2022-03-06
+
 html:
   offline: true
 
