@@ -1,10 +1,6 @@
 ---
 html:
-  embed_local_images: false
-  embed_svg: true
-  offline: false
-
-print_background: false
+  offline: true
 
 export_on_save:
   html: true
@@ -186,88 +182,10 @@ pre[data-line] .line-highlight[data-end]:after {
   bottom: .4em;
 }
 </style>
-<style>
-/* MyCss */
-p{
-    font-family:consolas;
-    color:#dddddd;
-}
-html body a{
-    color:#079de4;
-}
-html body a:hover{
-    color:#4ac8ff;
-    /* border: 1px solid currentColor; */
-}
-html body h1{
-    color:#eeeeee;
-    text-align:center;
-}
-html body h2{
-    color:#a4f3d1;
-    text-align:center;
-}
-html body h3{
-    color:#e06666;
-}
-html body h4{
-    color:pink;
-}
-html body h5{
-    color:#e4e79b;
-}
-html body code {
-    color:#72d163;
-    /* color: #83ee73; */
-}
-html body a code:hover{
-    border: 1px solid currentColor;
-    /* color: #83ee73; */
-}
-html body em code{
-    color: #66d9ef;
-}
-html body strong code{
-    color: #e4e07d;
-}
-html body pre{
-    /* color: #F8F8F2 !important; */
-    color: #dddddd !important;
-}
-.short {
-    width:60%;
-    background-color:rgba(0,0,0,0);
-    border-bottom:4px dotted #515151;
-}
-.code-output {
-    background-color: #323232;
-    padding: .8em;
-    margin: 1em 0px;
-}
-.code-hr {
-    margin:3em 0px .5em 0px;
-}
-html body .ditaa rect{
-  fill:#bbbbbb !important;
-}
-html body ul li ul a{
-    color:#b2c2c2;
-}
-html body em{
-    color :#75715e;
-}
-html body s{
-    color :#75715e;
-}
-html body strong {
-    /* color: rgb(176,7,14); */
-    color :red;
-}
-html body blockquote {
-    /* background-color:#744f4c */
-    background-color: #313131
-}
-</style>
+
+@import "/root.css"
+
+1
 
 # 算法
 
