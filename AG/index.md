@@ -8,8 +8,6 @@ export_on_save:
 
 @import "/root.css"
 
-1
-
 # 算法
 
 <br>
