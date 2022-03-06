@@ -34,11 +34,7 @@ vscode 插件安装：
 
 插件：
 
-- 中文支持：输入 `Chinese` 搜索
-
-- markdown 支持：`Markdown-Notes-Pack`
-
-- 额外插件： `foam`（双链笔记）
+@import "extList.md"
 
 ![image-20210823145921531](https://i.loli.net/2021/08/23/bGUQqENi5rYsgMX.png)
 
