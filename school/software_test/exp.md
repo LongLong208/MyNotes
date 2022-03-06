@@ -1,4 +1,4 @@
-<!-- @import "../.mytool/_pre.css" -->
+<!-- @import "/root.css" -->
 
 
 ## 等价类划分

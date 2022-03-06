@@ -1,4 +1,4 @@
-<!-- @import "../.mytool/_pre.css" -->
+<!-- @import "/root.css" -->
 
 <script>
   function show(id){
