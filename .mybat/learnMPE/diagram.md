@@ -212,3 +212,10 @@ graph TD;
 5 --- 7
 9
 ```
+
+
+```python {cmd=true matplotlib=true}
+import matplotlib.pyplot as plt
+plt.plot([1,2,3, 4])
+plt.show() # show figure
+```
