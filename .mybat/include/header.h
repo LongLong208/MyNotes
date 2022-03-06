@@ -2,7 +2,7 @@
 #define HEADER_H
 
 #include <bits/stdc++.h>
-#include "AlgorithmMode.cpp"
+#include "AlgorithmMode.h"
 #include "vector.h"
 #include "LinkedList.h"
 #include "Tree.h"
