@@ -1,6 +1,6 @@
 ---
 title: 算法
-type: main
+type: 算法
 date: 2022-03-06
 
 html:

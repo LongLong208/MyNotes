@@ -6,8 +6,6 @@ export_on_save:
   html: true
 ---
 
-
-
 # 在 VSCode 中用 Markdown 做「数字化」学习笔记
 
 这里是对原教程的搬运与补充，详情请看 [原教程](https://orangex4.cool/post/notes-in-markdown/)
