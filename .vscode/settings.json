@@ -76,5 +76,6 @@
         "valarray": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled",
-    "python.formatting.provider": "yapf"
+    "python.formatting.provider": "yapf",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }
