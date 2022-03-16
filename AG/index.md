@@ -10,7 +10,7 @@ export_on_save:
   html: true
 ---
 
-@import "/root.css"
+<!-- @import "/root.css" -->
 
 # 算法
 

@@ -5,109 +5,115 @@
     background-color: #222222 !important;
 } */
 
-p {
-    font-family: consolas;
-    color: #dddddd;
+p{
+    font-family: 'fira code' !important;
+    color: #dddddd !important;
 }
 
-html body a {
-    color: #079de4;
+html body a{
+    color: #079de4 !important;
 }
 
-html body a:hover {
-    color: #4ac8ff;
+html body a:hover{
+    color: #4ac8ff !important;
     /* border: 1px solid currentColor; */
 }
 
-html body h1 {
-    color: #eeeeee;
-    text-align: center;
+html body h1{
+    color: #eeeeee !important;
+    text-align: center !important;
 }
 
-html body h2 {
-    color: #a4f3d1;
-    text-align: center;
+html body h2{
+    color: #a4f3d1 !important;
+    text-align: center !important;
 }
 
-html body h3 {
-    color: #e06666;
+html body h3{
+    color: #e06666 !important;
 }
 
-html body h4 {
-    color: pink;
+html body h4{
+    color: pink !important;
 }
 
-html body h5 {
-    color: #e4e79b;
+html body h5{
+    color: #e4e79b !important;
 }
 
-html body code {
-    color: #72d163;
+html body code{
+    color: #72d163 !important;
     /* color: #83ee73; */
 }
 
-html body a code:hover {
-    border: 1px solid currentColor;
+html body a code:hover{
+    border: 1px solid currentColor !important;
     /* color: #83ee73; */
 }
 
-html body em code {
-    color: #66d9ef;
+html body em code{
+    color: #66d9ef !important;
 }
 
-html body strong code {
-    color: #e4e07d;
+html body strong code{
+    color: #e4e07d !important;
 }
 
-html body pre {
+html body pre{
     /* color: #F8F8F2 !important; */
     color: #dddddd !important;
 }
 
-.short {
-    width: 60%;
-    background-color: rgba(0, 0, 0, 0);
-    border-bottom: 4px dotted #515151;
+.short{
+    width: 60% !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    border-bottom: 4px dotted #515151 !important;
 }
 
-.code-output {
-    background-color: #323232;
-    padding: .8em;
-    margin: 1em 0px;
+.code-output{
+    background-color: #323232 !important;
+    padding: .8em !important;
+    margin: 1em 0px !important;
 }
 
-.code-hr {
-    margin: 3em 0px .5em 0px;
+.code-hr{
+    margin: 3em 0px .5em 0px !important;
 }
 
-html body .ditaa rect {
+html body .ditaa rect{
     fill: #bbbbbb !important;
 }
 
-html body ul li ul a {
-    color: #b2c2c2;
+html body ul li ul a{
+    color: #b2c2c2 !important;
 }
 
-html body em {
-    color: #75715e;
+html body em{
+    color: #75715e !important;
 }
 
-html body s {
-    color: #75715e;
+html body s{
+    color: #75715e !important;
 }
 
-html body strong {
+html body strong{
     /* color: rgb(176,7,14); */
-    color: red;
+    color: red !important;
 }
 
-html body blockquote {
+html body blockquote{
     /* background-color:#744f4c */
-    background-color: #313131
+    background-color: #313131 !important;
 }
 
+/* html body short{
+    display: inline-block !important;
+    width: 60% !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    border-bottom: 4px dotted #515151 !important;
+} */
 
-/** monokai */
+/** ------------------------------------monokai----------------------------------------- */
 
 html body {
     font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
