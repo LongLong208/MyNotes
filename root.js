@@ -39,4 +39,4 @@ function betterTableColor(){
 let t1 = setTimeout(()=>{
     betterTableColor()
     clearTimeout(t1)
-}, 250)
+}, 350)
