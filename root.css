@@ -5,8 +5,11 @@
     background-color: #222222 !important;
 } */
 
-p{
+*{
     font-family: 'fira code' !important;
+}
+
+p{
     color: #dddddd !important;
 }
 
