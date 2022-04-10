@@ -109,6 +109,10 @@ html body blockquote{
     background-color: #313131 !important;
 }
 
+html body .none {
+    display: none;
+}
+
 /* html body short{
     display: inline-block !important;
     width: 60% !important;

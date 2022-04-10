@@ -3,8 +3,7 @@
  * @param {str} path 引入文件的路径
  * @param {str} elementId 被引入的标签元素 ID
  */
-function importMD(path, elementId)
-{
+function importMD(path, elementId) {
     let e = document.getElementById(elementId)
     e.innerHTML += `<!-- @import '${path}.md' -->`
     e.innerHTML += `[[path]]`
@@ -12,7 +11,7 @@ function importMD(path, elementId)
 
 
 /* 调整表格 */
-function betterTableColor(){
+function betterTableColor() {
     var e = document.getElementsByTagName('tbody')
     for (let i = 0; i < e.length; ++i)
     {
