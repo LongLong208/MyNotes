@@ -2,3 +2,5 @@
 2. markdown 支持：[Markdown-Notes-Pack](https://marketplace.visualstudio.com/items?itemName=OrangeX4.markdown-notes-pack)
 3. 双链笔记：[foam](https://marketplace.visualstudio.com/items?itemName=foam.foam-vscode)
 4. 画图工具：[Draw.io](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)
+5. 画板 [draw note](https://marketplace.visualstudio.com/items?itemName=zhaouv.vscode-markdown-draw)
+6. Mermaid 语法高亮 [Mermaid Markdown Syntax Highlighting](https://marketplace.visualstudio.com/items?itemName=bpruitt-goddard.mermaid-markdown-syntax-highlighting)
