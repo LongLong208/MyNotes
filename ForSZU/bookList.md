@@ -3,7 +3,7 @@
 <hr>
 
 #### 高数：
-[武忠祥](https://www.bilibili.com/video/BV1A44y1V7qX)
+[武忠祥](https://www.bilibili.com/video/BV1tA4y197oc)
 book：高等数学基础篇2023
 
 #### 线代：
