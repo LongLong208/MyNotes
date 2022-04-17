@@ -1,4 +1,4 @@
-function draw(id, f = i=>i, title, D = [-5, 5], step = 0.1) {
+function draw(id, f = i=>i, name = null, D = [-5, 5], step = 0.1) {
     let TESTER = document.getElementById(id)
     let x = []
     let y = []
@@ -6,11 +6,21 @@ function draw(id, f = i=>i, title, D = [-5, 5], step = 0.1) {
         x.push(i)
         y.push(f(i));
     }
-    Plotly.plot(TESTER, [{
-        x: x,
-        y: y
-    }],  { 
-        title: title,
+    let trace
+    if (name) {
+        trace = {
+            x: x,
+            y: y,
+            name: name
+        }
+    } else {
+        trace = {
+            x: x,
+            y: y
+        }
+    }
+    Plotly.plot(TESTER, [trace],  { 
+        // title: title,
         xaxis: {
             showgrid: false,
             ticktext: [],
