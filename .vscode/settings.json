@@ -79,6 +79,10 @@
     "python.formatting.provider": "yapf",
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
     "[markdown]": {
-        "editor.quickSuggestions": true
+        "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+        }
     }
 }
