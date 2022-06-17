@@ -12,4 +12,8 @@ export_on_save:
 
 <!-- @import "/root.css" -->
 
-<span class=btn-green onclick='location.href = "./AG/index.html"'>算法</span>
+<script>
+  function toAG() { location.href = './AG/index.html'; }
+</script>
+
+<span class=btn-green onclick="toAG()">算法</span>
