@@ -114,12 +114,20 @@ html body .none {
 }
 
 html body .btn-green {
-    padding: 10px;
+    background: #3dd28d;
+    margin: 5px;
+    padding: 20px;
     text-align: center;
-    font-size: 32px;
-    background-color: #222222;
-    border: 3px solid #25972c;
-    border-radius: 5px;
+    text-decoration: none !important;
+    color: #282828 !important;
+    border: 0 none;
+    border-radius: 10%;
+    font-size: 24px;
+}
+
+.btn-green:hover {
+    transition: all 150ms linear;
+    opacity: .85;
 }
 
 /* html body short{
