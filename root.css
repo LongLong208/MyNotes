@@ -113,6 +113,15 @@ html body .none {
     display: none;
 }
 
+html body .btn-green {
+    padding: 10px;
+    text-align: center;
+    font-size: 32px;
+    background-color: #222222;
+    border: 3px solid #25972c;
+    border-radius: 5px;
+}
+
 /* html body short{
     display: inline-block !important;
     width: 60% !important;
